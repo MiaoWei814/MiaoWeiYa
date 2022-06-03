@@ -4,7 +4,7 @@
 
 在《分布式系统原理与范型》一书中有如下定义:"分布式系统是若干独立计算机的**集合**,这些计算机对于用户来说就像**单个**相关系统";
 
-![image-20211004092459722](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004092459722.png)
+![image-20211004092459722](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004092459722.png)
 
 > 理解:这里我们用户访问百度或者淘宝,对于用户来说只有一个入口,而淘宝后台有很多服务器,对于用户来说这100个服务器还是一个整体,因为这100个服务器只要串起来就能变成一个,所以用户访问只有一个淘宝或者百度。而回到刚刚那句话：“分布式系统是若干独立计算机的集合”指这若干个服务器都是独立的，对于用户来说就像单个系统；
 
@@ -22,11 +22,11 @@
 
 假设我们现在这个网站有100个人同时访问,这时我们发现在我电脑上跑不起来了,怎么办?这时我们就可以考虑把单机复制几个,让别人可以去访问其他的,那这期间就可以实现一个操作就是"Nginx(负载均衡)",就是说让用户看起来还是一个电脑,但是它访问的却是不同的东西了:
 
-![image-20211004094948180](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004094948180.png)
+![image-20211004094948180](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004094948180.png)
 
 这里Nginx就是一代理服务器,准确叫反向代理服务器,而后面的单机就叫横向扩展,就是不停的在扩展单机,如果说加载到一定的时候需求不够的情况下,才会考虑分布式! 
 
-![image-20211004095750887](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004095750887.png)
+![image-20211004095750887](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004095750887.png)
 
 如果我们是在下单的流程中,我们就会把下订单这个模块放在第一个[单机上](这个电脑可以处理一万个订单),物流和支付模块比较缓慢我们就放多个单机上,进行拆开,那拆开怎么联系呢?通过HttpRestful风格;而我们只需要将其放在不同的电脑上进行调用就好了,比如说第一个电脑处理完订单后就会给第二个电脑发一个请求让这个电脑去处理,这样就极大提高了效率
 
@@ -54,7 +54,7 @@ Dubbo有这张图:
 
    当网站流量很小的时候,只需一个应用将所有功能部署在一起,用于介绍部署节点和成本,此时,用于简化增删改查工作量的数据访问框架(ORM)是关键;
 
-   ![image-20211004103550085](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004103550085.png)
+   ![image-20211004103550085](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004103550085.png)
 
    适用于小型网站,比如小型管理系统,将所有功能部署到一个功能里,简单易用
 
@@ -68,7 +68,7 @@ Dubbo有这张图:
 
    当访问量逐渐增大,单一应用增加机器带来的加速度越来越小,将应用拆成互不相干的几个应用,以提升效率,此时.用于加速前端页面的开发的Web框架(MVC)是关键
 
-   ![image-20211004104235717](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004104235717.png)
+   ![image-20211004104235717](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004104235717.png)
 
    通过切分业务来实现各个模块独立部署,降低了维护和部署的难度,团队各司其职更易管理,性能扩展也更方便,更有针对性!
 
@@ -80,13 +80,13 @@ Dubbo有这张图:
 
    当垂直应用越来越多.应用之间交互不可避免,将核心业务**抽取**出来,作为独立的业务,逐渐形成稳定的服务,使前端应用能更快速的响应多变的市场需求,此时,用于提高业务复用及整合的**分布式服务框架(RPC)**是关键!
 
-   ![image-20211004105033879](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004105033879.png)
+   ![image-20211004105033879](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004105033879.png)
 
 4. 流动计算架构
 
    当服务越来越多，容量的评估，小服务资源的浪费等问题逐渐显现，此时需增加一个调度中心基于访问压力实时管理集群容量，提高集群利用率。此时，用于**提高机器利用率的资源调度和治理中心**(SOA)[ Service Oriented Architecture]是关键。
 
-   ![image-20211004105140677](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004105140677.png)
+   ![image-20211004105140677](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004105140677.png)
 
    理解:这个比如我们写完订单这个模块,我们就把它进行注册起来,而这个注册中心放在云端,注册完用户要用那么直接去注册中心拿
 
@@ -94,7 +94,7 @@ Dubbo有这张图:
 
 这是dubbo运行基本原理:
 
-![image-20211004135942904](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004135942904.png)
+![image-20211004135942904](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004135942904.png)
 
 init:初始要做的事情,async:异步,sync:同步
 
@@ -130,13 +130,13 @@ init:初始要做的事情,async:异步,sync:同步
 
    - 解决方案:将zkServer.cmd以文本文件打开,然后我们添加`pause`,这样就不会发生闪退了!
 
-     ![image-20211004152119093](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004152119093.png)
+     ![image-20211004152119093](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004152119093.png)
 
 2. 再次运行依然报错了,并且给出提示说没有zoo.cfg这个文件:
 
    - 解决方案:将conf/zoo_sample.cfg文件复制一份,然后将其重命名为zoo.cfg即可
 
-     ![image-20211004152312942](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004152312942.png)	
+     ![image-20211004152312942](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004152312942.png)	
 
    - 并且我们可以查看这个cfg里面都写了什么?
 
@@ -177,7 +177,7 @@ init:初始要做的事情,async:异步,sync:同步
 
    我们再重新查询一下节点:
 
-   ![image-20211004153105829](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004153105829.png)
+   ![image-20211004153105829](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004153105829.png)
 
    
 
@@ -214,13 +214,13 @@ dubbo-admin:是一个监控管理后台,主要查看我们注册了哪些服务,
    mvn clean package -Dmaven.test.skip=true 
    ```
 
-   ![image-20211004181720864](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004181720864.png)
+   ![image-20211004181720864](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004181720864.png)
 
    
 
    出现以下情况就是成功了:
 
-   ![image-20211004181750945](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004181750945.png)
+   ![image-20211004181750945](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004181750945.png)
 
 4. 执行 target 下的dubbo-admin-0.0.1-SNAPSHOT.jar
 
@@ -231,15 +231,15 @@ dubbo-admin:是一个监控管理后台,主要查看我们注册了哪些服务,
 
    **注意**:在运行期间会去自动查找zookeeper,所以一定要启动!
 
-   ![image-20211004181813193](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004181813193.png)
+   ![image-20211004181813193](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004181813193.png)
 
 5. 启动完毕我们打开看看:http://localhost:7001
 
-   ![image-20211004181833968](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004181833968.png)
+   ![image-20211004181833968](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004181833968.png)
 
    默认是用户名为root,密码也是root:
 
-   ![image-20211004182049701](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004182049701.png)
+   ![image-20211004182049701](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004182049701.png)
 
 ### 2.4 SpringBoot+Dubbo+zookeeper
 
@@ -367,11 +367,11 @@ dubbo-admin:是一个监控管理后台,主要查看我们注册了哪些服务,
 
    4. 我们在dubbo-admin中观察效果:
 
-      ![image-20211004203750429](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004203750429.png)
+      ![image-20211004203750429](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004203750429.png)
 
       我们点进去看看:
 
-      ![image-20211004203918912](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004203918912.png)
+      ![image-20211004203918912](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004203918912.png)
 
 ​		
 
@@ -454,13 +454,13 @@ dubbo-admin:是一个监控管理后台,主要查看我们注册了哪些服务,
 
    这里由于要去服务中心拿,一般我们使用POM坐标的形式获取,但是这里为了简单我们直接使用服务的全路径的形式获取,所以:
 
-   ![image-20211004210607735](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004210607735.png)
+   ![image-20211004210607735](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004210607735.png)
 
    将之前的接口拷过来!只是为了用路径相同的接口名去注册中心获取而已!它是根据这个接口名去找的!
 
    就是dubbo-admin中的这个:
 
-   ![image-20211004211308276](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004211308276.png)
+   ![image-20211004211308276](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004211308276.png)
 
 4. 编写测试类:
 
@@ -478,7 +478,7 @@ dubbo-admin:是一个监控管理后台,主要查看我们注册了哪些服务,
 
 5. 看控制台:
 
-   ![image-20211004210737414](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004210737414.png)
+   ![image-20211004210737414](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004210737414.png)
 
 
 
@@ -505,7 +505,7 @@ dubbo-admin:是一个监控管理后台,主要查看我们注册了哪些服务,
 
 HTTP协议是:无状态协议,是通信协议,基于网络的!而RPC也是一种协议,用于网络通信,其本质上没有区别,只是功能优点不一样!
 
-![image-20211004105734444](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004105734444.png)
+![image-20211004105734444](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004105734444.png)
 
 ### 3.1 简介
 
@@ -517,7 +517,7 @@ RPC[Remote Procedure Call]:
 
 也就是说两台服务器A,B,一个应用部署在A服务器上,想要调用B服务器上应用提供的函数/方法,由于不在一个内存空间,不能直接调用,需要通过网络来表达调用的语义和传达调用的数据,为什么要用RPC呢?就是无法在一个进程内,甚至一个计算机内通过本地调用的方式完成的需求,比如不同的系统间的通讯,甚至不同的组织间的通讯,由于计算能力需要横向扩展,需要在多台机器组成的集群上部署应用,RPC就是要像调用本地的函数一样去调远程函数;
 
-![image-20211004111027068](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004111027068.png)
+![image-20211004111027068](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004111027068.png)
 
 之前本地调用就是在自己的电脑里就可以直接调用,而RPC呢?就是在A电脑里去通过B电脑里的数据,这就叫远程调用,也许说A电脑在中国,而B电脑在美国,而这之间就需要远程调用了,并且要注意这之间的通信也是极不可靠的,这也说明分布式的缺点!
 
@@ -525,13 +525,13 @@ RPC[Remote Procedure Call]:
 
 ### 3.2 基本原理
 
-![image-20211004111503428](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004111503428.png)
+![image-20211004111503428](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004111503428.png)
 
 解释:首先客户端的函数会去调用客户端的一些东西,然后通过网络sockets通信方式去通信到了另一台电脑上,另一台电脑上就会去解析我们这边的代码,解析后比如说认为你要调用我们这边的服务数据,那么调用完毕后就会告诉服务器端,然后再通过sockets通信再返回回去
 
 ### 3.3 步骤解析
 
-![image-20211004111805301](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211004111805301.png)
+![image-20211004111805301](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211004111805301.png)
 
 解释:由客户端调用,然后将其序列化,因为在网络中无法直接传输需要将其序列化为文本然后对面再反序列化得出这个结果,然后序列化将其发送给服务器端,然后服务器端反序列化后调用本地的服务,服务器处理完后就会将结果返回出去,然后返回给客户端本地的调用结果!
 

@@ -111,15 +111,15 @@
 
 5. 测试:
 
-   ![image-20211204141056170](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204141056170.png)
+   ![image-20211204141056170](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204141056170.png)
 
    1. 输入刚刚基于内存的用户信息:zs,123
 
-      ![image-20211204141222544](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204141222544.png)
+      ![image-20211204141222544](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204141222544.png)
 
    2. 随便输入账号和密码,那么再看效果:
 
-      ![image-20211204141251024](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204141251024.png)
+      ![image-20211204141251024](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204141251024.png)
 
 ### 1.1 小结思路
 
@@ -127,7 +127,7 @@
 
 这个案例实现思路:
 
-![image-20211204141625442](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204141625442.png)
+![image-20211204141625442](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204141625442.png)
 
 大概步骤是:
 
@@ -147,11 +147,11 @@ SpringSecurity是基于Filter实现认证和授权，底层通过`FilterChainPro
 
 大概图:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/wps2DE2.tmp.jpg)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/wps2DE2.tmp.jpg)
 
 我们知道，SpringSecurity是通过很多的过滤器链共同协作完成认证，授权的流程，SpringSecurity中核心的过滤器链如下:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/wps9AD1.tmp.jpg)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/wps9AD1.tmp.jpg)
 
 //每个过滤器链都是什么意思?
 1. SecurityContextPersistenceFilter
@@ -198,7 +198,7 @@ SpringSecurity是基于Filter实现认证和授权，底层通过`FilterChainPro
 
 ## 3. 认证原理
 
-![image-20211206210815409](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211206210815409.png)
+![image-20211206210815409](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211206210815409.png)
 
 接下来就会围绕这个认证的流程进行不断的找源码一步一步走:
 
@@ -206,7 +206,7 @@ SpringSecurity是基于Filter实现认证和授权，底层通过`FilterChainPro
 
 2. 调用执行到`SecurityContextPersistenceFilter`类的`doFilter()`方法
 
-   ![image-20211204144828902](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204144828902.png)
+   ![image-20211204144828902](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204144828902.png)
 
    ```
    这里面就会首先从SecurityContextRepository去加载SecurityContext然后放进SecurityContextHolder中!
@@ -216,7 +216,7 @@ SpringSecurity是基于Filter实现认证和授权，底层通过`FilterChainPro
 
 4. 跳转到`UsernamePasswordAuthenticationFilter`这个类中:
 
-   ![image-20211204145901176](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204145901176.png)
+   ![image-20211204145901176](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204145901176.png)
 
    这里则是将请求账号和密码封装成Token,注意这个token在后面的使用中都是用这个token进行调用执行!
 
@@ -246,7 +246,7 @@ SpringSecurity是基于Filter实现认证和授权，底层通过`FilterChainPro
 
    注意:在之前传参的时候我们明明看到传递的是`UsernamePasswordAuthenticationToken类型`但是传递进来的却是`Authentication`这个类型? 实际上这是因为token中是实现了该Authentication接口
 
-   ![image-20211204151843682](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204151843682.png)
+   ![image-20211204151843682](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204151843682.png)
 
    
 
@@ -254,7 +254,7 @@ SpringSecurity是基于Filter实现认证和授权，底层通过`FilterChainPro
 
    进入这个类也就意味着进入到查询用户的阶段了,就好比是进入了项目的DAO层了,并且这里方法名`retrieveUser`翻译为"检索用户"
 
-   ![image-20211204152711350](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204152711350.png)
+   ![image-20211204152711350](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204152711350.png)
 
    注意:这里传递进来的参数是前端的username和封装的token,虽然这里我觉得完全是可以从token中拿,但是毕竟是人家设计的,不好说
 
@@ -264,7 +264,7 @@ SpringSecurity是基于Filter实现认证和授权，底层通过`FilterChainPro
 
    1. 我们点击`UserDetailsService`可以发现:
 
-      ![image-20211204153455256](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204153455256.png)
+      ![image-20211204153455256](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204153455256.png)
 
       可以发现:这里通过缓存或者内存或者jdbc都可以获取
 
@@ -272,13 +272,13 @@ SpringSecurity是基于Filter实现认证和授权，底层通过`FilterChainPro
 
    2. 查看我们自定义配置类:
 
-      ![image-20211204153854334](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204153854334.png)
+      ![image-20211204153854334](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204153854334.png)
 
       new一个内存用户管理器,然后创建用户,账号为zss,密码为123,权限为admin,这里的创建用户其实就是往Map中去put!
 
    3. 那么这里就会走进`InMemoryUserDetailsManager`中的`loadUserByUsername`
 
-      ![image-20211204154213906](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204154213906.png)
+      ![image-20211204154213906](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204154213906.png)
 
       可以发现这里会将前端用户去map中获取,然后返回一个UserDetails类型,然后就会判断说这个用户名是否存在啊,如果不存在就会抛出异常,如果存在就new一个User返回,而这个Uer实现了UserTails,注意这里比如`isEnabled`表示是否启用啊,`isAccountNonExpired`账户是否过期啊等等之类的
 
@@ -290,13 +290,13 @@ SpringSecurity是基于Filter实现认证和授权，底层通过`FilterChainPro
 
 1. 执行`preAuthenticationChecks.check(user)`进行检查用户的账户是否有效或者启用之类的一些状态:
 
-   ![image-20211204155423681](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204155423681.png)
+   ![image-20211204155423681](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204155423681.png)
 
 2. 检查完毕就会走`additionalAuthenticationChecks(user,(UsernamePasswordAuthenticationToken) authentication);`注意,这里就会进行校验密码了:
 
    走到`DaoAuthenticationProvider`中:
 
-   ![image-20211204160338354](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204160338354.png)
+   ![image-20211204160338354](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204160338354.png)
 
    3. 由于我们自定义的配置类中定义返回`PasswordEncoder`注入到IOC容器中,所以优先使用我们这个自定义的配置:
 
@@ -310,33 +310,33 @@ SpringSecurity是基于Filter实现认证和授权，底层通过`FilterChainPro
 
    4. 此时就会从`passwordEncoder.matches`就会默认走进`NoOpPasswordEncoder`中:
 
-      ![image-20211204160625928](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204160625928.png)
+      ![image-20211204160625928](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204160625928.png)
 
       可以发现这里是用的equals进行比较的!
 
    5. 此时比较成功之后就会一路返回到`AuthenticationManager`接口的实现类`ProviderManager`中的
 
-      ![image-20211204160947146](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204160947146.png)
+      ![image-20211204160947146](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204160947146.png)
 
       这里也是我们最开始执行认证的地方,然后执行下面的copyDetails,说白了这里就是将前端封装的token的details(就包括请求ip与sessionId)进行复制到从Security查询返回的UserDetails中去!
 
    6. 可以发现这里就有sessionId了,我们来看前端:
 
-      ![image-20211204161425272](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204161425272.png)
+      ![image-20211204161425272](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204161425272.png)
 
       再来看后台:
 
-      ![image-20211204161517914](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204161517914.png)
+      ![image-20211204161517914](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204161517914.png)
 
       7. 最后就一路返回到最初的起点:`SecurityContextPersistenceFilter`
 
-         ![image-20211204161820211](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204161820211.png)
+         ![image-20211204161820211](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204161820211.png)
 
          就会从holder中获取SecurityContext,然后清除holder中的Context,最后再将从holder获取到context保存到`SecurityContextRepository`中!
 
 ### 3.1 调用链
 
-![image-20211204162330838](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204162330838.png)
+![image-20211204162330838](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204162330838.png)
 
 1. 请求过来会被过滤器链中的`UsernamePasswordAuthenticationFilter`拦截到，请求中的用户名和密码被封装成`UsernamePasswordAuthenticationToken`(Authentication的实现类)
 2. 过滤器将UsernamePasswordAuthenticationToken提交给认证管理器(`AuthenticationManager`)进行认证
@@ -351,7 +351,7 @@ SpringSecurity是基于Filter实现认证和授权，底层通过`FilterChainPro
 
 总结一波:
 
-![image-20211204163924800](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204163924800.png)
+![image-20211204163924800](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204163924800.png)
 
 ### 3.2 定义密码编码器
 
@@ -389,17 +389,17 @@ public PasswordEncoder passwordEncoder(){
 
 RBAC传统授权流程:
 
-![image-20211204175640008](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204175640008.png)
+![image-20211204175640008](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204175640008.png)
 
 Security授权流程：
 
-![image-20211204175723933](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204175723933.png)
+![image-20211204175723933](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204175723933.png)
 
 
 
 
 
-![image-20211204175956117](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211204175956117.png)
+![image-20211204175956117](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211204175956117.png)
 
 1. 在FilterSecurityInterceptor中会调用其父类AbstractSecurityInterceptor的beforeInvocation方法做授权之前的准备工作
 2. 该方法中通过SecurityMetadataSource..getAttributes(object);获得资源所需要的访问权限 ，通过SecurityContextHolder.getContext().getAuthentication()获取当前认证用户的认证信息，即Authentication对象
@@ -473,5 +473,5 @@ public String add(){
 
 总结:
 
-![image-20211207161059378](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211207161059378.png)
+![image-20211207161059378](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211207161059378.png)
 

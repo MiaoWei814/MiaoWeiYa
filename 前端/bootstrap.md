@@ -14,7 +14,7 @@
 
 使用之前必先导包，所以这里需要引入bootstrap文件：
 
-![image-20210916094011753](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210916094011753.png)
+![image-20210916094011753](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210916094011753.png)
 
 ## 3.布局容器
 
@@ -50,7 +50,7 @@ bootstrap最重要的就是栅格系统,这个栅格系统会随着屏幕或浏�
 
 那再来看一下这个栅格系统的网格是如何布局的:
 
-![image-20210916101518434](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210916101518434.png)
+![image-20210916101518434](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210916101518434.png)
 
 ### 4.1 工作原理
 
@@ -78,7 +78,7 @@ bootstrap最重要的就是栅格系统,这个栅格系统会随着屏幕或浏�
 
 这里详细解释网格系统如何跨设备工作:
 
-![image-20210916102713824](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210916102713824.png)
+![image-20210916102713824](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210916102713824.png)
 
 ## 5.案例
 
@@ -190,7 +190,7 @@ bootstrap最重要的就是栅格系统,这个栅格系统会随着屏幕或浏�
 
 页面:
 
-![image-20210916103038861](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210916103038861.png)
+![image-20210916103038861](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210916103038861.png)
 
 **总结**:写前端要注意浏览器的缓存问题,所以在编辑数据的时候浏览器可能会保存上次编辑残留的数据,这是要考虑到的!除了缓存还有就是向服务器后端发起AJax请求后的响应!其他的比如HTML页面就没啥好总结的,说白了用bootstrap后人家就写好了CSS跟JS,我们只需要去用就行,最重要的还是去考虑我们如何**获取数据**和**组织数据**
 

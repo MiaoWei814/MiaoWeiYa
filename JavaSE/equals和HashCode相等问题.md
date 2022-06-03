@@ -222,7 +222,7 @@ null
 
 > 你可以这样理解:equals 方法虽然认定名字和年纪相同就是同一个学生，但它们本质上是两个对象，hashCode 并不相同。
 
-![image-20210805211259712](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210805211259712.png)
+![image-20210805211259712](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210805211259712.png)
 
 解决办法:
 
@@ -280,7 +280,7 @@ result = (31*1 + Integer(18).hashCode()) * 31 + String("张三").hashCode();
 
 哈哈哈,当然啦肯定是一样的了:此时 s1 和 s2 对象的哈希值都为 776408。
 
-![image-20210805212359877](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210805212359877.png)
+![image-20210805212359877](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210805212359877.png)
 
 总结:
 
@@ -309,7 +309,7 @@ result = (31*1 + Integer(18).hashCode()) * 31 + String("张三").hashCode();
 
 > 这个问题就解决了为什么Set判断重复标准的时候先用HashCode而不是equals方法
 
-![image-20210805214211654](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210805214211654.png)
+![image-20210805214211654](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210805214211654.png)
 
 2. 这种大量的并且快速的对象对比一般使用的Hash容器中，比如HashSet,HashMap,HashTable等等，比如HashSet里要求对象不能重复，则他内部必然要对添加进去的每个对象进行对比，而他的对比规则就是像上面说的那样，先hashCode()，如果hashCode()相同，再用equals()验证，如果hashCode()都不同，则肯定不同，这样对比的效率就很高了
 
@@ -328,7 +328,7 @@ result = (31*1 + Integer(18).hashCode()) * 31 + String("张三").hashCode();
 
 我在阿里巴巴java详尽手册泰山版里查询到,人家是做出来了一个规定->注意是**强制性**:
 
-![image-20210805214645898](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210805214645898.png)
+![image-20210805214645898](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210805214645898.png)
 
 1. 那我们思考下我们什么时候重写呢?
 

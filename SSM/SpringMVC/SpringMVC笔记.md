@@ -45,7 +45,7 @@
 
    这种模式统一把显示层、控制层、数据层的操作全部交给JSP或者JavaBean来进行处理的,我们称之为"Model1"
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/7896890-7b3f9cd59394b017.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/7896890-7b3f9cd59394b017.png)
 
    **说明**:通过上图可以发现JSP从Http Request(请求)中获得所需的数据.并进行业务逻辑的处理,然后将结果通过Http Response(响应)返回给浏览器,从中可见,JSP+JavaBean模式在一定程度上实现了MVC,也即是JSP将控制层和视图合二为一,JavaBean为模型层!
 
@@ -71,7 +71,7 @@
 
 由于上面的种种弊端,所以很快这种方式就被Servlet+JSP+JavaBean所替代了,早期的MVC模式,就像下面这图这样,一般我们称之为"Model2"
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/7896890-403a273b08fec826.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/7896890-403a273b08fec826.png)
 
 **解读**:首先用户的请求会到达Servlet,然后根据请求调用相应的Java Bean,并把所有的显示结果交给JSP去完成,这样的模式我们就称之为MVC模式
 
@@ -132,7 +132,7 @@ SpringMVC的优点:
 
 直接先贴代码再解释每一步:
 
-![image-20210905192035874](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210905192035874.png)
+![image-20210905192035874](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210905192035874.png)
 
 ​	Spring MVC是基于Servlet的,`DispatcherServlet`是整个Spring MVC框架的核心,主要负责截获请求并将其分派给相应的处理器处理;所以配置Spring MVC,首先得要定义DispatcherServlet,跟所有Servlet一样,用户必须在web.xml中进行配置
 
@@ -170,7 +170,7 @@ SpringMVC的优点:
 
 ​	当然我们可以将Spring MVC的配置文件存放在应用程序目录中的任何地方,但需要使用servlet的`init-param`元素加载配置文件,通过`contextConfigLocation`参数来指定Spring MVC配置文件的位置,如:
 
-​	![image-20210905193450682](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210905193450682.png)
+​	![image-20210905193450682](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210905193450682.png)
 
 此处使用Spring资源路径的方式进行指定,即`classpath:springmvc-servlet.xml`,并且这里`contextConfigLocation`必须是这个哈!
 
@@ -258,7 +258,7 @@ public class HelloController implements Controller {
 
 结果:
 
-![image-20210905192502603](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210905192502603.png)
+![image-20210905192502603](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210905192502603.png)
 
 以上就是一个很简单的Spring第一个小方法;
 
@@ -314,11 +314,11 @@ dispatcher-servlet.xml:
 
 在浏览器进行访问:
 
-![image-20210905203216498](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210905203216498.png)
+![image-20210905203216498](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210905203216498.png)
 
 可以发现是可以正常访问的,这里只是给了`index`表示视图解析器拿到了之后就会拼接URL,最终的路径是`/WEB-INF/jsp/index.jsp`这个路径,而我们智能的IDEA也给了提示:
 
-![image-20210905203428656](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210905203428656.png)
+![image-20210905203428656](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210905203428656.png)
 
 所以他就会去对应的文件夹下去找!
 
@@ -341,13 +341,13 @@ dispatcher-servlet.xml:
 
 只需改一个类名就可以了,效果一模一样的!
 
-![image-20210905203216498](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210905203216498.png)
+![image-20210905203216498](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210905203216498.png)
 
 ## 4.执行流程
 
 我们学习SpringMVC那么也需要了解一下SpringMVC的整个执行流程,了解学习才能我们更好的学习后面原理,并且这也是面试可能会问到的:
 
-![Spring MVC执行流程](https://gitee.com/miawei/pic-go-img/raw/master/imgs/1139441444-0.png)
+![Spring MVC执行流程](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/1139441444-0.png)
 
 SpringMVC的执行流程如下:
 
@@ -390,7 +390,7 @@ SpringMVC的执行流程如下:
 
     
 
-    ![image-20210907205615174](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210907205615174.png)
+    ![image-20210907205615174](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210907205615174.png)
 
 ### 4.1 各组件介绍
 

@@ -8,7 +8,7 @@
 
 ​	由于业务和市场需求的不断变化,一个企业可能同时运行着多个不同的业务系统,而这些系统基于不同的操作系统、不同的数据库、异构的网络环境，现在的问题是，如何把这些`信息系统结合成一个有机地协同工作的整体`，真正实现企业跨平台、分布式应用。中间件便是解决之道，它用自己的复杂换取了企业应用的简单。
 
-![image-20211017200855816](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211017200855816.png)
+![image-20211017200855816](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211017200855816.png)
 
 理解:其实中间件其实并不是什么高大上的名词,在我们的日常开发中也是随处可遇的!比如MySQL就是一种中间件的技术,当然他也要遵循一些规范与协议,比如TCP/IP协议,它只要遵守这个协议就能把数据写到硬盘上去,所以它具有一个功能就是持久化功能!而我们写的应用程序是Java写的,而我们使用Java也要去遵守这个TCP/IP协议才能与MySQL沟通!
 
@@ -22,7 +22,7 @@
 
 我们都知道现在流行的开发方式就是微服务架构或者分布式架构,而分布式架构的话就会把一个系统拆分成若干份!比如拆分成订单系统、支付系统、用户系统等等，那么现在这几个系统之间要实现互联.那么这就是一个问题,当我们把单体系统拆分成了分布式系统那么首先考虑的就是要采用什么中间件技术!并且要有最基本的遵循规范和通讯的功能,并且还要必须具备高可用和持久性!
 
-![image-20211017203653909](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211017203653909.png)
+![image-20211017203653909](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211017203653909.png)
 
 综上所述:所有的中间件都必须要`遵守一定的规范`,而且还要具备我们的`高可用`、`高可扩`和我们的`持久性`这些特征。
 
@@ -38,7 +38,7 @@
 
 > 中间件是位于平台(硬件和操作系统)和应用之间的通用服务,这些服务具有标准的程序接口和协议。针对不同的操作系统和硬件平台，它们可以有符合接口和协议规范的多种实现。
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/2018111321555179.jpg)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/2018111321555179.jpg)
 
 中间件有个很大的特点，是脱离于具体设计目标，而具备提供普遍独立功能需求的模块。这使得中间件一定是可替换的。如果一个系统设计中，中间件是不可替换的，不是架构、框架设计有问题，那么就是这个中间件，在 别处可能是个中间件，在这个系统内是引擎。
 
@@ -114,7 +114,7 @@ AMQP、MQTT、持久化设计、Kafka协议、消息发布设计、高可用设�
 
 在我们最初的项目架构中,一般采用的是`单体架构`模式:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudybcffe923-72f4-413b-af26-dd91b742311b.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudybcffe923-72f4-413b-af26-dd91b742311b.png)
 
 就是把所有的业务系统都丢进一个系统中进行架构,用Java语言或者Go语言去开发!
 
@@ -130,7 +130,7 @@ AMQP、MQTT、持久化设计、Kafka协议、消息发布设计、高可用设�
 
 > 分布式架构
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudyd40834ed-a15f-4606-bb36-ce475b05a949.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudyd40834ed-a15f-4606-bb36-ce475b05a949.png)
 
 分布式架构就是把我们的系统拆分成若干的部分,如果不理解那么就比对两个架构就可以得出:单体架构就是由一个请求由一个系统共同完成,而分布式架构有个典型的特征就是`一个请求由服务器端的多个服务来协同完成`!在分布式架构中就会拆分一个个独立的业务系统,而既然是拆分那么两者之间就要进行沟通,此时我们就要采用中间件技术,比如MQ或者Redis;
 
@@ -161,7 +161,7 @@ AMQP、MQTT、持久化设计、Kafka协议、消息发布设计、高可用设�
 
 所以说把我们的分布式架构系统往后推的话就会有一个新鲜的架构方式,比如说我们的基于消息中间件的分布式系统的架构:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudyb888e5f0-2c0f-4576-af88-0176abfa7832.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudyb888e5f0-2c0f-4576-af88-0176abfa7832.png)
 
 从图中可以知道:
 
@@ -192,17 +192,17 @@ AMQP、MQTT、持久化设计、Kafka协议、消息发布设计、高可用设�
 
 我们一般写的代码都是串行执行，就是一个请求由若干个方法执行的链路关系构成的！有个典型特征就是阻塞，前一个方法没执行完毕后一个方法是无法继续往后执行的；
 
-![image-20211018201550279](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211018201550279.png)
+![image-20211018201550279](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211018201550279.png)
 
 
 
 这里是并行执行，也就是不需要一个一个方法执行，可以同时执行，也就是说开了多个线程去执行：
 
-![image-20211018202024877](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211018202024877.png)
+![image-20211018202024877](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211018202024877.png)
 
 这也说明了为什么能高并发的流量削峰，就是取决于并行执行也就是我们的异步编程！我们可以拿到日常生活中去举例子，比如我们在赛跑的时候，接力跑一个接一个，最终跑完就是所有人的时间,这就是串行执行,所有时间的总和加起来就是整个方法执行的结束时间。而并行执行就好比是我们赛跑的时候一起跑，用户都在同一个跑道上，那么这个时候就会有先有后！而不像串行执行，一旦其中某一个方法遇到阻塞，那么整个的耗费时间都是很高的！
 
-![image-20211018202739038](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211018202739038.png)
+![image-20211018202739038](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211018202739038.png)
 
 **常见的消息中间件:**
 
@@ -214,7 +214,7 @@ ActiveMQ、RabbitMQ、Kafka、RocketMQ等等;
 
 > MQ消息队列：负责数据的传递接收，存储和传递，所以性能要过于普通服务和技术！
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy7c171d88-687a-4c6c-8a97-2b257467172e.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy7c171d88-687a-4c6c-8a97-2b257467172e.png)
 
 **消息中间件的核心组成部分：**
 
@@ -232,7 +232,7 @@ ActiveMQ、RabbitMQ、Kafka、RocketMQ等等;
 
 协议：
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy9e91d500-e775-45f3-92fa-78a6278efc51.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy9e91d500-e775-45f3-92fa-78a6278efc51.png)
 
 ​	我们都知道消息中间件负责`数据的传递`,`存储`和`分发消息`三个部分,数据的存储和分发的过程中肯定要遵循某种约定成俗的规范,比如你是采用底层的TCP/IP协议还是UDP协议还是其他的等等,而这些约定成俗的规范就称之为:协议。
 
@@ -319,7 +319,7 @@ Kafka协议是基于TCP/IP的二进制协议。消息内部是通过长度来分
 
 ​	比如我们这里APP或者前端系统把消息丢给了消息中间件，那么此时发生了故障那么也会将数据存入磁盘，然后等待恢复的时候又会将磁盘中的数据读取并且重新开始分发消息！
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudyf908e193-4ca3-44b7-87d0-cbb17b55a107.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudyf908e193-4ca3-44b7-87d0-cbb17b55a107.png)
 
 > 常见的持久化方式
 
@@ -343,13 +343,13 @@ MQ消息队列有如下几个角色
 
 > 场景分析一
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy4acfaeda-fc73-4832-9207-7a9aa45b15a4.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy4acfaeda-fc73-4832-9207-7a9aa45b15a4.png)
 
 比如我在APP上下了一个订单，我们的系统和服务很多，我们如何得知这个消息被那个系统或者那些服务或者系统进行消费，那这个时候就需要一个分发的策略。这就需要消费策略。或者称之为消费的方法论。
 
 > 场景分析二
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy1a150320-9535-423a-99ec-76c5e3e654f7.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy1a150320-9535-423a-99ec-76c5e3e654f7.png)
 
 在发送消息的过程中可能会出现异常，或者网络的抖动，故障等等因为造成消息的无法消费，比如用户在下订单，消费MQ接受，订单系统出现故障，导致用户支付失败，那么这个时候就需要消息中间件就必须支持消息重试机制策略。也就是支持：出现问题和故障的情况下，消息不丢失还可以进行重发。
 
@@ -392,7 +392,7 @@ MQ消息队列有如下几个角色
 
 > 集群模式1·Master-slave主从共享数据的部署方式
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy71c973d1-2a1a-4a82-9d71-85182c38c9f2.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy71c973d1-2a1a-4a82-9d71-85182c38c9f2.png)
 
 **解说**：生产者将消费发送到Master节点，所有的都连接这个消息队列`共享这块数据区域`，Master节点负责写入，一旦Master挂掉，slave节点继续服务。从而形成高可用，
 
@@ -406,7 +406,7 @@ MQ消息队列有如下几个角色
 
 > 集群模式2-Master-slave主从同步部署方式
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy6504af54-f8f7-4d58-aac4-bb547176ae88.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy6504af54-f8f7-4d58-aac4-bb547176ae88.png)
 
 **解释**：这种模式写入消息同样在Master主节点上，但是主节点会同步数据到slave节点形成副本，和zookeeper或者redis主从机制很类同。这样可以达到负载均衡的效果，如果消费者有多个这样就可以去不同的节点就行消费，以为消息的拷贝和同步会暂用很大的带宽和网络资源。在后续的rabbtmq中会有使用。
 
@@ -420,7 +420,7 @@ MQ消息队列有如下几个角色
 
 > 集群模式3·多主集群同步部署模式
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy402ac1b2-2d51-493c-9bc0-37329912dd2b.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy402ac1b2-2d51-493c-9bc0-37329912dd2b.png)
 
 **解释**：和上面的区别不是特别的大，但是它的写入可以往任意节点去写入。
 
@@ -434,7 +434,7 @@ MQ消息队列有如下几个角色
 
 > 集群模式4·多主集群转发部署模式
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudycc632a4a-a382-4303-85f9-8f63e93cea7a.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudycc632a4a-a382-4303-85f9-8f63e93cea7a.png)
 
 解释：如果你插入的数据是broker-1中，元数据信息会存储数据的相关描述和记录存放的位置（队列）。
 它会对描述信息也就是元数据信息就行同步，如果消费者在broker-2中进行消费，发现自己几点没有对应的消息，可以从对应的元数据信息中去查询，然后返回对应的消息信息，场景：比如买火车票或者黄牛买演唱会门票，比如第一个黄牛有顾客说要买的演唱会门票，但是没有但是他会去联系其他的黄牛询问，如果有就返回。
@@ -449,7 +449,7 @@ MQ消息队列有如下几个角色
 
 > 集群模式5 Master-slave与 Breoker-cluster组合的方案
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudya02ff996-446e-4d39-b230-dadb183269e5.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudya02ff996-446e-4d39-b230-dadb183269e5.png)
 
 解释：实现多主多从的热备机制来完成消息的高可用以及数据的热备机制，在生产规模达到一定的阶段的时候，这种使用的频率比较高。
 
@@ -494,7 +494,7 @@ MQ消息队列有如下几个角色
 
 成功后的截图:
 
-![image-20211019162043612](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019162043612.png)
+![image-20211019162043612](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019162043612.png)
 
 然后去RabbitMQ上下载:https://github.com/rabbitmq/rabbitmq-server/releases/
 
@@ -502,7 +502,7 @@ MQ消息队列有如下几个角色
 
 然后我们最终安装完毕并且启动了,此时我们就可以去http://localhost:15672看看:
 
-![image-20211019163836885](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019163836885.png)
+![image-20211019163836885](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019163836885.png)
 
 默认账号密码是`guest`和`guest`;
 
@@ -560,7 +560,7 @@ RabbitMQ Service-stop 停止
 
 如果没有开始菜单则进入安装目录下sbin目录手动启动:
 
-![image-20211112171022938](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112171022938.png)
+![image-20211112171022938](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112171022938.png)
 
 ```erlang
 安装并运行服务 
@@ -609,11 +609,11 @@ rabbitmq-service.bat start 启动服务
 
 6. 具体的操作的界面
 
-   ![image-20211019173809457](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019173809457.png)
+   ![image-20211019173809457](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019173809457.png)
 
 我们可以以admin权利登录进去然后创建一个用户,然后赋予权限为`policymaker`,此时,我们在重新登录进去,就是这样:
 
-![image-20211019173920782](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019173920782.png)
+![image-20211019173920782](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019173920782.png)
 
 因为当前是`policymaker`只能查看当前信息等等,所以此时并没有任何东西!
 
@@ -625,13 +625,13 @@ rabbitmq-service.bat start 启动服务
 
 RabbitMQ既然是中间件技术,那么它肯定有如下几个东西:
 
-![image-20211019191730371](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019191730371.png)
+![image-20211019191730371](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019191730371.png)
 
 Producer是消息生成者,消费者是订阅这个消息,我们现在需要干的事情就是将生产者的消息投递到MQ中,消费者就来把它的消息给消费掉;
 
 那么这里我们通过官方网站介绍这6种通讯机制、分发机制:https://www.rabbitmq.com/getstarted.html
 
-![image-20211019192307680](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019192307680.png)
+![image-20211019192307680](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019192307680.png)
 
 其中:
 
@@ -647,7 +647,7 @@ Producer是消息生成者,消费者是订阅这个消息,我们现在需要干�
 
 第六种RPC是一种拉取机制,一般用得比较少,可以不用去理解!
 
-![image-20211019192324454](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019192324454.png)
+![image-20211019192324454](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019192324454.png)
 
 > 实现步骤:
 
@@ -665,7 +665,7 @@ Producer是消息生成者,消费者是订阅这个消息,我们现在需要干�
 
 这里只是展示Simple模式,也就是简单的模式,一个生产者一个消费者,中间一个队列:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/python-one.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/python-one.png)
 
 
 
@@ -785,7 +785,7 @@ Producer是消息生成者,消费者是订阅这个消息,我们现在需要干�
 
  以上就完成了从生产者到队列的这个过程:
 
-   ![image-20211019195727930](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019195727930.png)
+   ![image-20211019195727930](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019195727930.png)
 
 
 
@@ -799,7 +799,7 @@ Producer是消息生成者,消费者是订阅这个消息,我们现在需要干�
 
 2. 此时我们看页面:
 
-   ![image-20211019200655819](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019200655819.png)
+   ![image-20211019200655819](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019200655819.png)
 
    ​	此时我们就可以看见在导航栏`Connections(连接对象)`这里发现重要的信息,Name是生产者是我们定义连接的名字,UserName是用户名,State是运行的状态!
 
@@ -811,7 +811,7 @@ Producer是消息生成者,消费者是订阅这个消息,我们现在需要干�
 
 4. 然后我们点击导航栏上的`Channels`,然后看:
 
-   ![image-20211019201501038](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019201501038.png)
+   ![image-20211019201501038](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019201501038.png)
 
    ​	此时我们就能发现这里Channel的连接对象是跟前面Connections的连接对象是一致的(因为我重复打断点所以这里对线也是在变化),这是表示创建了一个管道
 
@@ -823,25 +823,25 @@ Producer是消息生成者,消费者是订阅这个消息,我们现在需要干�
 
 6. 然后此时我们点击导航栏的`Queues`,看看:
 
-   ![image-20211019201837799](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019201837799.png)
+   ![image-20211019201837799](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019201837799.png)
 
    这里队列的名字就是我们刚刚声明的`queue1`这个名字;然后还看到Ready:消息就绪状态,Total表示消息的总数,然后Features是否是持久化,如果我在声明队列的时候表示是持久化的话就是这种带D的这种:
 
-   ![image-20211019202423877](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019202423877.png)
+   ![image-20211019202423877](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019202423877.png)
 
    
 
 7. 执行发送，这个时候可以在web控制台查看到这个队列queue的信息
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy51240e70-79d7-4b3f-9a83-6febb3499a42.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy51240e70-79d7-4b3f-9a83-6febb3499a42.png)
 
 8. 我们可以进行对队列的消息进行预览和测试如下：
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudyed656121-1e27-4c0e-84e7-70ae48f3b0f1.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudyed656121-1e27-4c0e-84e7-70ae48f3b0f1.png)
 
 9. 进行预览和获取消息进行测试
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudydc7c7bf4-bffe-4821-92da-c1c8563631d3.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudydc7c7bf4-bffe-4821-92da-c1c8563631d3.png)
 
 
 
@@ -929,17 +929,17 @@ public class Consumer {
 
 打印:
 
-![image-20211019203418189](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019203418189.png)
+![image-20211019203418189](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019203418189.png)
 
 以上就完成了消费者从队列中获取消息的过程:
 
-![image-20211019203324561](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019203324561.png)
+![image-20211019203324561](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019203324561.png)
 
 接下来我们就来具体的分析分析:
 
 1. 此时我们再看队列中:
 
-![image-20211019203911874](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019203911874.png)
+![image-20211019203911874](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019203911874.png)
 
 ​	此时消息已经被释放了
 
@@ -951,7 +951,7 @@ public class Consumer {
 
 3. 页面:
 
-   ![image-20211019204918960](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019204918960.png)
+   ![image-20211019204918960](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019204918960.png)
 
 ​	可以发现这里有个D,这就表示这就是持久化队列,而持久化队列和非持久化队列的区别就是:持久化队列就是无论服务器重启或者故障并不会移除,而不是持久化队列那么在重启的时候就会移除掉!
 
@@ -965,10 +965,10 @@ public class Consumer {
 
 5. 页面:
 
-   ![image-20211019205251198](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019205251198.png)
+   ![image-20211019205251198](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019205251198.png)
 
    发现是已经携带了参数了的!并且我们点击`queue1`可以看到具体的参数:
-   ![image-20211019205345935](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211019205345935.png)
+   ![image-20211019205345935](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211019205345935.png)
 
 6. 这里还有一个问题就是我们在使用生产者的时候说非持久化会存盘吗?答案:会存盘!但是会随着服务器重启而丢失!
 
@@ -980,7 +980,7 @@ public class Consumer {
 
 Broker:就是我们的MQ服务,一个节点的意思
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy7c8a41b8-e3bf-4821-a1f1-a18860277663.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy7c8a41b8-e3bf-4821-a1f1-a18860277663.png)
 
 理解:这个跟我们在第一个简单模式中写的生产者代码是一样的!
 
@@ -1009,7 +1009,7 @@ Broker:就是我们的MQ服务,一个节点的意思
 
 Broker:就是我们的MQ服务,一个节点的意思
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy081077ba-eced-43f9-b148-6f63987f1d2f.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy081077ba-eced-43f9-b148-6f63987f1d2f.png)
 
 ​	理解:这个跟生产者的执行流程整体是一样的!也是一样通过连接工厂获取然后设置属性进行打包放在协议头里发送到服务器进行碰撞! 碰撞成功就打开信道,然后就会信道里取一个出来,也就是说未来你会看到连接只有一个可能通道有多个;然后取了一个通道出来了以后在这里进行消费通过Basic.Consume进行消费,消费以后这里就会比上面多了一个点就是ACK应答,应答的话就有两种一种是手动应答一种是自动应答,而我们一般使用的是手动应答,就是代码与我们的NACK进行确认!因为这是一种消费者的可靠的消息消费!而正常应答的话就会从我们服务器中移除!而如果是不应答的话就会消息的不停重试直到消费为止,也就是出现了故障,那么消息队列就会被挂起,一旦被挂起生产者就会屏蔽生产者的消息的接受,系统就会发生故障!
 
@@ -1017,7 +1017,7 @@ Broker:就是我们的MQ服务,一个节点的意思
 
 ### 4.1 组成(面)
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy62a1f9e3-027d-408a-8fb4-a176bd184d23.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy62a1f9e3-027d-408a-8fb4-a176bd184d23.png)
 
 核心概念:
 
@@ -1045,23 +1045,23 @@ Broker:就是我们的MQ服务,一个节点的意思
 
 - rabbitmq发送消息一定有一个交换机
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudye28575ea-17f4-41a8-ac32-133727fd63ae.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudye28575ea-17f4-41a8-ac32-133727fd63ae.png)
 
 ​	可以看见Bindings绑定的是默认交换机!
 
 并且在这里也可以看见交换机中有一个自带的默认交换机!
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudyd23fdb11-89c8-4883-a027-76d93d257138.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudyd23fdb11-89c8-4883-a027-76d93d257138.png)
 
 > 这是MQ整体的架构图:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy23e6e571-d661-4f4b-b4f4-4d4efb766bc3.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy23e6e571-d661-4f4b-b4f4-4d4efb766bc3.png)
 
 ​	理解:这个跟上面是一样的,一个生产者将消息投递到交换机里面,在交换机里面就会把消息投递到队列里面,而在队列里面就会把消息进行分发,在分发的过程中进行过滤,比如加上路由key来指定消费者,就好比我们SQL中带上了`where routingkey=消费者1`这个意思;如果不过滤那么就不加!
 
 ### 4.2 运行流程
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy2704cee9-3595-45de-892d-ee658e848806.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy2704cee9-3595-45de-892d-ee658e848806.png)
 
 **理解**:生产者通过业务数据也就是消息转换成JSON,当然不止JSON也可能是另外的方式,总之序列化转换成字节以后接下来通过交换机或者路由key来添加这个标签头或者这个队列的名字,传递到我们的MQ服务端,如果这个时候有消费者进行订阅了它,那么就可以根据他的策略进行分发,如果是发布者订阅模式那么它就会全部收到,如果你有routingkey的机制的话那么接下来就会根据routingkey来进行匹配;然后消费者在收到消息以后就会有一个反序列化过程,将业务数据反序列化出来比如是一个json,然后我们就能进行相关的业务处理!就是这个逻辑!
 
@@ -1091,17 +1091,17 @@ Broker:就是我们的MQ服务,一个节点的意思
 
 1. 创建一个队列:
 
-   ![image-20211022170043529](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022170043529.png)
+   ![image-20211022170043529](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022170043529.png)
 
 2. 查看当前队列的信息,
 
-   ![image-20211022170717951](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022170717951.png)
+   ![image-20211022170717951](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022170717951.png)
 
    其中D为持久化的意思,表示随着MQ的服务重启或者宕机,那么重启之后这个队列依然存在消息也会得到持久化;Ready代表是一个就绪的状态,Total代表消息有多少条,Unacked代表消息还有多少条未被确认;后面Message rates就是我们磁盘的一些状况以及我们应答的一些状态;
 
 3. 我们点击这个querue1可以看到Overview:
 
-   ![image-20211022171155626](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022171155626.png)
+   ![image-20211022171155626](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022171155626.png)
 
    这个就是我们当前队列基本运行状况,以及它的一些条目数,...等等
 
@@ -1109,31 +1109,31 @@ Broker:就是我们的MQ服务,一个节点的意思
 
 4. 点击`publish message`
 
-   ![image-20211022180843073](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022180843073.png)
+   ![image-20211022180843073](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022180843073.png)
 
    这里面就是我们生产消息,其中`Delivery mode`表示是否是持久化的意思,1是不持久化,2是持久化,	
 
 5. 这里就是获取消息的地方,其中`Ack mode`选择的是Nack表示的预览消息,如果是选择的`Automatic ack`那么是应答消息,就会将消息从队列中移除!
 
-   ![image-20211022181206128](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022181206128.png)
+   ![image-20211022181206128](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022181206128.png)
 
 > 运行
 
 1. 点击Exchanges交换机发送消息,因为哪怕是简单模式那么都会有一个默认的交换机,所以我们往默认的交换机发送消息!并且我们这里发送消息要指定Routing key,因为是默认的交换机,这里的路由key就相当于指定了队列名,指定队列发送!
 
-   ![image-20211022181922744](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022181922744.png)
+   ![image-20211022181922744](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022181922744.png)
 
    如果我们没指定路由key,那么就会报异常:翻译为:邮件已发布，但未路由。
 
-   ![image-20211023100437256](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023100437256.png)
+   ![image-20211023100437256](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023100437256.png)
 
    2. 此时我们看到消息就是:处于一个就绪状态且总共有1条消息;
 
-      ![image-20211022183743995](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022183743995.png)
+      ![image-20211022183743995](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022183743995.png)
 
    3. 然后点queue1然后查看消息:
 
-      ![image-20211022184419003](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022184419003.png)
+      ![image-20211022184419003](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022184419003.png)
 
 > 总结:无论是简单工模式还是工作队列模式它们都有一个默认的交换机,发送消息一定是交换机去发送而不是队列!,交换机接收消息推送到队列中,队列以后消费者会自动监听订阅消息,然后进行推送! 还有没有声明交换机那么一定是走默认的交换机
 
@@ -1141,39 +1141,39 @@ Broker:就是我们的MQ服务,一个节点的意思
 
 这个模式也称"**发布与订阅模式**"
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/python-three.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/python-three.png)
 
 #### 1. web界面
 
 1. 创建一个fanout类型的交换机
 
-   ![image-20211022200712629](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022200712629.png)
+   ![image-20211022200712629](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022200712629.png)
 
    2. 查看我们的交换机
 
-      ![image-20211022200816591](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022200816591.png)
+      ![image-20211022200816591](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022200816591.png)
 
       此时我们的交换机已经创建好了!
 
    3. 然后我们创建两个队列:
 
-      ![image-20211022201013069](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022201013069.png)
+      ![image-20211022201013069](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022201013069.png)
 
    4. 点击queue2和queue3然后将队列与我们的自定义交换机进行绑定
 
-      ![image-20211022201335325](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022201335325.png)
+      ![image-20211022201335325](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022201335325.png)
 
    5. 绑定后就是这种:
 
-      ![image-20211022201508468](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022201508468.png)
+      ![image-20211022201508468](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022201508468.png)
 
       6. 接下来我们就往我们的交换机上投递一条信息,我们可以通过web页面俩模拟这个过程:
 
-         ![image-20211022202002123](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022202002123.png)
+         ![image-20211022202002123](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022202002123.png)
 
       7. 然后此时我们就能看到对应的队列中已经存在了消息:
 
-         ![image-20211022202058346](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022202058346.png)
+         ![image-20211022202058346](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022202058346.png)
 
       > 接下来只要有人订阅了我们这个队列,那么接下里都会收到消息;通过交换机与队列进行一对多进行绑定,那么我们只需要往一个交换机进行发送消息,那么消费者只要订阅了队列就会收到消息!就好比是广播,通过一个广播进行扩散!
 
@@ -1187,7 +1187,7 @@ Broker:就是我们的MQ服务,一个节点的意思
 
 这是图解:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy160fd9d8-2b42-4d43-b0d6-b4e47e272e8f.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy160fd9d8-2b42-4d43-b0d6-b4e47e272e8f.png)
 
 接下来我们就围着这张图去通过代码的方式去描述使用:
 
@@ -1375,11 +1375,11 @@ public class Consumer {
 
 生产者:
 
-![image-20211023212625710](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023212625710.png)
+![image-20211023212625710](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023212625710.png)
 
 消费者:
 
-![image-20211023212637663](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023212637663.png)
+![image-20211023212637663](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023212637663.png)
 
 > 其实无论是代码还是图形化界面都是为了表达:消息是通过交换机去传递给队列,队列之后就会推送给我们消费者,就是这样的一个关系!
 
@@ -1387,7 +1387,7 @@ public class Consumer {
 
 这个就是我们模式中的`Routing模式`
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy33427b78-879d-4511-9dd7-42fb33108339.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy33427b78-879d-4511-9dd7-42fb33108339.png)
 
 这个模式跟上面的Fanout模式是差不多的,只不过这个模式比上面多了一个`路由key`的概念,这个路由key呢就相当于给它指定了一个where条件,比如:where routekey=error,而消费者就必须去绑定这个error,然后我们就会把属于error的这个消费者给查询出来;其实可以想象成是一个过滤的一个条件就可以了!
 
@@ -1397,19 +1397,19 @@ public class Consumer {
 
 1. 创建Direct模式的交换机
 
-   ![image-20211022210832934](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022210832934.png)
+   ![image-20211022210832934](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022210832934.png)
 
 2. 然后我们针对一个队列进行绑定一个routing key,这样我们待会就可以不用指定队列去发送:
 
-   ![image-20211022212101541](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022212101541.png)
+   ![image-20211022212101541](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022212101541.png)
 
    最终就是这样子的:
 
-   ![image-20211022212145984](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022212145984.png)
+   ![image-20211022212145984](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022212145984.png)
 
 3. 然后我们现在就往order这个路由key里面发送消息:
 
-   ![image-20211022212416736](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022212416736.png)
+   ![image-20211022212416736](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022212416736.png)
 
    注意:在发送消息的时候必须要指定发送的路由key,不然就会失败!
    
@@ -1419,7 +1419,7 @@ public class Consumer {
 
 比如这种:
 
-![image-20211022213550448](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211022213550448.png)
+![image-20211022213550448](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211022213550448.png)
 
 给order发送消息,那么此时对应的两个队列都会收到消息,此时就已经达到了一个按需选择的目的!!!!
 
@@ -1431,7 +1431,7 @@ public class Consumer {
 
 图解:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy33427b78-879d-4511-9dd7-42fb33108339.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy33427b78-879d-4511-9dd7-42fb33108339.png)
 
 接下来我们就去围绕这张图去用代码去进行一个代码演示:
 
@@ -1618,22 +1618,22 @@ public class Consumer {
 
 这是绑定的路由key:
 
-![image-20211024185009575](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024185009575.png)
+![image-20211024185009575](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024185009575.png)
 
 生产者:
 
-![image-20211024185053347](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024185053347.png)
+![image-20211024185053347](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024185053347.png)
 
 消费者:
 
-![image-20211024185151316](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024185151316.png)
+![image-20211024185151316](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024185151316.png)
 
 > 可以发现:这里三个队列都收到了消息,而我们就是指定了路由key和交换机,就可以了!在图形化界面绑定了交换机和队列之间的路由key!
 
 ### 5.4 Topic模式
 
 这个是主题模式,这个模式比Direct模式又多了一点内容,也就是可以支持模糊匹配的路由key:
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy89e09dbc-b6ee-4db6-a6f2-ddbd7b4d95d6.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy89e09dbc-b6ee-4db6-a6f2-ddbd7b4d95d6.png)
 
 #### 1. web界面
 
@@ -1643,11 +1643,11 @@ public class Consumer {
 
 1. 创建一个Topic模式的交换机:
 
-   ![image-20211023141526044](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023141526044.png)
+   ![image-20211023141526044](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023141526044.png)
 
 2. 在交换机里面去绑定对应的队列:
 
-   ![image-20211023141956334](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023141956334.png)
+   ![image-20211023141956334](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023141956334.png)
 
    ```bash
    # 代表的是零个或者一个或者多个也就是多集,多集就是这样:com.xxxx.xxx.xx 无论点多少都无所谓,比如:com、com.xxx.x、com.xxx 都能进行匹配!
@@ -1656,11 +1656,11 @@ public class Consumer {
 
 3. 接下里我们我们给queue1和queue2和queue3发送消息,那么此时该如何去发:
 
-   ![image-20211023145204609](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023145204609.png)
+   ![image-20211023145204609](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023145204609.png)
 
    ​	我们随便点开一个queue3查看:
 
-   ​	![image-20211023145848682](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023145848682.png)
+   ​	![image-20211023145848682](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023145848682.png)
 
 > 只会给满足条件的路由key对应的队列发送消息,比如:com.course.order.user.test ,此时每个key都满足,但是除了course,因为它是\*.course.\*,后面存在多集,所以它不满足不会对他进行发送消息!
 
@@ -1670,7 +1670,7 @@ public class Consumer {
 
 图解:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy89e09dbc-b6ee-4db6-a6f2-ddbd7b4d95d6.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy89e09dbc-b6ee-4db6-a6f2-ddbd7b4d95d6.png)
 
 > 生产者
 
@@ -1852,15 +1852,15 @@ public class Consumer {
 
 这是图形化界面显示的模糊路由key
 
-![image-20211024190319145](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024190319145.png)
+![image-20211024190319145](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024190319145.png)
 
 生产者:
 
-![image-20211024190355681](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024190355681.png)
+![image-20211024190355681](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024190355681.png)
 
 消费者:
 
-![image-20211024190605283](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024190605283.png)
+![image-20211024190605283](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024190605283.png)
 
 > 可以发现,我们使用Topic模式的交换机,建立模糊路由key,那么就会自动去匹配去查找,如果符合要求那么就会给绑定对应的队列去推送消息,而消费者绑定队列,也在监听队列,所以一旦被推送那么就立马收到!当然要注意#代表0个或者多集,而*号代表必须有并且只有一集;
 
@@ -1872,19 +1872,19 @@ public class Consumer {
 
 1. 创建一个Headers模式的交换机
 
-   ![image-20211023190331117](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023190331117.png)
+   ![image-20211023190331117](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023190331117.png)
 
 2. 跟队列进行绑定,并且指定了参数:
 
-   ![image-20211023190951809](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023190951809.png)
+   ![image-20211023190951809](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023190951809.png)
 
 3. 然后我们发消息:
 
-   ![image-20211023191736630](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023191736630.png)
+   ![image-20211023191736630](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023191736630.png)
 
 4. 此时我们去queue1中可以查看到这个消息:
 
-   ![image-20211023191831036](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023191831036.png)
+   ![image-20211023191831036](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023191831036.png)
 
 > 也就说这个模式就是根据我们的条件去达成!通过在发送消息的设置Headers,然后去交换机里找是否满足条件!
 
@@ -1928,7 +1928,7 @@ channel.basicConsume(QUEUE_INFORM_EMAIL, true, consumer);
 
 图解:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy6f38311d-bcff-4d63-9c60-4ff4103eb3e0.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy6f38311d-bcff-4d63-9c60-4ff4103eb3e0.png)
 
 特点:该模式接收消息时当有多个消费者接入时，消息的分配模式是一个消费者分配一条，直至消息消费完成;
 
@@ -2001,7 +2001,7 @@ public class Producer {
 
 注意我们这里使用的默认的交换机,所以routingkey是队列名,我们这里循环往队列queue1中推送消息,然后此时我们就看见queue1中就有20条数据,然后我们运行看看消费者是如何获取进行分配的!
 
-![image-20211024201557382](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024201557382.png)
+![image-20211024201557382](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024201557382.png)
 
 > 消费者1
 
@@ -2155,11 +2155,11 @@ public class Work2 {
 
 这是work1:
 
-![image-20211024203940938](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024203940938.png)
+![image-20211024203940938](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024203940938.png)
 
 这是work2:
 
-![image-20211024204000282](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024204000282.png)
+![image-20211024204000282](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024204000282.png)
 
 结论:我们启动了两个消费者然后开始启动生产者投递消息,此时我们就可以看见消费者2因为处理消息速度较快,所以一下就跑完了,而消费者1处理较慢,需要一秒执行一次;但是可以看见两者收到的消息是平均的,哪怕如果出现奇数消息数量,那么最后一个就是随机的!
 
@@ -2175,7 +2175,7 @@ public class Work2 {
 
 图解:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy6f38311d-bcff-4d63-9c60-4ff4103eb3e0.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy6f38311d-bcff-4d63-9c60-4ff4103eb3e0.png)
 
 特点:由于消息接收者处理消息的能力不同,存在处理快慢的问题,我们就需要能者多劳模式,处理快的多处理,处理慢的少处理;
 
@@ -2419,11 +2419,11 @@ public class Work2 {
 
 这是work1:
 
-![image-20211024211822590](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024211822590.png)
+![image-20211024211822590](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024211822590.png)
 
 这是work2:
 
-![image-20211024211838689](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024211838689.png)
+![image-20211024211838689](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024211838689.png)
 
 
 
@@ -2496,7 +2496,7 @@ finalChannel.basicConsume("queue1", false, new DeliverCallback() {
 
 ### 5.7 完整的声明创建方式
 
-![image-20211024191556418](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024191556418.png)
+![image-20211024191556418](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024191556418.png)
 
 注意我们是先通过web界面先将交换机和队列进行绑定,然后再通过我们的程序进行发送,这样呢可以让我们的代码变得更加的简洁,不会有声明和绑定的过程;那么接下来我们通过代码的方式脱离这个web界面来绑定交换机和队列之间的关系:
 
@@ -2610,15 +2610,15 @@ public class Producer {
 
 之前的交换机:
 
-![image-20211024193826946](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024193826946.png)
+![image-20211024193826946](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024193826946.png)
 
 现在的交换机:
 
-![image-20211024193926051](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024193926051.png)
+![image-20211024193926051](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024193926051.png)
 
 然后我们点击这个交换机里面看看是否存在绑定了路由key和指定的队列:
 
-![image-20211024194000306](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024194000306.png)
+![image-20211024194000306](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024194000306.png)
 
 总结:也即是说我们可以通过代码的方式进行手动创建交换机和队列进行绑定这么个之间的关系!
 
@@ -2706,7 +2706,7 @@ public class Consumer {
 
 > 打印看效果:
 
-![image-20211024194214868](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211024194214868.png)
+![image-20211024194214868](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211024194214868.png)
 
 总结:可以发现这里queue5和queue6已经收到消息了,可为什么queue7没收到呢,是因为我们在生产者发送消息的时候指定的路由key是order,也就是queue5和queue6所以说queue7没收到!
 
@@ -2716,7 +2716,7 @@ public class Consumer {
 
 ### 5.8 RPC
 
-![image-20211112172903843](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112172903843.png)
+![image-20211112172903843](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112172903843.png)
 
 RPC即客户端远程调用服务端的方法 ，使用MQ可以实现RPC的异步调用，基于Direct交换机实现，流程如下：
 
@@ -2765,7 +2765,7 @@ MQ是一种应用程序之间的通信方法!，不同语言系统之间如何�
 
 **串行方式**：将订单信息写入数据库成功后，发送注册邮件，再发送注册短信。以上三个任务全部完成后，返回给客户端
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy3c16e7cd-e504-497e-a9fc-2260f74e5e51.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy3c16e7cd-e504-497e-a9fc-2260f74e5e51.png)
 
 这是对应的Demo代码:
 
@@ -2792,7 +2792,7 @@ public void makeOrder(){
 
 **并行方式**:将订单信息写入数据库成功后,发送注册邮件的同时,发送注册短信,以上三个任务完成以后,返回给客户端,与串行的差别是:并行的方式可以提高处理的时间
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy29bb193d-94fe-41a5-8d53-8e460316a7ba.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy29bb193d-94fe-41a5-8d53-8e460316a7ba.png)
 
 这是对应的Demo代码:
 
@@ -2849,7 +2849,7 @@ public void relationMessage(){
 
 > 异步消息队列的方式:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudydfbeb825-015d-4be0-abba-d2dc7084cb84.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudydfbeb825-015d-4be0-abba-d2dc7084cb84.png)
 
 **好处**:
 
@@ -2879,13 +2879,13 @@ public void makeOrder(){
 
 ### 6.2 高内聚、低耦合
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudya1f53997-b01d-443f-98cd-86a38223fe19.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudya1f53997-b01d-443f-98cd-86a38223fe19.png)
 
 如果说我临时增加了一个微信服务,那么我们就要进行往外扩展,而且我们可以不用把代码书写在下单服务里面去,而MQ就可理解为将其分隔开,这就达到了一个**解耦**的目的,
 
 还有比如:流量的削峰:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudyf2d1ac21-e710-45dc-a166-6b531c95945f.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudyf2d1ac21-e710-45dc-a166-6b531c95945f.png)
 
 1. 分布式事务的可靠消费和可靠生产
 
@@ -2921,7 +2921,7 @@ public void makeOrder(){
 
 然后我们可以看见:
 
-![image-20211026090503872](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026090503872.png)
+![image-20211026090503872](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026090503872.png)
 
 可以看见我们的starter启动器里面就包含了spring对MQ的中间件,这里还第二行就是包括了AMQP本身的客户端的包,发现其本身整合也是用的我们之前Spring的依赖:
 
@@ -2959,17 +2959,17 @@ spring:
 
 指定一下配置MQ要清晰明了,因为其本身自动配置的时候就已经有默认值了,不信我们来点看对应的`RabbitProperties`看看:
 
-![image-20211026091800906](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026091800906.png)
+![image-20211026091800906](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026091800906.png)
 
 > 我们再来看下我们的MQ核心:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudyb6899c5b-99c7-401b-9b6c-58bf72fe8734.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudyb6899c5b-99c7-401b-9b6c-58bf72fe8734.png)
 
 ### 7.1 fanout模式
 
 我们使用fanout模式来完成一个下订单的模拟,我们会绑定交换机和队列的关系,然后建立一个消费者也就是短信服务、邮件服务来监听队列,来完成用户下单来广播我们消息的能力!我们接下来就来体验一下RabbitMQ异步编程的机制以及高内聚、低耦合的特性:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy61c5b87b-d787-4d62-9e7c-85e8f26b02f8.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy61c5b87b-d787-4d62-9e7c-85e8f26b02f8.png)
 
 > 首先定义订单的生产者:
 
@@ -3120,7 +3120,7 @@ class SpringBootMqApplicationTests {
 
 运行测试之后我们来看看图形化界面是不是成功了:
 
-![image-20211026102024752](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026102024752.png)
+![image-20211026102024752](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026102024752.png)
 
 ​	此时:我们已经完成了用户模拟下单成功后向MQ服务发起消息的过程,接下来我们来通过服务来监听来收到消息在做相关处理的问题:
 
@@ -3212,7 +3212,7 @@ class SpringBootMqApplicationTests {
 
 启动测试,我们看看控制台:
 
-![image-20211026105552803](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026105552803.png)
+![image-20211026105552803](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026105552803.png)
 
 结论:在这个的过程中,使用SpringBoot方式去使用MQ,使我们的代码变得更加的简洁与清爽,而这个跟我们之前使用原生的发送和接收消息本质是一样的;
 
@@ -3615,7 +3615,7 @@ channel.basicConsume("queue1",false, consumer);
 
 这是图示:
 
-![image-20211112123637068](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112123637068.png)
+![image-20211112123637068](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112123637068.png)
 
 这是因为虽然我们设置了手动ACK，但是代码中并没有进行消息确认！所以消息并未被真正消费掉。
 
@@ -3638,11 +3638,11 @@ channel.basicConsume("queue1",false, consumer);
 - 消除峰值
   - 异步化提速(发消息),提高系统稳定性(多系统调用),服务解耦(5-10个服务),排序保证,消除峰值
 
-![image-20211112170757263](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112170757263.png)
+![image-20211112170757263](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112170757263.png)
 
 ### 8.4 轮询分发和公平分发
 
-![image-20211112171952548](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112171952548.png)
+![image-20211112171952548](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112171952548.png)
 
 公平模式与入门程序相比，多了一个消费端，两个消费端共同消费同一个队列中的消息。
 
@@ -3693,15 +3693,15 @@ channel.basicConsume("queue1",false, consumer);
 
 1. 交换机持久化
 
-   ![image-20211112173259096](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112173259096.png)
+   ![image-20211112173259096](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112173259096.png)
 
 2. 队列持久化
 
-   ![image-20211112173308791](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112173308791.png)
+   ![image-20211112173308791](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112173308791.png)
 
 3. 消息持久化
 
-   ![image-20211112173315261](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112173315261.png)
+   ![image-20211112173315261](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112173315261.png)
 
 而所谓的持久化的意思就是MQ服务挂了你依然还存在服务中,等待下一次启动还能继续使用!
 
@@ -3719,7 +3719,7 @@ channel.basicConsume("queue1",false, consumer);
 
 ### 8.6 场景:
 
-![腾讯课堂图片20211112093101](https://gitee.com/miawei/pic-go-img/raw/master/imgs/%E8%85%BE%E8%AE%AF%E8%AF%BE%E5%A0%82%E5%9B%BE%E7%89%8720211112093101.jpg)
+![腾讯课堂图片20211112093101](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/%E8%85%BE%E8%AE%AF%E8%AF%BE%E5%A0%82%E5%9B%BE%E7%89%8720211112093101.jpg)
 
 **解读**:
 
@@ -3729,11 +3729,11 @@ channel.basicConsume("queue1",false, consumer);
 
 ​	以前的架构是处于一个同步架构,也就是处理一个订单的结算那么是一步一步执行,也可以理解为这是一个面向过程的!而现在使用MQ充当中间件技术,这是一个异步的,可理解为这是一个面向对象的,也就是说MQ左边处理会非常快,那么这就解决了流量并发的一个削峰问题!
 
-![image-20211112202634793](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112202634793.png)
+![image-20211112202634793](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112202634793.png)
 
 ### 8.7 整合springBoot
 
-![image-20211201145805286](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211201145805286.png)
+![image-20211201145805286](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211201145805286.png)
 
 > 消息发送者
 

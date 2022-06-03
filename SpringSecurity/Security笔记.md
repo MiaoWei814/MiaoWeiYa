@@ -99,7 +99,7 @@ Spring Security的两个主要目标是"认证"和"授权"(访问控制)
 
 2. 首页访问:
 
-   ![image-20211001204802821](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211001204802821.png)
+   ![image-20211001204802821](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211001204802821.png)
 
    > 可以看见已经被拦截下来了,此时报了异常为403,表示无权限!
 
@@ -116,7 +116,7 @@ Spring Security的两个主要目标是"认证"和"授权"(访问控制)
 
 4. 此时页面:
 
-   ![image-20211001210002432](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211001210002432.png)
+   ![image-20211001210002432](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211001210002432.png)
 
    但是可以发现,这个页面并不是我们手写的,而是自动跳转的,这是spring Security默认的
 
@@ -124,7 +124,7 @@ Spring Security的两个主要目标是"认证"和"授权"(访问控制)
 
    我们查看formLogin的注释信息可以得出:
 
-   ![image-20211001210140566](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211001210140566.png)
+   ![image-20211001210140566](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211001210140566.png)
 
    没指定就会是默认页面,那么我们可以指定页面的,如:
 
@@ -163,7 +163,7 @@ Spring Security的两个主要目标是"认证"和"授权"(访问控制)
 
    我们还没登录进首页然后随便点一个level1然后突然后端报错了!
 
-   ![image-20211001212134934](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211001212134934.png)
+   ![image-20211001212134934](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211001212134934.png)
 
    根据报错信息说"这个密码没对其加密"
 
@@ -209,7 +209,7 @@ Spring Security的两个主要目标是"认证"和"授权"(访问控制)
 
    这里跳转路径不是乱写的,而是根据注销的功能里人家写好了的:
 
-   ![image-20211002090338267](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211002090338267.png)
+   ![image-20211002090338267](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211002090338267.png)
 
 2. 在自动配置类中开启注销的功能:
 
@@ -288,7 +288,7 @@ Spring Security的两个主要目标是"认证"和"授权"(访问控制)
 
 4. 此时我们看页面效果:
 
-   ![image-20211002095143019](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211002095143019.png)
+   ![image-20211002095143019](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211002095143019.png)
 
    > 可以说这里我们就已经能看到我们想要的效果了!
 
@@ -320,7 +320,7 @@ Spring Security的两个主要目标是"认证"和"授权"(访问控制)
 
 7. 看效果:
 
-   ![image-20211002101055526](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211002101055526.png)
+   ![image-20211002101055526](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211002101055526.png)
 
 ## 4.记住我
 
@@ -342,13 +342,13 @@ Spring Security的两个主要目标是"认证"和"授权"(访问控制)
 
    我们在登录后在F12控制台查看:
 
-   ![image-20211002102615030](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211002102615030.png)
+   ![image-20211002102615030](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211002102615030.png)
 
    可以发现这里有个我们登录的cookie,然后看它的最大时间计算后得出14天,也就是说这个cookie会默认存储14天,
 
 4. 我们点击注销的时候，可以发现，spring security 帮我们自动删除了这个 cookie
 
-   ![image-20211002102853828](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211002102853828.png)
+   ![image-20211002102853828](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211002102853828.png)
 
 5. 结论：
 
@@ -383,7 +383,7 @@ Spring Security的两个主要目标是"认证"和"授权"(访问控制)
 
    这是人家源码文档中告诉:
 
-   ![image-20211002105321913](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211002105321913.png)
+   ![image-20211002105321913](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211002105321913.png)
 
 4. 好的目前来说就可以了!就可以实现自定义登录页!
 
@@ -409,7 +409,7 @@ http.formLogin().loginPage("/toLogin").loginProcessingUrl("/login");// 登陆表
 
 这是源码文档中描述:
 
-![image-20211002110201930](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211002110201930.png)
+![image-20211002110201930](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211002110201930.png)
 
 ​	意思就是说请求到这里默认参数名为`username`和`password`这两个!
 

@@ -59,7 +59,7 @@ IOC也称控制反转,IOC是一种设计思想,在开发中,将你设计好的�
 
 画图理解：
 
-![image-20211008160644540](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211008160644540.png)
+![image-20211008160644540](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211008160644540.png)
 
 ### 2.1 DI
 
@@ -219,7 +219,7 @@ name和id的区别:
 
    报错信息:可以看出在<Beans>中的节点中Bean的名称已经使用过了
 
-   ![image-20210902192107834](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210902192107834.png)
+   ![image-20210902192107834](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210902192107834.png)
 
 2. 如果同时配置了id又配置了name,则两个都生效,如果id和name都没指定那么默认就会以类全名作为name,如:<bean class="com.xxxx.BeanController";比如:
 
@@ -249,7 +249,7 @@ name和id的区别:
 
    结果:
 
-   ![image-20210902192622355](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210902192622355.png)
+   ![image-20210902192622355](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210902192622355.png)
 
    如果默认不写id和name,那么就以class的参数指定:
 
@@ -260,7 +260,7 @@ name和id的区别:
 
    结果:
 
-   ![image-20210902192815362](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210902192815362.png)
+   ![image-20210902192815362](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210902192815362.png)
 
 
 #### 2.3.2 Bean元素进阶
@@ -311,7 +311,7 @@ Spring 容器在初始化一个 Bean 实例时，同时会指定该实例的作�
 
   **注意:**除了`singleton`和`prototype`以外的属性都只能在web环境下使用,如果在非web环境下使用ClassPathXmlApplicationContext 加载这些作用域中的任意一个的 Bean,就会抛出异常:
 
-  ![image-20210902195611858](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210902195611858.png)
+  ![image-20210902195611858](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210902195611858.png)
 
 这里本来想演示单例模式的作用域,但是我无形之中在之前的元素属性那节已经演示过了,两次获取都是同一个对象,对象地址都是一样的!
 
@@ -346,13 +346,13 @@ System.out.println(bean==bean1);//可以证明两次获取都是不同的对象,
 
 结果:
 
-![image-20210902200341947](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210902200341947.png)
+![image-20210902200341947](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210902200341947.png)
 
 2. ### 生命周期
 
    Spring容器在确保一个Bean能够使用之前,会进行许多工作,Spring容器中bean的生命周期如下:
 
-   ![Bean的生命周期](https://gitee.com/miawei/pic-go-img/raw/master/imgs/10551T325-0.png)
+   ![Bean的生命周期](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/10551T325-0.png)
 
    解读步骤:
    **注意:**是采用Spring容器中的ApplicationContext容器方式:
@@ -556,7 +556,7 @@ public class Person {
 
 执行:
 
-![image-20210903091554916](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903091554916.png)
+![image-20210903091554916](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903091554916.png)
 
 **总结**:可以发现我们在使用`ApplicationContext`容器的时候,一旦容器启动的时候会自动创建所有<bean>的实例,而创建方式就是默认的无参构造函数,所以会调用无参的构造方法!
 
@@ -635,7 +635,7 @@ public class Person {
 
      结果:
 
-     ![image-20210903095318976](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903095318976.png)
+     ![image-20210903095318976](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903095318976.png)
 
 2. ## 通过静态方法创建对象
 
@@ -719,13 +719,13 @@ public class Person {
 
    结果:
 
-   ![image-20210903101733968](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903101733968.png)
+   ![image-20210903101733968](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903101733968.png)
 
    > 这里就是利用了另一个类去创建实例,其本身不会创建实例!静态的工厂方法核心就是class+factory-method
 
    **注意:**必须是`static`方法,否则就会报异常:
 
-   ![image-20210903102131396](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903102131396.png)
+   ![image-20210903102131396](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903102131396.png)
 
 3. ## 通过工厂方法创建对象
 
@@ -743,7 +743,7 @@ public class Person {
 
    执行结果:
 
-   ![image-20210903104035835](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903104035835.png)
+   ![image-20210903104035835](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903104035835.png)
 
    **结论:**这个与静态方法的区别就是静态方法必须是static修饰并且在xml配置文件中是针对单个bean进行工厂方法调用,而现在的工厂方法进行引用然后执行工厂方法创建对象
 
@@ -855,7 +855,7 @@ xml:
 
 结果:
 
-![image-20210903153027393](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903153027393.png)
+![image-20210903153027393](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903153027393.png)
 
 #### 2.4.2 setter方式注入
 
@@ -964,7 +964,7 @@ xml:
 
 结果:
 
-![image-20210903151406794](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903151406794.png)
+![image-20210903151406794](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903151406794.png)
 
 > 总结:这里Spring容器就会将两个类实例化,然后Student类中进行属性赋值的时候,其中一个Teacher属性需要赋值Teacher实例,然后Spring通过ref标签属性进行引用类型注入,值类型用value注入
 
@@ -1029,7 +1029,7 @@ xml:
 
 执行结果:
 
-![image-20210903184214702](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903184214702.png)
+![image-20210903184214702](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903184214702.png)
 
 **注意:**这里有个注意的地方就是使用Spel注入中获取其他bena的属性的时候必须是位于自己bean的下面才能获取到,不然永远是null
 
@@ -1129,11 +1129,11 @@ xml:
 
    来吧直接看结果:
 
-   ![image-20210903191000855](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903191000855.png)
+   ![image-20210903191000855](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903191000855.png)
 
    如果只注入一个的话那么也是可以的:
 
-   ![image-20210903191031475](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903191031475.png)
+   ![image-20210903191031475](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903191031475.png)
 
 2. ### List集合类型注入和Set
 
@@ -1209,7 +1209,7 @@ xml:
 
    结果:
 
-   ![image-20210903193411110](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903193411110.png)
+   ![image-20210903193411110](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903193411110.png)
 
    > map的话哪怕只注入一个也要写map,其实我这里只列举出来三个典型的,如果出现map里面有数组啊list集合啊之类的那么这里就需要重重嵌套
 
@@ -1217,7 +1217,7 @@ xml:
 
    第一种方式:这是支持中文的:
    
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20180807153755364)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20180807153755364)
    
    第二种方式:这是不支持中文的:
    
@@ -1333,7 +1333,7 @@ xml:
 
    结果正常为:
 
-   ![image-20210904093834548](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904093834548.png)
+   ![image-20210904093834548](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904093834548.png)
 
 2. ## byName
 
@@ -1364,7 +1364,7 @@ xml:
 
    执行:
 
-   ![image-20210904103808612](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904103808612.png)
+   ![image-20210904103808612](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904103808612.png)
 
    > 可以发现与上面少了一个Person的无参构造方法打印语句,所以可以结论出自动装配不会走有参构造会走无参构造并且会走字段赋值的形式也就是setter方法
 
@@ -1388,7 +1388,7 @@ xml:
 
    执行效果:
 
-   ![image-20210904103808612](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904103808612.png)
+   ![image-20210904103808612](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904103808612.png)
 
    这时你会发现这个byType跟byName两者可能跟上面没什么区别,但是我接下来我把属性名改一下:
 
@@ -1447,7 +1447,7 @@ xml:
 
    看结果:
 
-   ![image-20210904114445745](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904114445745.png)
+   ![image-20210904114445745](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904114445745.png)
 
    咦:为什么是第一个呢?难道第二个Bean的类型不就是Man吗?
 
@@ -1457,11 +1457,11 @@ xml:
 
    在Bean中也就是我们的`Person`类中:
 
-   ![image-20210904110602602](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904110602602.png)
+   ![image-20210904110602602](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904110602602.png)
 
    有一个引用类型Man,全限定类名`hello.demo.autowire.Man`这就是它的类型,然后就会去在Spring容器中去找那些<bean>标签中class属性为"hello.demo.autowire.Man"的bean,那么找到之后就形成了类型匹配,Spring就会自动装配!
 
-   ![image-20210904112117899](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904112117899.png)
+   ![image-20210904112117899](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904112117899.png)
 
    
 
@@ -1476,11 +1476,11 @@ xml:
 
    而我们在找的过程中就会发现有两个bean都可以与之匹配,但是注入的话只能注入一个,不能同时注入多个对吧!所以这样子的就会报异常:
 
-   ![image-20210904113632760](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904113632760.png)
+   ![image-20210904113632760](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904113632760.png)
 
    而且IDEA也给我们提示了:
 
-   ![image-20210904113659164](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904113659164.png)
+   ![image-20210904113659164](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904113659164.png)
 
    这样应该懂了吧!
 
@@ -1492,7 +1492,7 @@ xml:
 
    这是Person:
 
-   ![image-20210904115315660](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904115315660.png)
+   ![image-20210904115315660](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904115315660.png)
 
    然后xml:
 
@@ -1508,7 +1508,7 @@ xml:
 
    结果:
 
-   ![image-20210904115453442](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904115453442.png)
+   ![image-20210904115453442](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904115453442.png)
 
    其实也可以这样去理解:
 
@@ -1600,7 +1600,7 @@ Spring 中常用的注解如下:
 
 意思就是将对象存放到Spring容器中,一般写在类的上方,如:
 
-![image-20210903211119234](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903211119234.png)
+![image-20210903211119234](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903211119234.png)
 
 这个等同于在Spring容器中构建<bean>标签,如:
 
@@ -1642,11 +1642,11 @@ Spring 中常用的注解如下:
    
    所以在我们测试的时候获取Bean是能找得到的!不会报错!
    
-   ![image-20210903213050718](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903213050718.png)
+   ![image-20210903213050718](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903213050718.png)
 
 ​    
 
-​	![image-20210903213113886](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210903213113886.png)
+​	![image-20210903213113886](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210903213113886.png)
 
    
 
@@ -1658,19 +1658,19 @@ Spring 中常用的注解如下:
 
 比如:
 
-![image-20210904142217536](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904142217536.png)
+![image-20210904142217536](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904142217536.png)
 
 这种加在属性上面后，**实际是通过反射field赋值**，这时默认要有一个无参构造方法：
 
 执行效果：
 
-![image-20210904144853772](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904144853772.png)
+![image-20210904144853772](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904144853772.png)
 
 
 
 还有一种方式：
 
-![image-20210904145013240](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904145013240.png)
+![image-20210904145013240](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904145013240.png)
 
 使用这种方式等同于：
 
@@ -1682,7 +1682,7 @@ Spring 中常用的注解如下:
 
 效果:
 
-![image-20210904145349448](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904145349448.png)
+![image-20210904145349448](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904145349448.png)
 
 **注意:**这种只能是值注入,不能是引用类型的,否则会报异常!
 
@@ -1737,7 +1737,7 @@ public void test() throws Exception{
 
 运行:
 
-![image-20210904160757665](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904160757665.png)
+![image-20210904160757665](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904160757665.png)
 
 **结论**:从代码运行可以看出已经正常完成自动装配-依赖注入
 
@@ -1745,13 +1745,13 @@ public void test() throws Exception{
 
 **思考**:由于`<bean class="">中class的属性值`在多个Bean中是可以重复的,这个时候Spring容器就难以抉择,不知道该选什么?就会报异常让程序员给一个方案出来!
 
-![image-20210904161531498](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904161531498.png)
+![image-20210904161531498](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904161531498.png)
 
 所以解决方案是:
 
 > 如果同类型有多个，可以使用@Autowired + @Qualifier表示按照名称注入。从类型匹配改为名称匹配
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20180807160824814)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20180807160824814)
 
 ##### 2.5.3.2 @Resource
 
@@ -1796,7 +1796,7 @@ public class Zoo1 {
 
 这个的话我就不敲代码演示了,这个的话在这里只是记录并不常用,需要的时候百度解决!
 
-<img src="https://gitee.com/miawei/pic-go-img/raw/master/imgs/20180807161040371" alt="img" style="zoom:50%;" />
+<img src="https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20180807161040371" alt="img" style="zoom:50%;" />
 
 #### 2.5.5 Spring注解测试
 
@@ -1805,7 +1805,7 @@ public class Zoo1 {
 @ContextConfiguration("classpath:applicationContext.xml")  
 ```
 
-<img src="https://gitee.com/miawei/pic-go-img/raw/master/imgs/20180807161406945" alt="img" style="zoom:50%;" />
+<img src="https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20180807161406945" alt="img" style="zoom:50%;" />
 
 ### 2.6 总结
 
@@ -1831,7 +1831,7 @@ AOP-**面向切面编程**和OOP-**面向对象编程**类似,也是属于一种
 
 > 简单的说：AOP的作用就是保住开发者在不修改源代码的前提下，为系统中的业务组件添加某种通用功能，AOP就是代理模式的典型应用！
 
-![image-20211008160719311](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211008160719311.png)
+![image-20211008160719311](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211008160719311.png)
 
 目前流程的AOP框架主要有两个：
 
@@ -1854,7 +1854,7 @@ AOP-**面向切面编程**和OOP-**面向对象编程**类似,也是属于一种
 
 AOP理解：
 
-![image-20211008160925600](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211008160925600.png)
+![image-20211008160925600](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211008160925600.png)
 
 ### 3.2 AOP术语
 
@@ -2060,7 +2060,7 @@ public class JdkProxy implements InvocationHandler {
 
 实现效果:
 
-![image-20210904200259054](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904200259054.png)
+![image-20210904200259054](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904200259054.png)
 
 这里我编辑红线进行分开,从上面可以清楚看出执行每一个方法之前或者之后都会调用其他切入其他的代码!这就是动态代理!
 
@@ -2157,7 +2157,7 @@ public class CglibProxy implements MethodInterceptor {
 
 结果:
 
-![image-20210904202607916](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210904202607916.png)
+![image-20210904202607916](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210904202607916.png)
 
 跟之前的结果是一模一样的!
 
@@ -2474,7 +2474,7 @@ public class Man {
 
 这是理解图:
 
-![image-20211008154005562](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211008154005562.png)
+![image-20211008154005562](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211008154005562.png)
 
 测试:
 
@@ -2491,7 +2491,7 @@ public class Man {
 
 执行效果:
 
-![image-20210905090904730](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210905090904730.png)
+![image-20210905090904730](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210905090904730.png)
 
 从这里可以看出每调用一个方法那么这里都会使用切面定义进行调用!
 
@@ -2774,11 +2774,11 @@ Spring使用简单的配置让我们完成AOP
 
 理解:在之前使用XML方式进行AOP的时候,抽象主题角色就是接口,代理主题角色就是切面,真实主题角色就是要切入的类或者方法!
 
-![image-20211008174251927](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211008174251927.png)
+![image-20211008174251927](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211008174251927.png)
 
 具体生活中例子:
 
-![image-20211008174316342](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211008174316342.png)
+![image-20211008174316342](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211008174316342.png)
 
 ## 4.创建Bean的方式
 
@@ -2918,17 +2918,17 @@ FactoryBean接口,主要用于实例化不能通过默认无参构造方法获�
 
 这是实现类:
 
-<img src="https://gitee.com/miawei/pic-go-img/raw/master/imgs/20180807174204755" alt="img" style="zoom:50%;" />
+<img src="https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20180807174204755" alt="img" style="zoom:50%;" />
 
-<img src="https://gitee.com/miawei/pic-go-img/raw/master/imgs/2018080717424540" alt="img" style="zoom:50%;" />
+<img src="https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/2018080717424540" alt="img" style="zoom:50%;" />
 
  依赖关系配置：
 
-<img src="https://gitee.com/miawei/pic-go-img/raw/master/imgs/20180807175348552" alt="img" style="zoom:50%;" />
+<img src="https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20180807175348552" alt="img" style="zoom:50%;" />
 
 测试:
 
-<img src="https://gitee.com/miawei/pic-go-img/raw/master/imgs/20180807175618666" alt="img" style="zoom:50%;" />
+<img src="https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20180807175618666" alt="img" style="zoom:50%;" />
 
 ## 6. 总结
 

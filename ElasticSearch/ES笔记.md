@@ -4,7 +4,7 @@
 
 ### 1.1 引入
 
-![image-20211101194331216](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101194331216.png)
+![image-20211101194331216](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101194331216.png)
 
 ElasticSearch其实本身并不难理解,就比如我们看见我们百度搜索关键词,然后不到一秒中就出现各种以有关键词的标题文档就出来;按照以前我们如果遇到这种场景,我们可能就会使用SQL来查询,就好比如:`...like %%`来进行模糊查询,那么问题来了,如果是大数据的话就好比是上万条的那种那么这个速度就会明显得缓慢,并且这个时候我们还要去考虑一些SQL语句的优化和索引的优化,虽然说相对来说会快一点但是本质上还是达不到一个大数据的一个要求;
 
@@ -26,23 +26,23 @@ ES跟这个人本身并没有太大关系,但是如果没有它一定没有ES,�
 
 1998年9月4日，Google公司在美国硅谷成立。正如大家所知，它是一家做`搜索引擎`起家的公司。
 
-![image-20211101201153248](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101201153248.png)
+![image-20211101201153248](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101201153248.png)
 
 无独有偶，一位名叫Doug Cutting的美国工程师，也迷上了搜索引擎。他做了一个用于`文本搜索的函数库`（姑且理解为软件的功能组件），命名为**Lucene**。
 
 > Lucene-读音:撸神死 后面的搜索引擎Solr和ElasticSerach都是基于这个进行封装的!
 
-![image-20211101201415452](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101201415452.png)
+![image-20211101201415452](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101201415452.png)
 
 Lucene是用JAVA写成的，目标是为各种中小型应用软件加入`全文检索功能`。因为好用而且开源（代码公开），非常受程序员们的欢迎。
 
 早期的时候，这个项目被发布在Doug Cutting的个人网站和SourceForge（一个开源软件网站）。后来，2001年底，Lucene成为Apache软件基金会jakarta项目的一个子项目
 
-![image-20211101201525738](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101201525738.png)
+![image-20211101201525738](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101201525738.png)
 
 2004年，Doug Cutting再接再励，在Lucene的基础上，和Apache开源伙伴Mike Cafarella合作，开发了一款可以代替当时的主流搜索的开源搜索引擎，命名为Nutch:
 
-![image-20211101201556970](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101201556970.png)
+![image-20211101201556970](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101201556970.png)
 
 > Nutch-读音:呐起
 
@@ -57,7 +57,7 @@ Nutch在业界的影响力比Lucene更大。
 
 尤其是Google，作为互联网搜索引擎，需要存储大量的网页，并不断优化自己的搜索算法，提升搜索效率。
 
-![image-20211101202003793](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101202003793.png)
+![image-20211101202003793](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101202003793.png)
 
 在这个过程中，Google确实找到了不少好办法，并且无私地分享了出来。
 
@@ -65,7 +65,7 @@ Nutch在业界的影响力比Lucene更大。
 
 第二年，也就是2004年，Doug Cutting基于Google的GFS论文，实现了**分布式文件存储系统**，并将它命名为**NDFS（Nutch Distributed File System）**。
 
-![image-20211101202742570](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101202742570.png)
+![image-20211101202742570](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101202742570.png)
 
 还是2004年，Google又发表了一篇技术学术论文，介绍自己的**MapReduce编程模型**。这个编程模型，用于`大规模数据集（大于1TB）的并行分析运算`。
 
@@ -73,11 +73,11 @@ Nutch在业界的影响力比Lucene更大。
 
 第二年（2005年），Doug Cutting又基于MapReduce，在Nutch搜索引擎实现了该功能。
 
-![image-20211101202823401](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101202823401.png)
+![image-20211101202823401](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101202823401.png)
 
 2006年，当时依然很厉害的Yahoo（雅虎）公司，招安了Doug Cutting
 
-![image-20211101202842803](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101202842803.png)
+![image-20211101202842803](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101202842803.png)
 
 加盟Yahoo之后，Doug Cutting将NDFS和MapReduce进行了升级改造，并重新命名为**Hadoop**（NDFS也改名为HDFS，Hadoop Distributed File System）
 
@@ -85,11 +85,11 @@ Nutch在业界的影响力比Lucene更大。
 
 这个，就是后来大名鼎鼎的大数据框架系统——Hadoop的由来。而Doug Cutting，则被人们称为Hadoop之父
 
-![image-20211101202936536](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101202936536.png)
+![image-20211101202936536](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101202936536.png)
 
 Hadoop这个名字，实际上是Doug Cutting他儿子的黄色玩具大象的名字。所以，Hadoop的Logo，就是一只奔跑的黄色大象:
 
-![image-20211101203006008](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101203006008.png)
+![image-20211101203006008](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101203006008.png)
 
 我们继续往下说。
 
@@ -99,13 +99,13 @@ Hadoop这个名字，实际上是Doug Cutting他儿子的黄色玩具大象的
 
 Doug Cutting当然没有放过，在自己的hadoop系统里面，引入了BigTable，并命名为**HBase**
 
-![image-20211101203100394](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101203100394.png)
+![image-20211101203100394](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101203100394.png)
 
 好吧，反正就是紧跟Google时代步伐，你出什么，我学什么。
 
 所以，Hadoop的核心部分，基本上都有Google的影子。
 
-![image-20211101203226603](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211101203226603.png)
+![image-20211101203226603](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211101203226603.png)
 
 2008年1月，Hadoop成功上位，正式成为Apache基金会的顶级项目。
 
@@ -193,21 +193,21 @@ Lucene是一个全文检索引擎的架构,那为什么是全文检索引擎?
 
 > ElasticSearch与Solr比较
 
-![image-20211102143841623](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211102143841623.png)
+![image-20211102143841623](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211102143841623.png)
 
 这是对单纯的已有数据进行检索时,Solr会更快;
 
-![image-20211102143914079](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211102143914079.png)
+![image-20211102143914079](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211102143914079.png)
 
 因为建立索引好比在mysql里面是一件非常麻烦的过程,所以Solr查询较差!
 
-![image-20211102143921393](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211102143921393.png)
+![image-20211102143921393](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211102143921393.png)
 
 数据量增加,尤其是到了大数据时代!
 
 
 
-![image-20211102143936631](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211102143936631.png)
+![image-20211102143936631](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211102143936631.png)
 
 比如说我们转变基本的搜索引擎以后从Solr转变为ES可以看见效率一般可以提高接近50倍,
 
@@ -233,17 +233,17 @@ Lucene是一个全文检索引擎的架构,那为什么是全文检索引擎?
 
 官网:https://www.elastic.co/cn/elasticsearch/
 
-![image-20211102211742033](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211102211742033.png)
+![image-20211102211742033](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211102211742033.png)
 
 这是下载链接:https://www.elastic.co/cn/downloads/elasticsearch
 
-![image-20211102211957624](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211102211957624.png)
+![image-20211102211957624](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211102211957624.png)
 
 ### 2.1 安装
 
 点击下载后得到一个压缩包,然后将其解压,然后解压后是这个样子的:
 
-![image-20211102212312139](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211102212312139.png)
+![image-20211102212312139](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211102212312139.png)
 
 目录结构含义:
 
@@ -338,7 +338,7 @@ plugins: 插件,比如我们后面使用的IK分词器
 
 双击ElasticSearch下的bin目录中的elasticsearch.bat启动，控制台显示的日志（等待启动完毕！）：
 
-![image-20211104152123046](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104152123046.png)
+![image-20211104152123046](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104152123046.png)
 
 记住:默认启动端口为9200,而9300表示是通信地址
 
@@ -346,7 +346,7 @@ plugins: 插件,比如我们后面使用的IK分词器
 
 然后我们此时在页面上访问:http://localhost:9200
 
-![image-20211104152311702](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104152311702.png)
+![image-20211104152311702](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104152311702.png)
 
 出现这几个字样就表示启动成功了!
 
@@ -382,7 +382,7 @@ Head是elasticsearch的集群管理工具，可以用于数据的浏览查询！
 
 **注意**:这是一个标准的前端项目,所以需要安装npm前端需要的依赖之类的!
 
-![image-20211104153557984](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104153557984.png)
+![image-20211104153557984](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104153557984.png)
 
 在head项目里找到package.json可以看见在scripts脚本里设置的名字是start,所以我们启动的话是`npm run start`
 
@@ -395,11 +395,11 @@ npm run start
 
 > 访问测试
 
-![image-20211104154454532](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104154454532.png)
+![image-20211104154454532](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104154454532.png)
 
 注意这里虽然启动了head,但是并没有跟我们的ES进行连接,原因为什么呢?
 
-![image-20211104154601445](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104154601445.png)
+![image-20211104154601445](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104154601445.png)
 
 也就是说这里发生了跨域问题,也就是我们这里从一个网站端口访问另一个端口这也就是两个服务之间的访问,这就已经达成了**跨域问题**!
 
@@ -415,7 +415,7 @@ npm run start
 
 修改后我们再次访问测试:
 
-![image-20211104161001952](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104161001952.png)
+![image-20211104161001952](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104161001952.png)
 
 **注意**:修改配置文件记得将ES进行重启!
 
@@ -423,7 +423,7 @@ npm run start
 
 1. 点击索引:
 
-   ![image-20211104163147223](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104163147223.png)
+   ![image-20211104163147223](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104163147223.png)
 
    **我们可以把索引当做一个数据库!**可以建立索引(当做数据库),而在这里面我们要放一些文档(当做是库中的数据!)
 
@@ -439,21 +439,21 @@ npm run start
 
    查看是否安装成功:
 
-   ![image-20211104165248382](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104165248382.png)
+   ![image-20211104165248382](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104165248382.png)
 
    然后回到我们刚刚新建索引后,查看概览:
 
-   ![image-20211104165349426](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104165349426.png)
+   ![image-20211104165349426](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104165349426.png)
 
    可以发现我们的索引是建立成功的,这里的1234是关于集群的分辨信息,后面用到再详细概述
 
 2. 点击数据概览:
 
-   ![image-20211104165547786](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104165547786.png)
+   ![image-20211104165547786](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104165547786.png)
 
 3. 点击复合查询:
 
-   ![image-20211104170305786](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104170305786.png)
+   ![image-20211104170305786](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104170305786.png)
 
    记住:这个查询的JSON就是我们未来查询的格式!
 
@@ -463,7 +463,7 @@ npm run start
 
 我们再一次总览一下这个Head插件的所有信息:
 
-![image-20211104172215318](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104172215318.png)
+![image-20211104172215318](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104172215318.png)
 
 ### 2.3 ELK介绍
 
@@ -473,7 +473,7 @@ npm run start
 
 ​	市面上很多开发只要提到ELK能够一致说出它是一个**日志分析架构技术栈**总称，但实际上ELK不仅仅适用于日志分析，它还可以支持其他任何数据分析和收集的场景，日志分析和收集只是更具有代表性，并且唯一性！
 
-![image-20211104174933072](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104174933072.png)
+![image-20211104174933072](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104174933072.png)
 
 > 理解:ELk其中ES提供搜索能力,Logstash提供从不同地方收集不同格式数据然后过滤输出到不同目的地;而Kibaba将ES的数据进行展示出来并提供分析的功能!
 
@@ -485,7 +485,7 @@ npm run start
 
 如:
 
-![image-20211104183350622](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104183350622.png)
+![image-20211104183350622](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104183350622.png)
 
 这是下载地址:https://www.elastic.co/cn/downloads/kibana
 
@@ -495,19 +495,19 @@ npm run start
 
 > 解压后的目录结构:
 
-![image-20211104185007419](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104185007419.png)
+![image-20211104185007419](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104185007419.png)
 
 > 启动测试
 
 点击bin目录下的`kibana.bat`
 
-![image-20211104185454994](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104185454994.png)
+![image-20211104185454994](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104185454994.png)
 
 当然这里启动也是比较慢的,这是正常的!
 
 然后访问IP:5601，kibana会自动去访问9200，也就是elasticsearch的端口号（当然elasticsearch这个时候必须启动着），然后就可以使用kibana了！
 
-![image-20211104185618975](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104185618975.png)
+![image-20211104185618975](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104185618975.png)
 
 > 这是都是英文的,所以我们进行汉化修改一下
 
@@ -521,13 +521,13 @@ npm run start
 i18n.locale: "zh-CN"
 ```
 
-![image-20211104190104949](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104190104949.png)
+![image-20211104190104949](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104190104949.png)
 
-![image-20211104190115854](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104190115854.png)
+![image-20211104190115854](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104190115854.png)
 
 > 重启走一波
 
-![image-20211104190259122](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104190259122.png)
+![image-20211104190259122](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104190259122.png)
 
 可以发现已经正常的切换过来了!这样我们在使用的过程中也不用受到英文的困扰!
 
@@ -564,7 +564,7 @@ i18n.locale: "zh-CN"
 
 - 一个人也是一个集群!默认的集群名称就是elasticSearch,所以说它不存在单个的,一开启就是被分片了,只是说你搭建了一个而已!什么叫分布式?启动就是集群!
 
-  ![image-20211104193330119](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104193330119.png)
+  ![image-20211104193330119](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104193330119.png)
 
 **逻辑设计**:
 
@@ -605,7 +605,7 @@ i18n.locale: "zh-CN"
 总之的意思就是说每一个字段都会有一个类型映射,而这个映射就是我们的基本类型,这个时候我们可以不设置它,它会自动去猜,当然我们也可以直接去设置
 ```
 
-![image-20211104203634555](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104203634555.png)
+![image-20211104203634555](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104203634555.png)
 
 > 索引
 
@@ -619,13 +619,13 @@ i18n.locale: "zh-CN"
 
 ​	一个集群至少有一个节点，而一个节点就是一个elasticsearch进程，节点可以有多个索引默认的，如果你创建索引，那么索引将会有5个分片（primary shard,又称主分片）构成的,每一个主分片会有一个副本(replica shard,又称复制分片)
 
-![image-20211104204152173](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104204152173.png)
+![image-20211104204152173](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104204152173.png)
 
 ```
 理解:说白了我们存的东西它不止一个地方可以存,我们可以通过分片把他搭在不同的集群上!
 ```
 
-![image-20211104195908940](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104195908940.png)
+![image-20211104195908940](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104195908940.png)
 
 上图是一个有3节点的集群,可以看到主分片和对应的复制分片都不会在同一个节点内(p开头的是主分片,r开头的是复制分片),这样有利于某个节点挂掉了,数据也至于丢失。实际上：**一个分片是一个lucene索引,**一个包含倒排索引的文件目录,倒排索引的结构使得es在不扫描全部文档的情况下,就能告诉你哪些文档包含特定的关键字;
 
@@ -667,7 +667,7 @@ To forever,study every day, good good up # 文档2包含的内容
 
 再来看一个示例：比如我们通过博客标签来搜索博客文章，那么倒排索引列表就是这样的一个结构：
 
-![image-20211104201358404](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104201358404.png)
+![image-20211104201358404](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104201358404.png)
 
 如果要搜索含有python标签的文章,那相对于查找所有原始数据而言,查找倒排索引后的数据将会快得多。只需要查看标签这一栏，然后获取相关的文章ID即可！
 
@@ -702,15 +702,15 @@ To forever,study every day, good good up # 文档2包含的内容
 
 下载后解压到ElasticSearch根目录下的plugins目录中:
 
-![image-20211104211914797](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104211914797.png)
+![image-20211104211914797](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104211914797.png)
 
 重新启动 ElasticSearch 服务，在启动过程中，你可以在日志里看到正在加载"analysis-ik"插件的提示信息;
 
-![image-20211104212428507](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104212428507.png)
+![image-20211104212428507](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104212428507.png)
 
 服务启动后，在bin目录下在命令行运行`elasticsearch-plugin list` 命令来查看加载进来的插件，确认 ik 插件安装成功,注意
 
-![image-20211104212546892](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211104212546892.png)
+![image-20211104212546892](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211104212546892.png)
 
 ### 4.2 测试
 
@@ -720,7 +720,7 @@ To forever,study every day, good good up # 文档2包含的内容
 
 1. 找到界面:
 
-   ![image-20211107121815476](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107121815476.png)
+   ![image-20211107121815476](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107121815476.png)
 
 2. 输入关于**ik_smart:最少切分**请求信息:
 
@@ -737,13 +737,13 @@ To forever,study every day, good good up # 文档2包含的内容
 
    看具体的效果:
 
-   ![image-20211107123201033](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107123201033.png)
+   ![image-20211107123201033](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107123201033.png)
 
 
 
 ​	再做点测试:
 
-​	**理解**:将一段文本切分为一个个关键字,进行最少的切分,一旦切分为一个关键字以后就不会参与后面的切分了![image-20211107124208662](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107124208662.png)
+​	**理解**:将一段文本切分为一个个关键字,进行最少的切分,一旦切分为一个关键字以后就不会参与后面的切分了![image-20211107124208662](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107124208662.png)
 
 2. 输入关于**ik_max_word:最小粒度切分**请求信息:
 
@@ -759,7 +759,7 @@ To forever,study every day, good good up # 文档2包含的内容
 
    看效果:
 
-   ![image-20211107123303022](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107123303022.png)
+   ![image-20211107123303022](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107123303022.png)
 
    最细粒度划分:就会把除了当前的组合拆开外就会把它所有可能的组合都拆开!
 
@@ -767,27 +767,27 @@ To forever,study every day, good good up # 文档2包含的内容
 
    **理解**:最小细粒度划分则是将整个文本进行存在可能的组合进行划分,注意:是细粒度的穷尽将整个文本组合进行划分!
 
-   ![image-20211107124441478](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107124441478.png)
+   ![image-20211107124441478](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107124441478.png)
 
 ### 4.3 自定义关键字
 
 先看一下:
 
-![image-20211107145220577](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107145220577.png)
+![image-20211107145220577](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107145220577.png)
 
 可以发现分词器认为这是两个词将其拆分开了,但是我认为这是个关键字不允许拆开,那么该如何处理呢?
 
 找到es目录下的plugins中的ik所在的配置文件里,找到配置文件`IKAnalyer.cfg.xml`,我们将其打开:
 
-![image-20211107145407023](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107145407023.png)
+![image-20211107145407023](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107145407023.png)
 
 打开后就是这样:
 
-![image-20211107145527564](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107145527564.png)
+![image-20211107145527564](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107145527564.png)
 
 发现这里就是配置ik分词器的词典的位置,同时我们在外面可以发现有很多后缀为`.dic`的文件,我们随便点开看看:
 
-![image-20211107145850543](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107145850543.png)
+![image-20211107145850543](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107145850543.png)
 
 我们可以得出这就是ik分词器根据这些dic配置文件中的关键词进行分词,当然这点词典肯定是远远不够的;
 
@@ -801,19 +801,19 @@ To forever,study every day, good good up # 文档2包含的内容
 
 2. 添加到配置文件:
 
-   ![image-20211107150338101](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107150338101.png)
+   ![image-20211107150338101](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107150338101.png)
 
    **解释**:编写我们自己的配置文件然后注入到这里的扩展配置中即可,编写了我们自己的词典那么后续ik分词的时候就会首先查找我们的词典是否包含关键词,包含关键词符合条件那么就不会拆分了;
 
 3. 重启ES,因为需要es重新加载插件!
 
-   ![image-20211107150908952](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107150908952.png)
+   ![image-20211107150908952](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107150908952.png)
 
    可以发现这里已经开始加载我们自己的词典了!
 
 4. 我们再次启动kibana进行测试
 
-   ![image-20211107151156953](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107151156953.png)
+   ![image-20211107151156953](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107151156953.png)
 
    可以发现这里拆分的时候,由于我们设置了自定义词典所以这里就会默认认为`我爱缪威`就是一个关键字!是不允许拆分的!
 
@@ -878,7 +878,7 @@ To forever,study every day, good good up # 文档2包含的内容
 
    我们在head插件中查看索引数据:
 
-   ![image-20211107154910808](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107154910808.png)
+   ![image-20211107154910808](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107154910808.png)
 
    由此可以看见已经完成了自动创建索引!数据也成功的添加了;
 
@@ -921,9 +921,9 @@ To forever,study every day, good good up # 文档2包含的内容
 
 4. 执行并查看索引
 
-   ![image-20211107161106602](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107161106602.png)
+   ![image-20211107161106602](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107161106602.png)
 
-   ![image-20211107160944530](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107160944530.png)
+   ![image-20211107160944530](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107160944530.png)
 
    我们这是创建了索引及其字段,但是我们并没有加入数据,所以这里是没有的!
 
@@ -931,19 +931,19 @@ To forever,study every day, good good up # 文档2包含的内容
 
 1. 获取索引信息
 
-   ![image-20211107161425551](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107161425551.png)
+   ![image-20211107161425551](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107161425551.png)
 
 **注意**:GET后面如果指定索引那么就会获取索引的信息,如果指定文档的id那么就会获取文档的信息,就是你指定到谁就是获取谁的信息
 
 2. 查看默认的信息
 
-   ![image-20211107162616946](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107162616946.png)
+   ![image-20211107162616946](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107162616946.png)
 
    注意:在后面就不会指定类型了,默认就是`_doc`类型的
 
    查看信息(`这里text类型它会默认加上一个关键字类型,也就是不可分割类型的!`):
 
-   ![image-20211107163030814](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107163030814.png)
+   ![image-20211107163030814](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107163030814.png)
 
 **如果自己的文档字段没有指定,那么es就会给我们默认配置字段类型!**
 
@@ -952,7 +952,7 @@ To forever,study every day, good good up # 文档2包含的内容
 `PUT test1/type1/1 `： 索引test1相当于关系型数据库的库，类型type1就相当于表 ，1 代表数据中的主键 id
 **这里需要补充的是**:在elastisearch5版本前，一个索引下可以创建多个类型，但是在elastisearch5后，一个索引只能对应一个类型;如果已经指定了类型然而由指定新的类型那么就会报错:
 
-![image-20211107165850651](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107165850651.png)
+![image-20211107165850651](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107165850651.png)
 
 所以后面慢慢会启用type类型,默认使用_doc,默认使用`_doc`可以指定多个索引
 
@@ -972,13 +972,13 @@ To forever,study every day, good good up # 文档2包含的内容
 
    就是这个:
 
-   ![image-20211107164210947](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107164210947.png)
+   ![image-20211107164210947](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107164210947.png)
 
 2. `GET _cat/indices?v`
 
    效果:
 
-   ![image-20211107164601019](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107164601019.png)
+   ![image-20211107164601019](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107164601019.png)
 
    我们可以通过这个命令来查看我们es相关的信息,比如我们可以看见health健康值,index为索引,docs.count为文档的数量
 
@@ -986,7 +986,7 @@ To forever,study every day, good good up # 文档2包含的内容
 
 其实这个head可视化界面就是在不停的发起请求然后展示在我们页面上,所以可以说它的底层就是一个工具集!
 
-![image-20211107164331445](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107164331445.png)
+![image-20211107164331445](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107164331445.png)
 
 
 
@@ -996,7 +996,7 @@ To forever,study every day, good good up # 文档2包含的内容
 
    所谓的修改也就是在第一次的基础上进行覆盖!
 
-   ![image-20211107172343594](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107172343594.png)
+   ![image-20211107172343594](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107172343594.png)
 
    但是有个缺点:如果在覆盖的时候如果少了一个字段那么同时在覆盖的时候之前的也会清除掉!
 
@@ -1004,11 +1004,11 @@ To forever,study every day, good good up # 文档2包含的内容
 
    通过`POST`进行修改文档,格式为:`localhost:9200/索引名称/类型名称/文档id/_update `
 
-   ![image-20211107173143344](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107173143344.png)
+   ![image-20211107173143344](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107173143344.png)
 
    然后我们再查看是否被修改成功了
 
-   ![image-20211107173227125](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107173227125.png)
+   ![image-20211107173227125](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107173227125.png)
 
    可以发现已经修改了,这样的好处就是效率很高,我们想要修改什么就可以直接修改什么
 
@@ -1020,17 +1020,17 @@ To forever,study every day, good good up # 文档2包含的内容
 
 这是之前的索引:
 
-![image-20211107174528568](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107174528568.png)
+![image-20211107174528568](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107174528568.png)
 
 现在删除索引:
 
-![image-20211107174602289](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107174602289.png)
+![image-20211107174602289](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107174602289.png)
 
 **为true表示删除成功!**
 
 再来看索引还存不存在:
 
-![image-20211107174625240](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107174625240.png)
+![image-20211107174625240](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107174625240.png)
 
 ### 5.2 基于文档的基本操作(重点)
 
@@ -1040,25 +1040,25 @@ To forever,study every day, good good up # 文档2包含的内容
 
 1. 添加数据:
 
-   ![image-20211107210956433](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107210956433.png)
+   ![image-20211107210956433](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107210956433.png)
 
    多添加几条:
 
-   ![image-20211107211559591](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107211559591.png)
+   ![image-20211107211559591](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107211559591.png)
 
 2. 获取数据-GET
 
-   ![image-20211107211725733](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107211725733.png)
+   ![image-20211107211725733](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107211725733.png)
 
 3. 更新数据-PUT
 
-   ![image-20211107212045587](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107212045587.png)
+   ![image-20211107212045587](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107212045587.png)
 
    缺点:如果put的时候内容不是完整的假设少了一个字段那么修改的时候就会将其原本的数据进行滞空,就好比是删除了一样!put如果不传递值,就会被覆盖!
 
 4. 更新数据-POST
 
-   ![image-20211107213720422](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107213720422.png)
+   ![image-20211107213720422](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107213720422.png)
 
    好处:灵活度更高,只需要修改想要修改的字段,其他字段不会滞空!
 
@@ -1072,11 +1072,11 @@ To forever,study every day, good good up # 文档2包含的内容
 
 > 简单的条件查询,可以根据默认的映射规则,产生基本的查询!
 
-![image-20211107215007835](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107215007835.png)
+![image-20211107215007835](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107215007835.png)
 
 **注意:** _score 权重
 
-![image-20211107220047229](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107220047229.png)
+![image-20211107220047229](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107220047229.png)
 
 #### 2.复杂操作
 
@@ -1084,11 +1084,11 @@ To forever,study every day, good good up # 文档2包含的内容
 
 1. 构建查询
 
-   ![image-20211107220842901](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107220842901.png)
+   ![image-20211107220842901](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107220842901.png)
 
    增加两条数据再查询一次看看:
 
-   ![image-20211107222308217](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107222308217.png)
+   ![image-20211107222308217](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107222308217.png)
 
    **说明**:relation:eq; 关系:匹配、相等就是equals的意思！ 然后下面查询出来的数据会根据“_score"的匹配度从高到底进行排序!
 
@@ -1096,7 +1096,7 @@ To forever,study every day, good good up # 文档2包含的内容
 
    如果我们查询不需要那么多字段进行查询出来,我们仅仅需要查看name和desc两个属性,其他的不要怎么办呢?
 
-   ![image-20211107223713843](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211107223713843.png)
+   ![image-20211107223713843](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211107223713843.png)
 
    其实这个就好比是我们之前使用的是`select *`,而现在加入了就好比是`select name,desc`,就好理解了!
 
@@ -1106,11 +1106,11 @@ To forever,study every day, good good up # 文档2包含的内容
 
    对查询出来的数据进行排序!
 
-   ![image-20211111110105391](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111110105391.png)
+   ![image-20211111110105391](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111110105391.png)
 
 > 分页查询!
 
-![image-20211111110556170](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111110556170.png)
+![image-20211111110556170](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111110556170.png)
 
 from:从第几个数据开始(数据下标还是从0开始);  size:返回多少条数据  
 
@@ -1120,7 +1120,7 @@ from:从第几个数据开始(数据下标还是从0开始);  size:返回多少�
 
 must相当于SQL中的`and`,所有的条件都要符合!
 
-![image-20211111113020088](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111113020088.png)
+![image-20211111113020088](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111113020088.png)
 
 这是构建查询的错误示例:
 
@@ -1175,13 +1175,13 @@ GET miaowei/user/_search
 
 上面用must表示and的意思,那么接下来就是表示or或的意思!
 
-![image-20211111114123187](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111114123187.png)
+![image-20211111114123187](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111114123187.png)
 
 ​	等价于**or**的意思,就是两个条件满足其一就可以了!
 
 > not--must_not
 
-![image-20211111114527328](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111114527328.png)
+![image-20211111114527328](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111114527328.png)
 
 不等于也就是**not**;在SQL中好比是`select * from xx where name!=张三 and age!=1`的结果并返回
 
@@ -1189,7 +1189,7 @@ not过滤一些条件,就是一种反向操作!
 
 > 过滤器--filter
 
-![image-20211111115345807](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111115345807.png)
+![image-20211111115345807](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111115345807.png)
 
 - gt:大于>
 - lt:小于<
@@ -1198,11 +1198,11 @@ not过滤一些条件,就是一种反向操作!
 
 可以进行多个条件进行过滤:
 
-![image-20211111115910480](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111115910480.png)
+![image-20211111115910480](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111115910480.png)
 
 > 短语搜索--只要含有这个标签满足一个就给我返回这个数据了。
 
- ![image-20211111120533775](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111120533775.png)
+ ![image-20211111120533775](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111120533775.png)
 
 **注意**:
 
@@ -1212,7 +1212,7 @@ not过滤一些条件,就是一种反向操作!
 
 term查询是直接通过倒排索引指定的词条进行精确查找的!
 
-![image-20211111120937646](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111120937646.png)
+![image-20211111120937646](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111120937646.png)
 
 **关于分词**:
 
@@ -1277,15 +1277,15 @@ GET _analyze
 
 这是构建查询的结果:
 
-![image-20211111160637113](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111160637113.png)
+![image-20211111160637113](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111160637113.png)
 
-​	![image-20211111161109849](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111161109849.png)
+​	![image-20211111161109849](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111161109849.png)
 
 回头过来我们来看看term查询：
 
-1. ![image-20211111161935037](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111161935037.png)
+1. ![image-20211111161935037](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111161935037.png)
 
-2. ![image-20211111162003439](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111162003439.png)
+2. ![image-20211111162003439](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111162003439.png)
 
 从结果上看:第一个使用字段`name`等于"很"那么他就会去匹配分词器中被拆分的,只要符合要求就会返回,而字段`desc`等于"MiaoDaWei很desc"不会拆分所以可以精确匹配到
 
@@ -1308,7 +1308,7 @@ GET _analyze
 
 文档:https://www.elastic.co/guide/cn/elasticsearch/guide/current/_finding_multiple_exact_values.html
 
-![image-20211111165315010](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111165315010.png)
+![image-20211111165315010](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111165315010.png)
 
 其实上述可以缩写修改为:
 
@@ -1328,11 +1328,11 @@ GET testdb/_doc/_search
 
 > 高亮查询
 
-![image-20211111171829991](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111171829991.png)
+![image-20211111171829991](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111171829991.png)
 
 可以发现它会自动加上`<em></em>`标签来展示高亮,那么我们可不可以进行修改呢?就是不要这个高亮标签,我想换成红色高亮标签!
 
-![image-20211111172428218](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111172428218.png)
+![image-20211111172428218](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111172428218.png)
 
 
 
@@ -1355,22 +1355,22 @@ GET testdb/_doc/_search
 
 2. 找到 Elasticsearch Clients（这个就是客户端api文档）
 
-   ![image-20211111175839528](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111175839528.png)
+   ![image-20211111175839528](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111175839528.png)
 
 3. 我们使用java rest风格api，大家可以更加自己的版本选择特定的other versions。
 
-   ![image-20211111180149517](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111180149517.png)
+   ![image-20211111180149517](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111180149517.png)
 
 4. rest又分为**high level(高级客户端)**和**low level(低级客户端)**，我们直接选择**high level**下面的 **Getting started**
 
-   ![image-20211111180747251](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111180747251.png)
+   ![image-20211111180747251](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111180747251.png)
 
 5. 向下阅读找到Maven依赖和基本配置！
 
-   ![image-20211111181045246](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111181045246.png)
+   ![image-20211111181045246](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111181045246.png)
 
 6.那么此时我们就找到了maven的配置,那么我们再点击旁边的**Initialzation**初始化设置: 
-![image-20211111181438520](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111181438520.png)
+![image-20211111181438520](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111181438520.png)
 
 可以发现这里可以绑定多个客户端,其实es本身就是一个集群,下面还有一个close表示关闭客户端
 
@@ -1390,7 +1390,7 @@ Java REST Client有两种风格:
 
 勾选es是在NoSQL去勾选
 
-![image-20211111183359554](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111183359554.png)
+![image-20211111183359554](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111183359554.png)
 
 > 配置项目基本依赖
 
@@ -1403,7 +1403,7 @@ Java REST Client有两种风格:
 
 这个要注意一个细节,因为这里没指定版本那么就有SpringBoot默认的版本,那么我们来看一下:
 
-![image-20211111195042429](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111195042429.png)
+![image-20211111195042429](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111195042429.png)
 
 ​	发现这里版本是7.12.1,而我们本地es的版本是7.6.1版本不一致,这种不一致极容易导致有些时候启动或者调用的时候出现错误!
 
@@ -1484,7 +1484,7 @@ public class ElasticSearchConfig {
 
 2. 这是关于ElasticSearch的源码都在这里:
 
-   ![image-20211111212306860](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211111212306860.png)
+   ![image-20211111212306860](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211111212306860.png)
 
 3. 因为我们使用的Java REST的所以我们需要用下面的那个elasticsearch,然后我们点击下面的那个`ElasticsearchRestClientAutoConfiguration`看看:
 
@@ -1692,7 +1692,7 @@ class ApiDemoApplicationTests {
 
 然后我们看看head插件里是否已经创建好了:
 
-![image-20211112084135024](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112084135024.png)
+![image-20211112084135024](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112084135024.png)
 
 > 2.测试获取索引---索引是一个库,只能判断是否存在
 
@@ -1708,7 +1708,7 @@ private RestHighLevelClient restHighLevelClient;
     }
 ```
 
-![image-20211112203619346](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112203619346.png)
+![image-20211112203619346](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112203619346.png)
 
 > 3.删除索引
 
@@ -1731,11 +1731,11 @@ private RestHighLevelClient restHighLevelClient;
     }
 ```
 
-![image-20211112204137701](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112204137701.png)
+![image-20211112204137701](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112204137701.png)
 
 这个跟我们在图形化界面删除返回的是一摸一样:
 
-![image-20211112204341773](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112204341773.png)
+![image-20211112204341773](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112204341773.png)
 
 #### 2.文档操作
 
@@ -1773,7 +1773,7 @@ private RestHighLevelClient restHighLevelClient;
 
 打印:
 
-![image-20211112211340833](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112211340833.png)
+![image-20211112211340833](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112211340833.png)
 
 > 2.测试获取文档,判断是否存在
 
@@ -1801,7 +1801,7 @@ private RestHighLevelClient restHighLevelClient;
 
 打印:
 
-![image-20211112212413211](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112212413211.png)
+![image-20211112212413211](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112212413211.png)
 
 > 3.获取文档信息
 
@@ -1825,7 +1825,7 @@ private RestHighLevelClient restHighLevelClient;
 
 打印:
 
-![image-20211112213314033](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112213314033.png)
+![image-20211112213314033](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112213314033.png)
 
 > 4.更新文档信息
 
@@ -1854,7 +1854,7 @@ private RestHighLevelClient restHighLevelClient;
 
 打印:
 
-![image-20211112214234507](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112214234507.png)
+![image-20211112214234507](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112214234507.png)
 
 > 5.删除文档
 
@@ -1881,7 +1881,7 @@ private RestHighLevelClient restHighLevelClient;
 
 输出:
 
-![image-20211112215058012](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112215058012.png)
+![image-20211112215058012](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112215058012.png)
 
 > 6.批量处理
 
@@ -1926,11 +1926,11 @@ private RestHighLevelClient restHighLevelClient;
 
 输出:
 
-![image-20211112220953182](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112220953182.png)
+![image-20211112220953182](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112220953182.png)
 
 图形化界面:
 
-![image-20211112221025474](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112221025474.png)
+![image-20211112221025474](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112221025474.png)
 
 > 7.查询
 
@@ -1978,13 +1978,13 @@ private RestHighLevelClient restHighLevelClient;
 
 打印输出:
 
-![image-20211112223628251](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211112223628251.png)
+![image-20211112223628251](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211112223628251.png)
 
 ## 7.实战(京东搜索)
 
 我们来最终模拟一下这个京东页面实现搜索关键字高亮:
 
-![image-20211113080021578](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211113080021578.png)
+![image-20211113080021578](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211113080021578.png)
 
 ### 7.1 爬虫
 
@@ -2119,7 +2119,7 @@ https://search.jd.com/Search?keyword=Java&enc=utf-8&pvid=9e638b455bbf47f2a751f56
 
 最后实战效果:
 
-![image-20211116153833696](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211116153833696.png)
+![image-20211116153833696](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211116153833696.png)
 
 ## 8.集群规划
 
@@ -2284,7 +2284,7 @@ ElasticSearch推荐的 大JVM堆空间是30~32G, 所以把你的分片 大容量
 
 ### 8.3 集群核心原理分析
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/wps725D.tmp.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/wps725D.tmp.png)
 
 1、 每个索引会被分成多个分片shards进行存储，默认创建索引是分配5个分片进行存储。每个分片都会分布式部署在多个不同的节点上进行部署，该分片成为primary shards。
 
@@ -2306,7 +2306,7 @@ ElasticSearch推荐的 大JVM堆空间是30~32G, 所以把你的分片 大容量
 
 高可用视图分析下图所示：上面的图，如果节点1与节点2宕机了，es集群数据就不完整了。下图，如果节点1与节点2宕机了，es集群数据还是完整的
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/wps726F.tmp.png) 
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/wps726F.tmp.png) 
 
  
 
@@ -2324,13 +2324,13 @@ ElasticSearch推荐的 大JVM堆空间是30~32G, 所以把你的分片 大容量
 
 **IP访问限制、默认端口修改***9200 这里有两个需要提醒下，第一个就是IP访问限制，第二个就是es实例的默认端口号9200。IP访问限制可以限定具体的IP访问服务器，这有一定的安全过滤作用。
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/wps7272.tmp.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/wps7272.tmp.png)
 
 如果设置成0.0.0.0则是不限制任何IP访问。一般在生产的服务器可能会限定几台IP，通常用于管理使用。
 
 默认的端口9200在一般情况下也有点风险，可以将默认的端口修改成另外一个，这还有一个原因就是怕开发人员误操作，连接上集群。当然，如果你的公司网络隔离做的很好也无所谓。
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/wps7273.tmp.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/wps7273.tmp.png)
 
 这里的9300是集群内部通讯使用的端口，这个也可以修改掉。因为连接集群的方式有两种，通过扮演集群node也是可以进入集群的，所以还是安全起见，修改掉默认的端口。
 
@@ -2346,17 +2346,17 @@ ElasticSearch推荐的 大JVM堆空间是30~32G, 所以把你的分片 大容量
 
 你需要在192.168.152.128的elasticsearch中配置成：
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/wps7274.tmp.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/wps7274.tmp.png)
 
 让他去发现129，130的机器，以此内推，完成剩下的129和130机器的配置。
 
 然后你需要配置下集群名称，就是你当前节点所在集群的名称，这有助于你规划你的集群。集群中的所有节点的集群名称必须一样，只有集群名称一样才能组成一个逻辑集群。
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/wps7284.tmp.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/wps7284.tmp.png)
 
 配置你当前节点的名称
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/wps7285.tmp.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/wps7285.tmp.png)
 
 以此类推，完成另外两个节点的配置。cluster.name的名称必须保持一样。然后分别设置node.name。
 

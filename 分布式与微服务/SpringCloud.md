@@ -30,7 +30,7 @@
 
 举个例子:就好比是超市收银一样,之前由于客人不多那么使用一台收银机子那么就可以完全够用,但是如果人流量增多大家都挤着排队等着一台收银机子,那么效率自然就变得很差,客户的使用体验也变差:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/u=952521477,3058193742&fm=26&fmt=auto)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/u=952521477,3058193742&fm=26&fmt=auto)
 
 所以就会增加多个收银台来完成`相同`的工作-----这就是集群!
 
@@ -40,7 +40,7 @@
 
 ​	负载均衡说白了就是请求的路由、请求的分发 、就是将请求`均衡的分发`到服务器上，之前说集群就是将服务器复制多份,那么每个服务器都有自己的ip,用户请求并不知道该请求谁,那么这个时候就有负载均衡Nginx,用户只需请求到Nginx,而Nginx里保存了集群每个服务器的ip,然后根据自己的算法来将请求分配到其中一个集群服务器
 
-![mark](https://gitee.com/miawei/pic-go-img/raw/master/imgs/aHR0cDovL3E2M2YyZWFjMy5ia3QuY2xvdWRkbi5jb20vYmxvZy8yMDIwMDIyNC8zdmhtTGxJRkhhS2QucG5n)
+![mark](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/aHR0cDovL3E2M2YyZWFjMy5ia3QuY2xvdWRkbi5jb20vYmxvZy8yMDIwMDIyNC8zdmhtTGxJRkhhS2QucG5n)
 
 也就是说集群就是将应用复制多份,每台服务器完成的功能都是一模一样的,可是无论如何最终只有一台服务器来完成请求,那么如何决定呢?这个时候Nginx就来了,那客户端是不知道该访问哪个应用节点的，这个时候我们就需要有一个`请求分发的功能的组件`(负载均衡器)将客户端的请求相对平均的分发多个应用节点上，这就是负载均衡，这个做请求分发的组件就是负载均衡器
 
@@ -72,7 +72,7 @@
 
 举个例子: 就好比是在厨房工作为了要给客户上一道佛跳槽这道菜,一个厨师忙里忙外又要切菜、准备菜品、调味等等,一个人不停的干就会一直忙不停如果此时再增加其他菜那么肯定是忙不停的!所以此时就会给增加多个厨师,这个厨师切菜,那个厨师炒菜,这样每个人只会干自己所负责的事情,都不会收到干扰,提高了整体的效率!
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/u=367974782,436195706&fm=253&fmt=auto&app=120&f=JPEG)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/u=367974782,436195706&fm=253&fmt=auto&app=120&f=JPEG)
 
 注意:如果分布式有个子系统挂了怎么办? 那么单独针对这个子系统做集群, 这样如果有一个节点挂了也不影响整体运行!
 
@@ -255,15 +255,15 @@ tip:一站式的意思就是全套服务啥都做;
 
 Spring官网：https://spring.io/
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/aHR0cHM6Ly9zczEuYmRzdGF0aWMuY29tLzcwY0Z1WFNoX1ExWW54R2twb1dLMUhGNmhoeS9pdC91PTM1NzgwMTc3ODAsMTIxODQyMDAyOSZmbT0yNiZncD0wLmpwZw)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/aHR0cHM6Ly9zczEuYmRzdGF0aWMuY29tLzcwY0Z1WFNoX1ExWW54R2twb1dLMUhGNmhoeS9pdC91PTM1NzgwMTc3ODAsMTIxODQyMDAyOSZmbT0yNiZncD0wLmpwZw)
 
-![format_png 1](https://gitee.com/miawei/pic-go-img/raw/master/imgs/aHR0cHM6Ly9zczIuYmRzdGF0aWMuY29tLzcwY0Z2blNoX1ExWW54R2twb1dLMUhGNmhoeS9pdC91PTE2Mzc3ODY4OTcsNzQ1MTM1MjUxJmZtPTI2JmdwPTAuanBn)
+![format_png 1](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/aHR0cHM6Ly9zczIuYmRzdGF0aWMuY29tLzcwY0Z2blNoX1ExWW54R2twb1dLMUhGNmhoeS9pdC91PTE2Mzc3ODY4OTcsNzQ1MTM1MjUxJmZtPTI2JmdwPTAuanBn)
 
 SpringCloud下载：
 
 官网：http://projects.spring.io/spring-cloud/
 
-![image-20211117170658773](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211117170658773.png)
+![image-20211117170658773](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211117170658773.png)
 
 可以发现SpringCloud没有采用数字编号的方式命名版本号，而是采用了伦敦地铁站的名称，同时根据字母表的顺序来对应版本时间顺序；
 
@@ -379,7 +379,7 @@ HTTP:SpringCloud基于Http的RESTFul调用
 
 SpringCloud为一系列的微服务难题提供了相应的组件来解决:
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200329232256382.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200329232256382.png)
 
 - **EurekaServer:服务的注册与发现**
   - 服务之间需要通信,添加或删除都需要调整每个服务之间的通信地址,要非常麻烦,而现在增加了EurekaServer,它会将所有的微服务统计在一起, 统一管理, 可理解为它就是一个班的班主任的角色!总的来说EurekaServer就是服务的注册与发现,它管理了所有的微服务,形成了一个服务清单(保存微服务的ip,端口名....总之服务的信息)
@@ -402,7 +402,7 @@ SpringCloud为一系列的微服务难题提供了相应的组件来解决:
 
  总的来说组件都有这些:
 
-![image-20211118083457513](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211118083457513.png) 
+![image-20211118083457513](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211118083457513.png) 
 
 ## 3.Eureka-服务注册中心
 
@@ -443,11 +443,11 @@ SpringCloud为一系列的微服务难题提供了相应的组件来解决:
 
 Eureka的思想:
 
-![image-20211118083602390](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211118083602390.png)
+![image-20211118083602390](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211118083602390.png)
 
 > Eureka的工作流程
 
-![mark](https://gitee.com/miawei/pic-go-img/raw/master/imgs/aHR0cDovL3E2M2YyZWFjMy5ia3QuY2xvdWRkbi5jb20vYmxvZy8yMDIwMDMxOS80dzBTeGppZ2p5eHgucG5n)
+![mark](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/aHR0cDovL3E2M2YyZWFjMy5ia3QuY2xvdWRkbi5jb20vYmxvZy8yMDIwMDMxOS80dzBTeGppZ2p5eHgucG5n)
 
 解析:支付服务和用户服务在启动的时候就会往注册中心进行"服务注册"将自己的服务名、ip等端口注册进去，注册中心拿到后就会形成服务通信地址清单，这个清单里面就包含每个服务的通信地址等等；然后微服务每隔30秒就会向注册中心拉取注册清单然后缓存到本地中，然后消费者在调用提供者的时候，就会从本地缓存的注册清单中获取地址然后调用!
 
@@ -510,7 +510,7 @@ Eureka的思想:
 
    4. 启动访问: http://localhost:7001/
 
-      ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200521130420201.png)
+      ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200521130420201.png)
 
 2. eureka-client
 
@@ -555,7 +555,7 @@ Eureka的思想:
 
    4. 先启动7001服务端后启动8001客户端进行测试，然后访问监控页http://localhost:7001/ 产看结果如图，成功
 
-      ![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200521130507106.png)
+      ![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200521130507106.png)
 
 > 看到结果说明我们已经将服务注册到服务端注册中心去了,以下就是其他的配置:
 
@@ -573,13 +573,13 @@ Eureka的思想:
 
 2. 修改结果:
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200521130659314.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200521130659314.png)
 
 ------
 
 1. 如果此时停掉springcloud-provider-dept-8001 等**30s**后 监控会开启保护机制：
 
-![123](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200521130557974.png)
+![123](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200521130557974.png)
 
 2. 修改client的yaml:
 
@@ -591,7 +591,7 @@ Eureka的思想:
 
 1. 此时鼠标悬停地址上就会出现:
 
-   ![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200521130718511.png)
+   ![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200521130718511.png)
 
 2. 修改为使用ip注册到Eureka去:
 
@@ -629,9 +629,9 @@ info:
 
 然后启动重新刷新点击进入就可以看到显示如下内容:
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200521130756988.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200521130756988.png)
 
-![image-20211117201646293](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211117201646293.png)
+![image-20211117201646293](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211117201646293.png)
 
 > ##### EureKa自我保护机制：好死不如赖活着
 
@@ -698,11 +698,11 @@ public class IndexController {
 
 控制台:
 
-![image-20211117205749979](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211117205749979.png)
+![image-20211117205749979](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211117205749979.png)
 
 页面:
 
-![image-20211117205826790](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211117205826790.png)
+![image-20211117205826790](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211117205826790.png)
 
 ## 4.Ribbon-负载均衡(基于客户端)
 
@@ -717,7 +717,7 @@ public class IndexController {
 
 > Ribbon的工作机制
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200321001421198.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200321001421198.png)
 
 ​	两个User集群,除了服务名字相同而ip不同,注册表注册中心的注册表中形成了一个服务名下面挂载了两个IP地址, 而客户端在每30秒拉取注册中心的清单, 这时我们指定找到服务名字, 然后 Ribbon就会去清单中根据服务名找到两台实例,然后根据某种算法选择其中一个,然后组装http请求路径,然后再发起请求调用
 
@@ -822,17 +822,17 @@ server:
 
 **客户端查看:**
 
-![image-20211117213845521](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211117213845521.png)
+![image-20211117213845521](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211117213845521.png)
 
 **我们发送请求到消费者,看看消费者会根据服务名的Ribbon如何负载均衡的:**
 
 第一次请求:
 
-![image-20211117213941060](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211117213941060.png)
+![image-20211117213941060](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211117213941060.png)
 
 第二次请求:
 
-![image-20211117213956171](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211117213956171.png)
+![image-20211117213956171](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211117213956171.png)
 
 结论:可以发现端口已经发生了改变,也就意味着消费者根据服务名去本地缓存中找到注册清单根据清单中的服务名找到有另个ip地址,这时根据自己的负载均衡来决定请求给谁!
 
@@ -868,7 +868,7 @@ Retry:单机重试:一台服务重试多次,比如重试达到2次,那么就会�
 
 > Ribbon能干嘛?
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20201121103107791.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20201121103107791.png)
 
 - LB，即负载均衡 (LoadBalancer) ，在微服务或分布式集群中经常用的一种应用。
 - 负载均衡简单的说就是`将用户的请求平摊的分配到多个服务上`，从而达到系统的HA (高用)。
@@ -911,7 +911,7 @@ public class ConfigBean {
 
 在myRule包下自定义一个配置类MyRule.java，注意：**该包不要和主启动类所在的包同级，要跟启动类所在包同级**：
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200521131456478.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200521131456478.png)
 
 ```java
 /**
@@ -1139,7 +1139,7 @@ Feign是声明式Web Service客户端，它让微服务之间的调用变得更�
 
 扩展:Feigin全名叫`nettfix fegin`(是nettfix公司开发的),它的底层依然还是Ribbon->springCloud拿来在这基础上封装了一个`Spring Cloud Open Fegin `
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/2020072410031595.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/2020072410031595.png)
 
 > 实战
 
@@ -1230,7 +1230,7 @@ public class PayApplication {
 
 测试:
 
-![image-20211118174915625](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211118174915625.png)
+![image-20211118174915625](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211118174915625.png)
 
 这里调用`userClient.getById`方法，看起来是像在调用本地方法，其实该接口已经被Feign代理，我们发起调用时其实在像Feign接口配置的目标服务发起调用。
 
@@ -1243,7 +1243,7 @@ public class PayApplication {
 
 ​	主启动类上的`@EnableFeignClients`注解开启fegin,然后就会扫描到指定包下的`@FeiginClient`接口, 扫描到了之后就会将该注解所在的接口进行动态代理,然后放进Spring进行管理,所以我们可以通过@Autowrited进行注入,然后在我们发起请求的时候, 会使用jdk的动态代理方式代理接口，生成相应的`RequestTemplate`, 而这个RequestTemplate里面封装好请求的URL一些参数信息,然后RequestTemplate就会交给`HttpClient`去执行请求, 而在这底层又会交给Ribbon的负载均衡, 而Ribbon又会根据接口上的服务名, 然后去本地缓存注册表中找到服务, 然后根据负载均衡算法进行选择,选择后进行发送请求!
 
-![image-20211118203312699](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211118203312699.png)
+![image-20211118203312699](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211118203312699.png)
 
 > 其他的一些配置参数
 
@@ -1337,13 +1337,13 @@ public class PayApplication {
 
 ​	多个微服务之间调用的时候，假设微服务A调用微服务B和微服务C，微服务B和微服务C又调用其他的微服务，这就是所谓的“扇出”，如果扇出的链路上**某个微服务的调用响应时间过长，或者不可用**，对微服务A的调用就会占用越来越多的系统资源，进而引起系统崩溃，所谓的“**雪崩效应**”。
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20201121144830148.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20201121144830148.png)
 
 ​	对于高流量的应用来说，单一的后端依赖可能会导致所有服务器上的所有资源都在几十秒内饱和。比失败更糟糕的是，这些应用程序还可能导致服务之间的延迟增加，备份队列，线程和其他系统资源紧张，导致整个系统发生更多的级联故障，**这些都表示需要对故障和延迟进行隔离和管理，以达到单个依赖关系的失败而不影响整个应用程序或系统运行**。
 
 **理解**:在整个服务调用链中, 如果某个服务发生故障,那么就有可能导致整个调用请求崩塌;甚至就会造成整个微服务宕机,这是因为有可能这个A服务并发比较高 然后这个服务挂了, 然后其他请求调用的时候由于是网络调用, 如果调用出现故障那么就会等待2s 出现连接超时,而此时如果并发高有很多请求又在后面进行等待,造成`大量的请求等待`.那么此时就会造成整个微服务崩塌!
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/aHR0cHM6Ly9naXRodWIuY29tL05ldGZsaXgvSHlzdHJpeC93aWtpL2ltYWdlcy9zb2EtMy02NDAucG5n)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/aHR0cHM6Ly9naXRodWIuY29tL05ldGZsaXgvSHlzdHJpeC93aWtpL2ltYWdlcy9zb2EtMy02NDAucG5n)
 
 > 什么是Hystrix
 
@@ -1351,7 +1351,7 @@ public class PayApplication {
 
 **断路器**本身是一种开关装置，当某个服务单元发生故障之后，通过断路器的故障监控 (类似熔断保险丝) ，**向调用方返回一个服务预期的，可处理的备选响应 (FallBack) ，而不是长时间的等待或者抛出调用方法无法处理的异常，这样就可以保证了服务调用方的线程不会被长时间，不必要的占用**，从而避免了故障在分布式系统中的蔓延，乃至雪崩。
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/2020112114554744.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/2020112114554744.png)
 
 Hystrix是处理依赖隔离的框架,将出现故障的服务通过熔断、降级等手段隔离开来，这样不影响整个系统的主业务(比如你得了传染病是不是要把你关起来隔离呢),同时也是可以帮我们做服务的治理和监控。
 
@@ -1392,7 +1392,7 @@ Hystrix是处理依赖隔离的框架,将出现故障的服务通过熔断、降
    缺点:严格的控制线程且立即返回模式，无法应对突发流量（流量洪峰来临时，处理的线程超过数量，其他的请求会直接返回，不继续去请求依赖的服务)
    ```
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200724110558712.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200724110558712.png)
 
 理解:
 
@@ -1452,11 +1452,11 @@ Hystrix是处理依赖隔离的框架,将出现故障的服务通过熔断、降
 
 4. 缓存：对`请求做缓存`，提高性能。
 
-![腾讯课堂图片20211118115837](https://gitee.com/miawei/pic-go-img/raw/master/imgs/%E8%85%BE%E8%AE%AF%E8%AF%BE%E5%A0%82%E5%9B%BE%E7%89%8720211118115837.jpg)
+![腾讯课堂图片20211118115837](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/%E8%85%BE%E8%AE%AF%E8%AF%BE%E5%A0%82%E5%9B%BE%E7%89%8720211118115837.jpg)
 
 > Hystrix工作机制
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200325082851768.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200325082851768.png)
 
 ​	正常情况下我们正常访问一个服务的话那么此时断路器是处于一个`关闭状态(Closed)`状态,然后在连续的调用过程中出现异常故障达到请求数量阈值,那么此时这个服务就会进入`服务熔断(Open)状态`也就是说后续的请求就会直接触发快速失败走降级机制,总之不会让请求处于等待的状态,然后后面一段时间内调用都是处于被拒绝的状态,然后在一段时间内保护器会尝试进入`半熔断状态(Half-Open)`,允许少量的请求进来尝试是否请求成功,如果成功就关闭保护器进入一个正常的调用状态,如果请求失败那么还是回到熔断状态!
 
@@ -1521,11 +1521,11 @@ public class IndexController {
 
 测试:此时我们不启动User服务,那么在调用的过程就会发生异常故障
 
-![image-20211118212249824](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211118212249824.png)
+![image-20211118212249824](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211118212249824.png)
 
 总结:
 
-![image-20211118220219643](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211118220219643.png)
+![image-20211118220219643](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211118220219643.png)
 
 可以看见这个方法熔断只是针对单个的方法进行熔断降级方法,那么如何针对整个类进行熔断降级呢?因为如果为每一个方法进行熔断降级就会显得代码冗余:
 
@@ -1748,7 +1748,7 @@ public class UserClientFallback implements FallbackFactory<UserClient> {
 }
 ```
 
-![image-20211118220157014](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211118220157014.png)
+![image-20211118220157014](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211118220157014.png)
 
 两者最大的区别就是:fallback不支持在控制台看到触发降级方法的异常信息,而fallbackFactory是可以的!
 
@@ -1762,7 +1762,7 @@ Zull包含了对请求的**路由**(用来跳转的)和**过滤**两个最主要
 
 其中**路由功能负责将外部请求转发到具体的微服务实例上，是实现外部访问统一入口的基础**，而过**滤器功能则负责对请求的处理过程进行干预，是实现请求校验，服务聚合等功能的基础**。Zuul和Eureka进行整合，将Zuul自身注册为Eureka服务治理下的应用，同时从Eureka中获得其他服务的消息，也即以后的访问微服务都是通过Zuul跳转后获得。
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200325163341376.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200325163341376.png)
 
 注意:zuul本身是一个`独立的服务`，默认集成了Ribbon，zuul通过Ribbon将客户端的请求分发到下游的微服务，所以zuul需要`通过Eureka做服务发行`，同时zuul也集成了Hystrix。
 
@@ -1818,7 +1818,7 @@ zuul:
 
 测试:
 
-![image-20211118220945888](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211118220945888.png)
+![image-20211118220945888](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211118220945888.png)
 
 格式: http://localhost:zuul端口/前缀/服务别名/资源路径
 
@@ -1830,7 +1830,7 @@ zuul:
 
 Filter的执行流程图：
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200325165309752.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200325165309752.png)
 
 - 正常流程：
   - 请求到达首先会经过pre类型过滤器，而后到达routing类型，进行路由，请求就到达真正的服务提供者，执行请求，返回结果后，会到达post过滤器。而后返回响应。
@@ -2020,7 +2020,7 @@ https://blog.csdn.net/u014494148/article/details/105098362?spm=1001.2014.3001.55
 
 > 配置中心工作流程
 
-![在这里插入图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200328132657430.png)
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200328132657430.png)
 
 在spring cloud config 分为了服务端 config server和客户端config client 两个角色。
 

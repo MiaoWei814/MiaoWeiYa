@@ -1,4 +1,4 @@
-﻿# 基于Git的分布式代码管理
+﻿﻿# 基于Git的分布式代码管理
 
 **变更履历**
 
@@ -71,7 +71,7 @@ Git的初始设计目标是：
 
 分布式版本管理系统的结构如下所示：
 
-![Git-arch](https://gitee.com/miawei/pic-go-img/raw/master/imgs/Git-arch.png)
+![Git-arch](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/Git-arch.png)
 
 从上图我们可以看出，与我们现行的SVN相比，最大的改变来自于两点。
 
@@ -88,11 +88,11 @@ Git 和其他版本控制系统的主要差别在于，Git 只关心文件数据
 
 VCS的文件存储方式如下：
 
-![VCS-files](https://gitee.com/miawei/pic-go-img/raw/master/imgs/VCS-files.png)
+![VCS-files](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/VCS-files.png)
 
 Git的文件存储方式如下：
 
-![Git-files](https://gitee.com/miawei/pic-go-img/raw/master/imgs/Git-files.png)
+![Git-files](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/Git-files.png)
 
 + **近乎所有操作都是本地执行**
 
@@ -112,7 +112,7 @@ Git的文件存储方式如下：
 
 由此我们看到 Git 管理项目时，文件流转的三个工作区域：Git 的工作目录，暂存区域（Stage），以及本地仓库。
 
-![Git-state](https://gitee.com/miawei/pic-go-img/raw/master/imgs/Git-state.png)
+![Git-state](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/Git-state.png)
 
 ### <a name="为什么要使用Git">为什么要使用Git</a>
 回到我们最初的问题点，Git可以这样来解决我们的问题。
@@ -212,7 +212,7 @@ git revert
 git push origin :yourbranch
 ```
 
-![GitCommand](https://gitee.com/miawei/pic-go-img/raw/master/imgs/GitCommand.png)
+![GitCommand](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/GitCommand.png)
 
 
 #### <a name="注册GitLab">注册GitLab</a>
@@ -333,7 +333,7 @@ $ git commit -a -m 'finished the new footer [issue 53]'
 #### <a name="解决冲突">解决冲突</a>
 在协作开发中，一种通常的模式是，我们从远端仓库clone一个项目，添加内容之后提交。但是如果我们需要和别人协作修改一个文件，这时候我们往往需要把远端服务器的最新内容给同步到本地服务器，在这种情况下，如果远端服务器的修改内容和本地服务器的修改内容有可能发生冲突。
 
-![rebase1](https://gitee.com/miawei/pic-go-img/raw/master/imgs/rebase1.png)
+![rebase1](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/rebase1.png)
 
 通过git pull命令，可以把远端仓库的修改内容直接同步到本地。
 
@@ -361,7 +361,7 @@ To 192.168.1.188:git-demo/demo1.git
 
 解决完冲突之后的示意图如下所示
 
-![rebase2](https://gitee.com/miawei/pic-go-img/raw/master/imgs/rebase2.jpg)
+![rebase2](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/rebase2.jpg)
 
 
 #### <a name="查看状态">查看状态</a>
@@ -378,7 +378,7 @@ Git只是一个工具，Git的工作流才是我们关注的重点。使用Git�
 ### <a name="集中式工作流">集中式工作流</a>
 集中式工作流基本上来说非常适合使用Subversion的团队，集中式工作流让你无需去适应一个全新流程就可以体验Git带来的收益。这个工作流也可以作为向更Git风格工作流迁移的友好过渡。
 
-![git-workflow-svn](https://gitee.com/miawei/pic-go-img/raw/master/imgs/git-workflow-svn.png)
+![git-workflow-svn](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/git-workflow-svn.png)
 
 [详细介绍](http://blog.jobbole.com/76847/)
 
@@ -386,7 +386,7 @@ Git只是一个工具，Git的工作流才是我们关注的重点。使用Git�
 ### <a name="功能分支工作流">功能分支工作流</a>
 功能分支工作流以集中式工作流为基础，不同的是为各个新功能分配一个专门的分支来开发。这样可以在把新功能集成到正式项目前，用Pull Requests的方式讨论变更。
 
-![git-workflow-feature_branch](https://gitee.com/miawei/pic-go-img/raw/master/imgs/git-workflow-feature_branch.png)
+![git-workflow-feature_branch](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/git-workflow-feature_branch.png)
 
 [详细介绍](http://blog.jobbole.com/76857/)
 
@@ -394,7 +394,7 @@ Git只是一个工具，Git的工作流才是我们关注的重点。使用Git�
 ### <a name="Gitflow工作流">Gitflow工作流</a>
 Gitflow工作流通过为功能开发、发布准备和维护分配独立的分支，让发布迭代过程更流畅。严格的分支模型也为大型项目提供了一些非常必要的结构。
 
-![git-workflows-gitflow](https://gitee.com/miawei/pic-go-img/raw/master/imgs/git-workflows-gitflow.png)
+![git-workflows-gitflow](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/git-workflows-gitflow.png)
 
 [详细介绍](http://blog.jobbole.com/76867/)
 
@@ -402,7 +402,7 @@ Gitflow工作流通过为功能开发、发布准备和维护分配独立的分�
 ### <a name="Forking工作流">Forking工作流</a>
 Forking工作流是分布式工作流，充分利用了Git在分支和克隆上的优势。可以安全可靠地管理大团队的开发者（developer），并能接受不信任贡献者（contributor）的提交。
 
-![git-workflow-forking](https://gitee.com/miawei/pic-go-img/raw/master/imgs/git-workflow-forking.png)
+![git-workflow-forking](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/git-workflow-forking.png)
 
 [详细介绍](http://blog.jobbole.com/76861/)
 
@@ -410,11 +410,11 @@ Forking工作流是分布式工作流，充分利用了Git在分支和克隆上�
 ### <a name="Pull Request工作流">Pull Request工作流</a>
 Pull requests是Bitbucket提供的让开发者更方便地进行协作的功能，提供了友好的Web界面可以在提议的修改合并到正式项目之前对修改进行讨论。
 
-![pull-request](https://gitee.com/miawei/pic-go-img/raw/master/imgs/pull-request.png)
+![pull-request](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/pull-request.png)
 
 [详细介绍](http://blog.jobbole.com/76854/)
 
-![Git-struct](https://gitee.com/miawei/pic-go-img/raw/master/imgs/Git-struct.png)
+![Git-struct](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/Git-struct.png)
 
 ## 分支策略
 
@@ -465,13 +465,13 @@ Pull requests是Bitbucket提供的让开发者更方便地进行协作的功能�
 
 总体就是这样的:
 
-![image-20211023161148576](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023161148576.png)
+![image-20211023161148576](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023161148576.png)
 
 ## 其他注意点
 
 在idea中使用切分支要注意:
 
-![image-20211023161456039](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023161456039.png)
+![image-20211023161456039](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023161456039.png)
 
 我们提交代码都commit提交到本地分支上的,然后push的时候才会将本地分支的代码提交到远程分支上,idea创建分支的时候是创建本地分支,然后提交的时候需要远程仓库跟本地也有一个一模一样的分支才可以!
 
@@ -487,7 +487,7 @@ Pull requests是Bitbucket提供的让开发者更方便地进行协作的功能�
 
    - 要合并到哪个分支,那么我们首先得切换到那个分支上去操作,比如修改dev2,合并到master,那么我就切换到master
 
-     ![image-20211023171735822](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023171735822.png)
+     ![image-20211023171735822](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023171735822.png)
 
    - 在master分支上点击dev2进行合并,但是此时只是合并到本地分支上,所以我们需要push远程仓库中!
 
@@ -503,19 +503,19 @@ Pull requests是Bitbucket提供的让开发者更方便地进行协作的功能�
 
    1. 创建Pull Request合并请求
 
-   ![image-20211023164628531](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023164628531.png)
+   ![image-20211023164628531](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023164628531.png)
 
    2. 填写请求信息
 
-      ![image-20211023164731132](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023164731132.png)
+      ![image-20211023164731132](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023164731132.png)
 
    3. 这时有权限的上级才可以同意合并
 
-      ![image-20211023164806142](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023164806142.png)
+      ![image-20211023164806142](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023164806142.png)
 
    4. 这时就可以完成合并
 
-      ![image-20211023164847459](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023164847459.png)
+      ![image-20211023164847459](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023164847459.png)
 
-      ![image-20211023164853003](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211023164853003.png)
+      ![image-20211023164853003](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211023164853003.png)
 

@@ -160,4 +160,4 @@ https://blog.csdn.net/MiaoWei_/article/details/109400310?ops_request_misc=%257B%
 
 捋一下插件导图:
 
-![image-20211007214932430](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007214932430.png)
+![image-20211007214932430](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007214932430.png)

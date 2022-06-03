@@ -21,7 +21,7 @@ Maven中的有两大核心:
 
 画图:
 
-![image-20210929183753736](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210929183753736.png)
+![image-20210929183753736](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210929183753736.png)
 
 ## 2.常用命令
 
@@ -44,15 +44,15 @@ Maven中的有两大核心:
 
 比如:
 
-<img src="https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-dd0dbc65256b2f2d43fc8f2f774ac975_r.jpg" alt="img" style="zoom: 67%;" />
+<img src="https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-dd0dbc65256b2f2d43fc8f2f774ac975_r.jpg" alt="img" style="zoom: 67%;" />
 
 如果在IDEA的工具中则可以点击下就可以了:
 
-![image-20210911204910153](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210911204910153.png)
+![image-20210911204910153](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210911204910153.png)
 
 画图:
 
-![image-20210929185739437](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210929185739437.png)
+![image-20210929185739437](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210929185739437.png)
 
 ## 3.仓库和坐标
 
@@ -99,11 +99,11 @@ Maven中的有两大核心:
 
 这里举出依赖范围比较图:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9HdnRER0tLNHVZbTB2aWFoZWxEaWJPUXp0a0Qwd2FpYzd4ejF3UzAxeUk2UUd6eEZHSFpvUzZ3VW1nbk1VTndpYlpBbXlTMkJDdEprT2JMaWFCRWliSlFWaWNpYnBBLzY0MA)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9HdnRER0tLNHVZbTB2aWFoZWxEaWJPUXp0a0Qwd2FpYzd4ejF3UzAxeUk2UUd6eEZHSFpvUzZ3VW1nbk1VTndpYlpBbXlTMkJDdEprT2JMaWFCRWliSlFWaWNpYnBBLzY0MA)
 
 比如下面这样呢:
 
-![preview](https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-acdadd4b177e6c587d41afe78f16527c_r.jpg)
+![preview](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-acdadd4b177e6c587d41afe78f16527c_r.jpg)
 
 ## 4.依赖
 
@@ -132,7 +132,7 @@ Maven中的有两大核心:
 
 **依赖产生冲突的原因**:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9HdnRER0tLNHVZbTB2aWFoZWxEaWJPUXp0a0Qwd2FpYzd4ejgyY0VLMGljd2YwRDcwbmdaaWJnOUwzc1JpYXlHdTFtR01pY09Pb3VudXpqZFF6dEgxclhrZE9hRVEvNjQw)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9HdnRER0tLNHVZbTB2aWFoZWxEaWJPUXp0a0Qwd2FpYzd4ejgyY0VLMGljd2YwRDcwbmdaaWJnOUwzc1JpYXlHdTFtR01pY09Pb3VudXpqZFF6dEgxclhrZE9hRVEvNjQw)
 
 **说明**:在图中,`a.jar`依赖`b.jar`;同时`a.jar`依赖`d.jar`,而这个时候a和b,d的关系是直接依赖的关系,a跟c的关系时间接依赖的关系!
 
@@ -182,15 +182,15 @@ Maven中的有两大核心:
 
 其实创建聚合工程就是在一个maven工程上创建另一个maven项目:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9HdnRER0tLNHVZbTB2aWFoZWxEaWJPUXp0a0Qwd2FpYzd4ejgydDJWMUlRQ0g3T09zVlBpYWw2MkY5a2FVcDZOYTUwQ2Z5eW55MGlic2h2ZHhkcjNCbTlYMFBBLzY0MA)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9HdnRER0tLNHVZbTB2aWFoZWxEaWJPUXp0a0Qwd2FpYzd4ejgydDJWMUlRQ0g3T09zVlBpYWw2MkY5a2FVcDZOYTUwQ2Z5eW55MGlic2h2ZHhkcjNCbTlYMFBBLzY0MA)
 
 点击之后我们就只需要填入当前Module的artifactId就可:(因为这里就默认会继承第一个项目)
 
-<img src="https://gitee.com/miawei/pic-go-img/raw/master/imgs/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9HdnRER0tLNHVZbTB2aWFoZWxEaWJPUXp0a0Qwd2FpYzd4emliQTdodGN2Nk9WWnc3TkpsTGVQQ2tWclZWZzY4WENFSVRvSDUxcGRDSjNyaWJRdXJCVlhEOXhnLzY0MA" alt="img" style="zoom: 67%;" />
+<img src="https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9HdnRER0tLNHVZbTB2aWFoZWxEaWJPUXp0a0Qwd2FpYzd4emliQTdodGN2Nk9WWnc3TkpsTGVQQ2tWclZWZzY4WENFSVRvSDUxcGRDSjNyaWJRdXJCVlhEOXhnLzY0MA" alt="img" style="zoom: 67%;" />
 
 avaboy-manager 创建完成后，此时，观察 javaboy-parent 的 pom.xml 文件，发现它自动加上了 packing 属性：
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9HdnRER0tLNHVZbTB2aWFoZWxEaWJPUXp0a0Qwd2FpYzd4ekxlT1lZbkhMWG51a25NWDRXeDZtNUdFT3ZhaWJnNE9pYWRldGNRUEJxVU11TzVIOUVpYU90RUxady82NDA)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9HdnRER0tLNHVZbTB2aWFoZWxEaWJPUXp0a0Qwd2FpYzd4ekxlT1lZbkhMWG51a25NWDRXeDZtNUdFT3ZhaWJnNE9pYWRldGNRUEJxVU11TzVIOUVpYU90RUxady82NDA)
 
 **注意**:它的packaging属性值为`pom`,这表示它是一个聚合工程,同时,它还多了`modules`节点,指明了它自己的子模块!
 

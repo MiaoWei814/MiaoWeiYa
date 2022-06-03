@@ -1,6 +1,6 @@
 # JDBC
 
-![image-20210831092047309](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210831092047309.png)
+![image-20210831092047309](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210831092047309.png)
 
 ## 1.概念:
 
@@ -83,7 +83,7 @@ JDBC(JAVA Data Base Connectivity)指java数据库连接;是一种用于执行SQL
 
 数据库:
 
-![image-20210820174416155](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210820174416155.png)
+![image-20210820174416155](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210820174416155.png)
 
 代码实现:
 
@@ -158,18 +158,18 @@ public class SqlConnection {
 
  1. 由于我使用的SQL驱动已经是8.0,所以之前的`com.mysql.jdbc.Driver;`已经被废弃了,现在采用`com.mysql.cj.jdbc.Driver;`这种加载驱动,不然就会报异常:
 
-    ![image-20210820175054702](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210820175054702.png)
+    ![image-20210820175054702](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210820175054702.png)
 
  2. 使用了8.0后的版本在连接数据库配置的时候,就需要指定时区了,不然也会因为时区问题而报错:
 
-    ![image-20210820175232835](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210820175232835.png)
+    ![image-20210820175232835](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210820175232835.png)
 
 3. 在执行查询语句的时候,如果查询字段为空那么就得做处理,不然也会报空指针异常,因为`(query.getObject(7) `返回就是`null`,然后用null去调用toString就会报异常!
 4. 驱动版本达到8.0了之后,就不需要显式的指定注册驱动了,也就是`DriverManager.registerDriver(new Driver());`也可以注释了
 
 结果:
 
-![image-20210820175455039](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210820175455039.png)
+![image-20210820175455039](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210820175455039.png)
 
 ### 2.2 加载驱动-Driver
 
@@ -190,7 +190,7 @@ DriverManager作用:
 
    使用registerDriver(Driver driver) ;注册驱动，但是我们查看Driver源码类中包含一个静态代码块:
 
-   ![image-20210820180754987](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210820180754987.png)
+   ![image-20210820180754987](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210820180754987.png)
 
    我们发现这会导致Driver会new两次,所以我们推荐使用反射来进注册驱动
 
@@ -293,7 +293,7 @@ Statement st = conn.createStatement();
 
 图解:
 
-![image-20210822153848414](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210822153848414.png)
+![image-20210822153848414](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210822153848414.png)
 
 说明:当我们查询后返回的是一个`ResultSet`类型,而这个里面装的是一个集合,而`ResultSet对象.next()`是指当前指针指的查询结果集的头部,也就是如上图的字段那个位置,如果我们不使用`next`移动指针直接去获取字段,就会获取失败,所以我们需要将指针指向下一块区域,才能获取,如果获取的是最后的区域,已经表示没有了,那么`next`就会返回false
 
@@ -326,7 +326,7 @@ password=123456
 
 放入以下的环境里:
 
-![image-20210820191436661](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210820191436661.png)
+![image-20210820191436661](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210820191436661.png)
 
 代码:
 
@@ -453,7 +453,7 @@ select * from user where true; //查询了所有记录
 
 **结构:**
 
-![image-20210821084231250](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821084231250.png)
+![image-20210821084231250](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821084231250.png)
 
 PreparedStatement 是 Statement 接口的子接口，继承于父接口中所有的方法。它是一个预编译的 SQL 语句
 
@@ -491,7 +491,7 @@ pstmt.setInt(2,123);
 
 **思考:**我把一条sql发送到数据库之后，数据库会做什么事情?
 
-![image-20210821100235077](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821100235077.png)
+![image-20210821100235077](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821100235077.png)
 
 ### 4.3 使用
 
@@ -570,7 +570,7 @@ public class SqlConnection1 {
 
 结果:
 
-![image-20210821092047887](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821092047887.png)
+![image-20210821092047887](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821092047887.png)
 
 我这里虽然还使用之前的代码,但是我想意思你也看明白了,这并不难,这是多了SQL语句的占位符罢了!
 
@@ -604,11 +604,11 @@ String sql = "select *from user where username =? and password =?";
 
    试想一下会发生什么?
 
-   ![image-20210821092633587](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821092633587.png)
+   ![image-20210821092633587](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821092633587.png)
 
    这时就会发生报错,就会提示不能为select做出更新操作,那么我们有的时候我们换个角度思考,我们站在程序的角度上我们并不知道SQL语句里面到底是select还是update,这些编写SQL语句都是程序员而进行操作的,那么我们每次就不能手动去选择`executeUpdate()`和`executeQuery()`操作,所以我们只需换个方法使用`execute`,但是也有缺点:
 
-   ![image-20210821093155954](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821093155954.png)
+   ![image-20210821093155954](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821093155954.png)
 
    判断是否执行成功,返回对应的Boolean值,所以后阶段一些框架mybatis也对此做了一些封装和修改
 
@@ -629,7 +629,7 @@ String sql = "select *from user where username =? and password =?";
 
    结果:
 
-   ![image-20210821093646082](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821093646082.png)
+   ![image-20210821093646082](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821093646082.png)
 
    修改下:
 
@@ -644,7 +644,7 @@ String sql = "select *from user where username =? and password =?";
 
    看断点:
 
-   ![image-20210821094007466](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821094007466.png)
+   ![image-20210821094007466](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821094007466.png)
 
    很明显失败了因为它这个针对占位符使用了""引号括起来的,我们对应这个SQL再进行改变一下(结果就不贴图了因为什么都没有,因为失败了肯定没查出啊):
 
@@ -652,7 +652,7 @@ String sql = "select *from user where username =? and password =?";
    statement.setString(1, "SMITH or ENAME=JONES");
    ```
 
-   ![image-20210821094433320](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821094433320.png)
+   ![image-20210821094433320](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821094433320.png)
 
    .....
 
@@ -752,7 +752,7 @@ API介绍:
 
 先看数据库:
 
-![image-20210821104612984](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821104612984.png)
+![image-20210821104612984](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821104612984.png)
 
 上代码:
 
@@ -852,11 +852,11 @@ public class SqlConnection2 {
 
 看结果:
 
-![image-20210821104748046](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821104748046.png)
+![image-20210821104748046](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821104748046.png)
 
 看数据库的变化:
 
-![image-20210821104807555](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821104807555.png)
+![image-20210821104807555](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821104807555.png)
 
 好了你学废了吗?
 
@@ -907,15 +907,15 @@ connection对象.rollback();
 
 依然使用`exceuteUpdate()`来进行设置
 
-![image-20210821112155626](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821112155626.png)
+![image-20210821112155626](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821112155626.png)
 
 这就是参数值
 
-![image-20210821112248334](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821112248334.png)
+![image-20210821112248334](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821112248334.png)
 
 而获取则通过:
 
-![image-20210821112337158](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821112337158.png)
+![image-20210821112337158](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821112337158.png)
 
 你肯定还有点小疑惑,那么我们直接贴代码直接看或许就知道怎么回事了!
 
@@ -979,13 +979,13 @@ public class SqlConnection3 {
 
 这是之前的数据库:
 
-![image-20210821112553828](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821112553828.png)
+![image-20210821112553828](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821112553828.png)
 
 然后这是执行之后的数据库和控制台打印的主键:
 
-![image-20210821112640492](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821112640492.png)
+![image-20210821112640492](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821112640492.png)
 
-![image-20210821112650119](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821112650119.png)
+![image-20210821112650119](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821112650119.png)
 
 对吧没那么难,所以我总结出:
 
@@ -1009,7 +1009,7 @@ ResultSet keys = statement.getGeneratedKeys();
 
 **注意:**这里获取主键返回的是一个`ResultSet`对象,这里依然要进行`keys.next()`移动指针,然后这里必须得获取列号,不能通过字段来获取,因为这里并没有写select nid from表名，所有不能通过rs.geeLong（"nid"）来获取,否则就会报异常:
 
-![image-20210821113214561](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821113214561.png)
+![image-20210821113214561](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821113214561.png)
 
 **注意:**这里只展示PrepareStatement用法,而Statement也是一样的获取,只不过Statement则把设置是否能获取主键放在了executeUpdate里面,而PrepareStatement则是在获取SQL执行对象的时候就设置,然后获取的两者都是一样的!
 
@@ -1068,19 +1068,19 @@ Public void FindAllUsers(){
 
 假如现在就有1000个人访问:
 
-![image-20210821163253478](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821163253478.png)
+![image-20210821163253478](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821163253478.png)
 
 这里面就会造成不断的连接和断开,然后我们都知道“数据库连接”是一种稀缺的资源，为了保障网站的正常使用，应该对其进行妥善管理。其实我们查询完数据库后，如果不关闭连接，而是暂时存放起来，当别人使用时，把这个连接给他们使用。就避免了一次建立数据库连接和断开的操作时间消耗。，所以现在的线程池就出来了：
 
-![image-20210821163634972](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821163634972.png)
+![image-20210821163634972](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821163634972.png)
 
 **数据库连接池的基本思想：**给数据库建立一个“缓冲池”。就是说预先在缓冲池中放入一定数量的连接，当需要建立数据库连接时，只需要从“缓冲池”中取出一个，使用完毕之后再放回去。从而避免了频繁的向数据库申请资源，释放资源带来的性能损耗。我们可以通过设定连接池最大连接数来防止系统无尽的与数据库连接。更重要的是我们可以通过连接池的管理机制监视数据库的连接的数量、使用情况，为系统开发、测试及性能调整提供依据。
 
-![image-20210821164313928](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821164313928.png)
+![image-20210821164313928](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821164313928.png)
 
 再来一张连接池的概述图:
 
-![image-20210823155030543](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210823155030543.png)
+![image-20210823155030543](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210823155030543.png)
 
 我们了解了连接池的基本思想那我们思考几个问题(并且我采用火车站的问题来回答):
 
@@ -1125,7 +1125,7 @@ Public void FindAllUsers(){
 
 先来一个总的工程目录:
 
-![image-20210821170827800](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821170827800.png)
+![image-20210821170827800](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821170827800.png)
 
 - DBConfigXML:是一个接口,用于存放配置文件信息,只是这里图方便采用常量的形式来进行配置
 - demo:程序执行的入口
@@ -1458,7 +1458,7 @@ public class demo {
 
 结果:
 
-![image-20210821181311292](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821181311292.png)
+![image-20210821181311292](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821181311292.png)
 
 结论:这里我循环1000次管道都是一样的,是因为我每使用一个连接管道后我及时的设置关闭的标识,然后下一次管道就会从已经关闭了的管道中去获取然后进行开启,然后我将连接池用集合来进行存储,可以实现同样的功能!
 
@@ -1480,7 +1480,7 @@ DataSource是接口,和JDBC是一样的,是Sum公司开发的一套接口,需要
 
 再来个综合比较图：
 
-![综合比较](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20200214155722813.png)
+![综合比较](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20200214155722813.png)
 
 我这里直接贴最后一个Druid的maven:
 
@@ -1576,7 +1576,7 @@ public class DuridDemo {
 
 看结果:
 
-![image-20210821194500892](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210821194500892.png)
+![image-20210821194500892](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210821194500892.png)
 
 > 这里我就不贴数据库变化了,因为这里控制台已经给出答案了!
 

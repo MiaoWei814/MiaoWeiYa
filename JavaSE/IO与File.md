@@ -175,7 +175,7 @@ File[] files3 = list2.stream().flatMap(Arrays::stream).toArray(File[]::new);//�
 
 看结果:
 
-![image-20210808162750820](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210808162750820.png)
+![image-20210808162750820](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210808162750820.png)
 
 解释一下:首先将list转为流的形式然后对list多个数组进行转为多个流合并为一个流,然后转为数组,我真的叹呼Stream的强大之处!
 
@@ -240,7 +240,7 @@ public static Long fileSizeSum(File file) {
 
 画图理解:
 
-![image-20210807103230021](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210807103230021.png)
+![image-20210807103230021](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210807103230021.png)
 
 从图可以看出,每次递归都会创建新的栈帧进行在栈帧中入栈,然后当方法调用完毕就会出栈,而如果一直没返回那么就会一直入栈创建新的栈帧,就会造成栈帧溢出,因为栈帧的内存是有限的,这是去取决于电脑内存的,然后性能方面肯定是不好的,所以少用!
 
@@ -252,7 +252,7 @@ public static Long fileSizeSum(File file) {
 
 **分类:**
 
-![这里写图片描述](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20160522165107051)
+![这里写图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20160522165107051)
 
 流的概念与作用:
 
@@ -293,7 +293,7 @@ public static Long fileSizeSum(File file) {
 
    - 输出流:只能向其写入数据【主要是由outputStream和Writer作为基类】-》可理解为向文件里写东西
 
-     ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-9482617e5e4192a41995b36c8c53441e_720w.jpg)
+     ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-9482617e5e4192a41995b36c8c53441e_720w.jpg)
 
 2. 按照流的操作颗粒度进行划分:
 
@@ -305,9 +305,9 @@ public static Long fileSizeSum(File file) {
    - 节点流:可以从/向一个特定的IO设备(如磁盘,网络)读/写数据的流.也叫"低级流";比如`FileInputStream`
    - 高级流:用于对一个已存在的流进行连接和封装,通过**封装**后的流来实现数据的读/写功能,也叫"高级流";比如`BufferedInputStream`
 
-   ![preview](https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-e1afd7f4862e6608cf4103fe5425e7a4_r.jpg)
+   ![preview](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-e1afd7f4862e6608cf4103fe5425e7a4_r.jpg)
 
-   ![image-20210807135917047](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210807135917047.png)
+   ![image-20210807135917047](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210807135917047.png)
 
    可以看出上面左边的流也就是我们平时主要用的流,叫"低级流",而右边处理流就是在基础的字节流上，进行了封装，增加了特定的功能，使得传输更适合特定的场景。
 
@@ -315,11 +315,11 @@ public static Long fileSizeSum(File file) {
 
    ​	我们知道，程序与磁盘的交互相对于内存运算是很慢的，容易成为程序的性能瓶颈。减少程序与磁盘的交互，是提升程序效率一种有效手段。缓冲流，就应用这种思路：普通流每次读写一个字节，而缓冲流在内存中设置一个缓存区，缓冲区先存储足够的待操作数据后，再与内存或磁盘进行交互。这样，在总数据量不变的情况下，通过提高每次交互的数据量，减少了交互次数
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-b06fea615630981d1ed47bc79c7d5e17_720w.jpg)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-b06fea615630981d1ed47bc79c7d5e17_720w.jpg)
 
 完整的IO分类图:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-625373ac62037f328eb6e8b034f512c8_720w.jpg)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-625373ac62037f328eb6e8b034f512c8_720w.jpg)
 
 ### 2.3 FileInputStream
 
@@ -354,7 +354,7 @@ FileInputStream(File)
 
 常见的FileInputStream有很多子类如图:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/bba1cd11728b4710312b3d5ec1018bfbfd032375.jpeg)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/bba1cd11728b4710312b3d5ec1018bfbfd032375.jpeg)
 
 1. ByteArrayInputStream:字节数组输入流
    - 该类的功能就是从字节数组byte[]中进行以字节为单位的读取,也就是将资源文件都以字节形式存入到该类中的字节数组中去,我们拿数据也是从这个字节数组中拿。
@@ -462,7 +462,7 @@ byte[] bytes = new byte[1024],初始化固定长度,然后使用while循环in.re
 
 来看图解:
 
-![Snipaste_2021-08-09_10-51-59](https://gitee.com/miawei/pic-go-img/raw/master/imgs/Snipaste_2021-08-09_10-51-59.png)
+![Snipaste_2021-08-09_10-51-59](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/Snipaste_2021-08-09_10-51-59.png)
 
 **结论:**每次循环读取一个数组大小那么就会覆盖之前的数组,所以会造成有些数组的元素还是之前的,
 
@@ -514,7 +514,7 @@ System.out,println(str);
 
 如图:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/e1fe9925bc315c60aed5e98f8f7e831548547767.jpeg)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/e1fe9925bc315c60aed5e98f8f7e831548547767.jpeg)
 
 再循环write()这里只是将数据写到内存的缓冲区,只有缓冲区满了,才能将这些数据写出去
 
@@ -978,7 +978,7 @@ public class InputStreamReaderDemo {
 
 转换图解:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/1363376-20201118224838460-266023909.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/1363376-20201118224838460-266023909.png)
 
 
 
@@ -1564,5 +1564,5 @@ AIO是发出IO请求后，由操作系统自己去获取IO权限并进行IO操�
 
 **Nio线程处理流程**
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/d87a237af3ba4080f598a536e5dcede2.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/d87a237af3ba4080f598a536e5dcede2.png)
 

@@ -14,7 +14,7 @@ jsp支持非常强大的功能,不仅能写Java代码还能写HTML页面,按照�
 
 模板引擎核心思想图:
 
-![image-20210921194501055](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210921194501055.png)
+![image-20210921194501055](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210921194501055.png)
 
 模板引擎的作用就在于就是我们写一个HTML页面模板,然后呢,页面中有些值是动态的,比如商品价格等等,然后我们写一个表达式,而这些动态值是从我们后台数据库获取然后组织然后将数据交给模板引擎,而模板引擎就会去页面模板对表达式进行解析然后填充数据,最终这个页面由我们想要的内容进行展示出来,这就是我们这个模板引擎,不管是哪一个模板引擎都是这个核心思想;
 
@@ -44,7 +44,7 @@ springBoot核心东西就是自动装配,所以我们使用之前看springBoot�
 
 3. 然后我们点击`ThymeleafProperties.class`进去看看:
 
-   ![image-20210921200009853](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210921200009853.png)
+   ![image-20210921200009853](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210921200009853.png)
 
    从图中可以看出有一个路径:`classpath:/templates/`,然后还有一个后缀;
 
@@ -82,7 +82,7 @@ springBoot核心东西就是自动装配,所以我们使用之前看springBoot�
 
 3. 地址栏访问:
 
-   ![image-20210921200837364](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210921200837364.png)
+   ![image-20210921200837364](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210921200837364.png)
 
 > 是成功通过thymeleaf解析跳转过来了!
 
@@ -176,7 +176,7 @@ public class ThymeleafViewResolver extends AbstractCachingViewResolver implement
 
 4. 启动测试:
 
-   ![image-20210921204215593](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210921204215593.png)
+   ![image-20210921204215593](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210921204215593.png)
 
    这是常用的一些Thymeleaf语法:
 
@@ -296,7 +296,7 @@ public class ThymeleafViewResolver extends AbstractCachingViewResolver implement
 
       3. 测试:
 
-         ![image-20210921205338899](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210921205338899.png)
+         ![image-20210921205338899](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210921205338899.png)
 
 > 使用Thymeleaf模板语法:
 >
@@ -605,7 +605,7 @@ If you want to take complete control of Spring MVC, you can add your own @Config
 
 2. 由于在SpringMVC执行流程中都会执行到`dispatcherServlet`,所以我们全局搜索`dispatcherServlet`这个类,并找到`doDispatch`这个方法:
 
-   ![image-20210924195722308](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210924195722308.png)
+   ![image-20210924195722308](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210924195722308.png)
 
    我们在doDispatcher这里打断点可以发现这里有很多方法,我们找到viewResolvers视图解析器,展开发现默认的是`ContentNegotiatingViewResolver`,然后我们找到自己自定义写的视图解析器,
 
@@ -663,7 +663,7 @@ If you want to take complete control of Spring MVC, you can add your own @Config
 
    那么试想既然是通过配置文件进行获取的,那么我们可以在yaml中进行修改成我们想要的格式:
 
-   ![image-20210924202442450](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210924202442450.png)
+   ![image-20210924202442450](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210924202442450.png)
 
    自定义格式后,如果前台传的不是这个格式就会报错;
 
@@ -692,19 +692,19 @@ If you want to take complete control of Spring MVC, you can add your own @Config
 
    1. 这是输入正确的数据:
 
-      ![image-20210924204853089](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210924204853089.png)
+      ![image-20210924204853089](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210924204853089.png)
 
       控制台:
 
-      ![image-20210924204917432](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210924204917432.png)
+      ![image-20210924204917432](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210924204917432.png)
 
    2. 这是输入错误的数据:
 
-      ![image-20210924205011614](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210924205011614.png)
+      ![image-20210924205011614](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210924205011614.png)
 
       控制台也会打印错误日志!
 
-      ![image-20210924205041189](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210924205041189.png)
+      ![image-20210924205041189](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210924205041189.png)
 
 ### 2.3 修改springBoot默认设置
 
@@ -754,7 +754,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 
 地址栏:
 
-![image-20210924211142062](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210924211142062.png)
+![image-20210924211142062](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210924211142062.png)
 
 这里是跳转成功了,只不过这里没传值而已,但是已经跳转过来了!
 
@@ -948,19 +948,19 @@ public class MyMvcConfig implements WebMvcConfigurer {
 
 1. 第一先设置IDEA的poperties的编码,不然每个页面就会乱码,这样就会导致我们白写了:Ctrl+alt+S
 
-   ![image-20210927140933943](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210927140933943.png)
+   ![image-20210927140933943](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210927140933943.png)
 
    2. 编写配置文件:
 
       1. 在resources资源目录下新建一个文件夹`i18n`,然后在里面新建一个文件:`login.properties`,然后又新建一个`login_zh_CN.properties`
 
-         ![image-20210927141817047](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210927141817047.png)
+         ![image-20210927141817047](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210927141817047.png)
 
          注意:这里login_en_US.properties是我后面加的!
 
       2. 然后此时我们右键`Resource Bundle login`:
 
-         ![image-20210927142004401](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210927142004401.png)
+         ![image-20210927142004401](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210927142004401.png)
 
       3. 这里就会自动识别国际化配置文件:然后输入:`en_US`,这样就会变成上面的那样,就会变得很快捷
 
@@ -1024,7 +1024,7 @@ public MessageSourceProperties messageSourceProperties() {
 
    这里关于路径的写法:其本身是从classPath下去寻找,然后这里合并文件夹为login
 
-   ![image-20210927152702241](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210927152702241.png)
+   ![image-20210927152702241](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210927152702241.png)
 
 > 这里路径一定要对,不然页面使用就会发生乱码的问题
 
@@ -1071,7 +1071,7 @@ public MessageSourceProperties messageSourceProperties() {
 </html>
 ```
 
-![image-20210927161011188](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210927161011188.png)
+![image-20210927161011188](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210927161011188.png)
 
 ### 3.4 自定义配置解析
 
@@ -1204,11 +1204,11 @@ public MessageSourceProperties messageSourceProperties() {
 
 7. 看效果:
 
-   ![image-20210927171749205](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210927171749205.png)
+   ![image-20210927171749205](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210927171749205.png)
 
    这时我们点击English:
 
-   ![image-20210927171820328](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210927171820328.png)
+   ![image-20210927171820328](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210927171820328.png)
 
 ### 3.5 总结
 
@@ -1237,7 +1237,7 @@ public MessageSourceProperties messageSourceProperties() {
 
 1. 首先我们新建项目,然后我们需要在创建SpringBoot项目的时候勾选指定的启动器:
 
-   ![image-20210928145703327](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210928145703327.png)
+   ![image-20210928145703327](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210928145703327.png)
 
 2. 创建完毕后我们查看pom.xml依赖:
 
@@ -1290,7 +1290,7 @@ public MessageSourceProperties messageSourceProperties() {
 
    **注意**:这里连接数据库的时候要把时区加上,不然就会报以下异常:
 
-   ![image-20210928153247591](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210928153247591.png)
+   ![image-20210928153247591](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210928153247591.png)
 
    配置完了我们就可以开始开干了,但是该怎么写呢?
 
@@ -1384,7 +1384,7 @@ public MessageSourceProperties messageSourceProperties() {
 
    控制台:
 
-   ![image-20210928153415058](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210928153415058.png)
+   ![image-20210928153415058](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210928153415058.png)
 
    ​	结果:我们可以看到它默认给我们配置的数据源为:`class com.zaxxer.hikari.HikariDataSource`,而这个数据源我们并没有手动配置!而获取的连接信息也可以看出是用JDBC的连接实现!
 
@@ -1414,7 +1414,7 @@ public MessageSourceProperties messageSourceProperties() {
 
 1. 首先我们得找到对应JDBC所在目录:
 
-   ![image-20210928161410050](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210928161410050.png)
+   ![image-20210928161410050](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210928161410050.png)
 
    2. 然后找到`JdbcTemplateConfiguration`这个类然后点进去:
 
@@ -1685,7 +1685,7 @@ Druid读音为"德鲁伊"
 
    4. 打印结果:
 
-   ![image-20210929231343814](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210929231343814.png)
+   ![image-20210929231343814](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210929231343814.png)
 
    > 可以发现我们明明设置了最大值可是这里依然还是Druid的默认值,所以我们需要手动将关于Druid的配置注入到DruidDataSource
 
@@ -1700,7 +1700,7 @@ Druid读音为"德鲁伊"
    ```
 
    再执行看效果:
-   ![image-20210930082357555](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210930082357555.png)
+   ![image-20210930082357555](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210930082357555.png)
 
 #### 5.3.1 Druid默认配置源码
 
@@ -1708,7 +1708,7 @@ Druid读音为"德鲁伊"
 
 由于Druid是自定义数据源所以我们springBoot并没有对其自动配置,所以我们需要从maven依赖处找到:
 
-![image-20210930084638423](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210930084638423.png)
+![image-20210930084638423](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210930084638423.png)
 
 1. 然后找到`com.alibaba.druid.pool`,然后选中`DruidDataSource`这个类,这个类是Druid数据源的配置信息,然后我们全局搜索`maxActive`:
 
@@ -1811,11 +1811,11 @@ public class DruidConfig {
 
 结果:
 
-![image-20210930095811409](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210930095811409.png)
+![image-20210930095811409](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210930095811409.png)
 
 在输入对应的账号密码就可以了!里面有很多监控等功能:
 
-![image-20210930095858795](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210930095858795.png)
+![image-20210930095858795](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210930095858795.png)
 
 然后我们需要配置Druid web监控filter过滤器
 
@@ -1847,11 +1847,11 @@ public FilterRegistrationBean webStatFilter() {
 
 看过DruidDataSource知道其获取配置参数都是以:
 
-![image-20210930100717663](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210930100717663.png)
+![image-20210930100717663](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210930100717663.png)
 
 来进行获取,但是我们在配置文件的时候,并没有找到以druid相关的,也就是我们springBoot并没有对其进行自动配置类,这样无法获取Druid的专属配置,所以我们需要将自定义的Druid数据源添加到容器中:
 
-![image-20210930101904636](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210930101904636.png)
+![image-20210930101904636](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210930101904636.png)
 
 这里就是将`spring.datasource`前缀下所有配置将其注入到`DruidDataSorce`里面去,那么我们怎么知道如何进行注入的呢?
 
@@ -1859,19 +1859,19 @@ public FilterRegistrationBean webStatFilter() {
 
 1. 我们在`DruidDataSource`中找到有关对`maxActive`有关的东西,然后我们通过断点来看看:
 
-   ![image-20210930110534756](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210930110534756.png)
+   ![image-20210930110534756](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210930110534756.png)
 
    这里意思首先会从配置文件中获取属性`druid.maxActive`的属性,但是没有,获取为null,所以这里是获取失败的!也就进不去里面的方法!
 
 2. 我们点击`this.setMaxActive()`然后打断点试试:
 
-   ![image-20210930110740502](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210930110740502.png)
+   ![image-20210930110740502](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210930110740502.png)
 
    咦,看到没有,这里传的数字是21,明显对应了我们之前在配置文件中写的,说明我们把配置文件中的参数进行注入到我们`DruidDataSource`中去了,并且对我们Druid中的数据参数进行重新赋值!
 
 3. 思考:这里的`setMaxActive`全局搜索一下只有上面获取配置文件时才调用了一次,那么这里为什么能传参呢?我们在`setMaxActive`方法里执行完毕执行return,看看:
 
-   ![image-20210930114242797](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210930114242797.png)
+   ![image-20210930114242797](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210930114242797.png)
 
    哦哦哦,我看到`invoke`我就知道这是由反射进行创建的,当前类是:`JavaBeanBinder`
 
@@ -1995,7 +1995,7 @@ Maven仓库地址:https://mvnrepository.com/artifact/org.mybatis.spring.boot/myb
 
 6. 执行效果:
 
-   ![image-20211001144105590](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211001144105590.png)
+   ![image-20211001144105590](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211001144105590.png)
 
    > 可以发现并不难,就是核心注解和对应的配置文件,就可以快速的整合mybatis了!
 
@@ -2055,7 +2055,7 @@ public long save(Demo name);
 
 这里不用导依赖因为springBoot已经自带了日志:
 
-![image-20211011100239448](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211011100239448.png)
+![image-20211011100239448](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211011100239448.png)
 
 ```yaml
 # 配置日志
@@ -2075,13 +2075,13 @@ springBoot操作数据都是封装到Spring-Data里面,比如说JPA、jdbc、Mon
 
 **注**:SpringData是与SpringBoot齐名的项目!
 
-![image-20211014191812009](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211014191812009.png)
+![image-20211014191812009](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211014191812009.png)
 
 > 整合测试:
 
 1. 新建项目,注意此处在新建的时候要勾选NoSQL中的Redis:
 
-   ![image-20211014192345312](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211014192345312.png)
+   ![image-20211014192345312](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211014192345312.png)
 
 2. 然后在pom.xml发现是有这个依赖:
 
@@ -2290,7 +2290,7 @@ springBoot操作数据都是封装到Spring-Data里面,比如说JPA、jdbc、Mon
 
    输出:
 
-   ![image-20211014211627677](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211014211627677.png)
+   ![image-20211014211627677](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211014211627677.png)
 
    在cmd中查看:
 
@@ -2370,7 +2370,7 @@ springBoot操作数据都是封装到Spring-Data里面,比如说JPA、jdbc、Mon
 
    输出:
 
-   ![image-20211015192041483](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211015192041483.png)
+   ![image-20211015192041483](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211015192041483.png)
 
    这是经过序列化后的,发现是可以正常保存的,那么我们试试直接保存一个对象试试:
 
@@ -2380,7 +2380,7 @@ springBoot操作数据都是封装到Spring-Data里面,比如说JPA、jdbc、Mon
 
    输出:
 
-   ![image-20211015192312164](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211015192312164.png)
+   ![image-20211015192312164](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211015192312164.png)
 
    可以发现:这是没有序列化,没有实现序列化那么这里默认的JDK序列化是实现不了的!我们这个对象无法进行传输!没有实现序列化就会报错,所以我们所有的对象都需要进行序列化;也可理解为将对象存入内存中那么就要将对象转为二进制的过程,如果我们对象不实现Serializable接口那么在使用JDK序列化的时候就无法对其进行序列化,就无法转为二进制进行存储到内存中去!
 
@@ -2441,7 +2441,7 @@ public class RedisConfig {
 
 ​	我们可以点击`setKeySerializer`中的`this.keySerializer`的`RedisSerializer`中就可以看到所有的序列化类:
 
-![image-20211015201220444](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211015201220444.png)
+![image-20211015201220444](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211015201220444.png)
 
 然后我们使用的话就只需要new一个这个对象即可!
 
@@ -2449,7 +2449,7 @@ public class RedisConfig {
 
 我们在使用redisTemplate的时候因为我们自定义了,所以导致底层也有一个redisTemplate,导致分不清!
 
-![image-20211015201908967](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211015201908967.png)
+![image-20211015201908967](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211015201908967.png)
 
 那么这个时候我们只需要在引用的redisTemplate上加上注解`@Qualifier`指定bean的名称,就可以找到了:
 
@@ -2484,7 +2484,7 @@ private RedisTemplate redisTemplate;
 
 输出:
 
-![image-20211015202658483](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211015202658483.png)
+![image-20211015202658483](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211015202658483.png)
 
 
 然后我们去cmd客户端控制台看:

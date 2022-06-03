@@ -6,7 +6,7 @@
 
 1. 单体项目
 
-![image-20220423151630517](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20220423151630517.png)
+![image-20220423151630517](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20220423151630517.png)
 
 ​	经典就是将项目打包成jar包放在服务器上，用户去访问服务器上tomcat返回查询返回！这种呢并发量小，适合项目初期
 
@@ -14,7 +14,7 @@
 
 这种项目到一定发展的阶段就无法支持接下来的使用了，因为用户量的增加导致并发增加，那么传统的单体服务器就无法支撑这个并发，那么此时我们就横向扩展，一个服务器不够那我们多增加几台，可是增加了之后用户在选择不同的服务器就要做选择，那么此时对用户来说体验也不好并且众所都知session是无法共享的！所以此时我们就需要在中间增加一个`代理服务器`,通过一个代理服务器来进行选择性的将请求分发到其中一个服务器！
 
-![image-20220423155443920](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20220423155443920.png)
+![image-20220423155443920](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20220423155443920.png)
 
 我们希望这个代理服务器可以帮助我们接收用户的请求，然后将用户的请求按照规则帮我们转发到不同的服务器节点上。这个过程用户是无感知的，用户并不知道是哪个服务器返回的结果，我们还希望他可以按照服务器的性能提供不同的权重选择，保证最佳体验！所以我们使用了Nginx。
 
@@ -41,7 +41,7 @@
 
 1. 正向代理：
 
-   ![image-20220423163348003](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20220423163348003.png)
+   ![image-20220423163348003](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20220423163348003.png)
 
    解释：当我们访问海外的服务器比如美国的服务器那么就会被拦截拒绝，那么此时我们开启一个VPN那么就可以访问了，那么此时就你的客户端去访问VPN代理服务器，而这个VPN的服务器呢比如就在香港，那么就会访问香港，而香港呢就可以直接访问外网就去访问美国的服务器，
 
@@ -60,7 +60,7 @@
 
 2. 反向代理:
 
-![image-20220423165905605](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20220423165905605.png)
+![image-20220423165905605](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20220423165905605.png)
 
 解释：反向代理说白了就是伪造隐藏了服务器，对外只公布了一个代理服务器，对用户来说只访问这个代理就足以，哪怕这个代理服务器挂了那么只需要再加一个代理服务器就可以继续工作了；
 
@@ -95,25 +95,25 @@ Nginx提供的负载均衡策略有2种：
 
 1. 轮询：
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy4d33dfac-1949-4b2d-abb8-fe0b6e65b8dc.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy4d33dfac-1949-4b2d-abb8-fe0b6e65b8dc.png)
 
 ​		每一个服务器按照顺序来一个一个分发，都不落下！
 
 2. 加权轮询
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudyb1e3e440-4159-4259-a174-528b56cb04b2.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudyb1e3e440-4159-4259-a174-528b56cb04b2.png)
 
 ​		比如第三个服务器处理性能比较好，那么权重就更高，那么如果有很多请求打进来的话那么大量的请求进入到第三个服务器，而只有一部分请求才会依次按照权重进行分发到不同权重的服务器！这样可以保证我们服务器的性能最大化！
 
 3. iphash
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy64acb9a3-cd1a-4c0e-a1fa-9b220046a95a.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy64acb9a3-cd1a-4c0e-a1fa-9b220046a95a.png)
 
 ​	这个呢主要是对客户端请求的ip进行hash操作，然后根据hash结果将同一个客户端ip的请求分发给同一台服务器进行处理，可以解决session不共享的问题。不过现在一般不用session，一般用Redis作为数据共享的方式
 
 4. 动静分离
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudyedb1bbd6-e530-4aba-8fde-68658a10e73f.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudyedb1bbd6-e530-4aba-8fde-68658a10e73f.png)
 
 ​		在我们的开发过程中，有些请求是不需要后台去处理的，碧如：css、HTML、jpg等等，这些就不需要经过后台处理的文件就称为静态文件。让动态网站里的动态网页根据一定的规则吧不变的资源和经常变的资源区分开来，动静资源做好了拆分之后，我们可以就可以根据静态资源的特点将其做`缓存操作`，来提高资源响应的速度！
 
@@ -132,7 +132,7 @@ Nginx提供的负载均衡策略有2种：
 
 下载界面:
 
-![image-20220501090126440](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205010901588.png)
+![image-20220501090126440](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205010901588.png)
 
 > 一般我们都是去"conf"文件夹里修改配置文件即可
 
@@ -142,7 +142,7 @@ Nginx提供的负载均衡策略有2种：
 
 2. 浏览器执行（出现这个界面就是启动成功）：
 
-   ![image-20220501090912770](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205010909848.png)
+   ![image-20220501090912770](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205010909848.png)
 
 3. 热更新：
 
@@ -173,7 +173,7 @@ Nginx提供的负载均衡策略有2种：
 
 ​	首先我们打开目录`conf`中找到配置文件`nginx.conf`然后并打开：
 
-![image-20220501091854768](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205010918810.png)
+![image-20220501091854768](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205010918810.png)
 
 此时我们就知道了原来Nginx默认监听的是端口`80`,然后`localhost`默认是带有80的，所以当我们浏览器打开时就会触发打开本地的`/html/index.html`然后打开
 
@@ -265,29 +265,29 @@ https://www.jianshu.com/p/ad4c21ab2266
 
 1. 首先启动一个服务，然后改变端口启动两个：
 
-   ![image-20220501141706452](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011417500.png)
+   ![image-20220501141706452](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011417500.png)
 
-​		![image-20220501141717155](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011417195.png)
+​		![image-20220501141717155](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011417195.png)
 
 2. 配置文件：
 
-   ![image-20220501142855994](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011428043.png)
+   ![image-20220501142855994](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011428043.png)
 
    上面是负载均衡，下面那个是反向代理，也就是说当用户访问80的这个端口那么就会被监听，此时就会被代理，然后进行负载均衡选择其中一个服务进行代理请求；
 
 3. 效果（访问http://localhost:80）：
 
-   ![image-20220501143031565](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011430620.png)
+   ![image-20220501143031565](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011430620.png)
 
 疑惑：我也在想为什么在代理的时候要加http，不加的话会怎么样？来试试
 
 - 我去除后热更新失败：
 
-  ![image-20220501143254850](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011432892.png)
+  ![image-20220501143254850](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011432892.png)
 
 - 然后我尝试在负载均衡那里加上http呢？
 
-  ![image-20220501143320224](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011433267.png)
+  ![image-20220501143320224](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011433267.png)
 
 果然：必须要有一个合法的前缀才可以！
 
@@ -295,13 +295,13 @@ https://www.jianshu.com/p/ad4c21ab2266
 
 在配置文件中这里：
 
-![image-20220501143845420](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011438466.png)
+![image-20220501143845420](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011438466.png)
 
 `/manage`和`/beokaMhost`这两个，也就是说访问指定路径下后执行不同的方法里，比如当访问“80”这个端口后访问路径“/manage”然后就会访问指定文件夹中的，然后如果访问路径“/beokaMhost”后那么就会执行代理访问路径`http://47.108.95.24:8005/`这个路径（当然如果这里代理的名字是负载均衡upstream中的那么就会去获取对应名字中的服务地址进行替换）
 
 画图解析：
 
-![image-20220501150414459](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011504535.png)
+![image-20220501150414459](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011504535.png)
 
 ## 6.动静分离
 
@@ -313,11 +313,11 @@ https://www.jianshu.com/p/ad4c21ab2266
 
    这是打包后的样子：
 
-   ![image-20220501150748874](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011507930.png)
+   ![image-20220501150748874](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011507930.png)
 
 2. 放到nginx的HTML文件夹中：
 
-   ![image-20220501150900686](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011509735.png)
+   ![image-20220501150900686](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011509735.png)
 
 3. 配置文件：
 
@@ -350,9 +350,9 @@ https://www.jianshu.com/p/ad4c21ab2266
    	按照某种规则去查找文件
    ```
 
-   ![image-20220501152355226](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011523293.png)
+   ![image-20220501152355226](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011523293.png)
 
 画图解析：
 
-![image-20220501153320188](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202205011533252.png)
+![image-20220501153320188](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011533252.png)
 

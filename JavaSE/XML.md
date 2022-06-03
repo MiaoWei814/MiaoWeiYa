@@ -399,11 +399,11 @@ public class Dom4JDemo {
 
 结果:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20180530123713879)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20180530123713879)
 
 ### 5.1 Dom4J的结构与语法:
 
-![image-20210815152850586](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210815152850586.png)
+![image-20210815152850586](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210815152850586.png)
 
 分别对应右图的结构,也叫文档树,整个文档树就是Document对象
 

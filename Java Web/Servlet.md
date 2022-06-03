@@ -28,7 +28,7 @@ Tomcat与Servlet的关系:
 
 ​	从http协议中的请求和响应可以得知，浏览器发出的请求是一个请求文本，而浏览器接收到的也应该是一个响应文本。但是在上面这个图中，并不知道是如何转变的，只知道浏览器发送过来的请求也就是request，我们响应回去的就用response。忽略了其中的细节，现在就来探究一下。
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/874710-20170214204632894-1786729693.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/874710-20170214204632894-1786729693.png)
 
 解读:
 
@@ -55,7 +55,7 @@ Tomcat与Servlet的关系:
 
 任何一个应用程序,必然包括这三个步骤。其中接收请求和响应请求时共性功能，且没有差异性。比如我们常说的访问淘宝和京东，都是接收`taobao.com/brandNo=1`,就会响应给浏览器的都是JSON数据,于是,大家就把接收和响应两个步骤抽取成Web服务器:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-3d86f470ec1dc31bbe93d1df2c30fa47_r.jpg)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-3d86f470ec1dc31bbe93d1df2c30fa47_r.jpg)
 
 > 一般描述网络请求啥的,其实都是Tomcat的工作
 
@@ -63,7 +63,7 @@ Tomcat与Servlet的关系:
 
 当然,随着后期互联网发展,出现了三层架构,所以一些逻辑就从Servlet抽取出来,分担到Service和DAO
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-f41587429ebde63225029b0c235960c1_r.jpg)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-f41587429ebde63225029b0c235960c1_r.jpg)
 
 所以这就迎来了JAVAWeb开发经典三层架构:代码分层、逻辑清晰、还解耦.
 
@@ -77,11 +77,11 @@ Tomcat与Servlet的关系:
 
 其实这一切的一切,简单的来说就是"注入"和"回调",这样假如Tomcat里有个main方法:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-ce6e39bb02e3c6a2f4eb1e5afaa6e4e6_r.jpg)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-ce6e39bb02e3c6a2f4eb1e5afaa6e4e6_r.jpg)
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-14c18b69b5fb642f8d56698d2df20171_r.jpg)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-14c18b69b5fb642f8d56698d2df20171_r.jpg)
 
-![preview](https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-d473a8662d758859e75c3f9afce9e982_r.jpg)
+![preview](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-d473a8662d758859e75c3f9afce9e982_r.jpg)
 
 可以看出大部分工作容器或者框架都已经帮我们做了,而我们就只要编写实现xxx接口
 
@@ -161,11 +161,11 @@ Tomcat与Servlet的关系:
 
 3. 运行
 
-   ![image-20210827101005874](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827101005874.png)
+   ![image-20210827101005874](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827101005874.png)
 
    这是浏览器:
 
-   ![image-20210827101025339](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827101025339.png)
+   ![image-20210827101025339](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827101025339.png)
 
 其中:我们发现有5个方法需要重写，有init【初始化】，destroy【销毁】,service【服务】,ServletConfig【Servlet配置】,getServletInfo【Serlvet信息】。
 
@@ -194,7 +194,7 @@ public class FirstDemo extends HttpServlet {
 
 结果:
 
-![image-20210827105353165](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827105353165.png)
+![image-20210827105353165](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827105353165.png)
 
 在我们日常开发中多数用doGet和doPost请求,因为前端请求到后端多数都是get或者post请求
 
@@ -257,19 +257,19 @@ public class FirstDemo implements Servlet {
 
 当我们第一次启动服务器的时候:
 
-![image-20210827101833741](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827101833741.png)
+![image-20210827101833741](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827101833741.png)
 
 当我们开始访问的时候:
 
-​	![image-20210827102047051](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827102047051.png)
+​	![image-20210827102047051](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827102047051.png)
 
 我们第二次访问:
 
-​	![image-20210827102115097](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827102115097.png)
+​	![image-20210827102115097](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827102115097.png)
 
 当我们**关闭Tomcat服务器**的时候:
 
-![image-20210827102303129](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827102303129.png)
+![image-20210827102303129](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827102303129.png)
 
 所以得出Servlet生命周期可分为5个步骤:
 
@@ -297,7 +297,7 @@ public class FirstDemo implements Servlet {
 
 ​	对于浏览器多次对Servlet的请求,一般请求下,服务器只创建一个Servlet对象,也就是说Servlet对象一旦创建,就会驻留在内存中,为后续的请求做服务,直到服务器关闭
 
-![image-20210827110336863](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827110336863.png)
+![image-20210827110336863](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827110336863.png)
 
 为什么每次访问请求对象和响应对象都是新的
 
@@ -320,7 +320,7 @@ public class FirstDemo implements Servlet {
 
 > load-on-startup
 
-![image-20210827112941286](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827112941286.png)
+![image-20210827112941286](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827112941286.png)
 
 这表示将Servlet实例化和初始化的时机提前到项目部署或服务器开启的时候，只需要加上<load-on-startup>标签即可
 
@@ -384,7 +384,7 @@ public class FirstDemo implements Servlet {
 
 结果:
 
-![image-20210827153241833](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827153241833.png)
+![image-20210827153241833](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827153241833.png)
 
 在web.xml中设置初始参数为name,值为MiaoDaWei,
 
@@ -460,7 +460,7 @@ public class FirstDemo implements Servlet {
 
   结果:
 
-  ![image-20210827162813060](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827162813060.png)
+  ![image-20210827162813060](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827162813060.png)
 
 
 
@@ -494,7 +494,7 @@ public class FirstDemo implements Servlet {
 
 - 结果:
 
-  ![image-20210827163405939](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827163405939.png)
+  ![image-20210827163405939](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827163405939.png)
 
 **注意:**这里要先执行第一个servlet先把参数set到容器中,然后切换到第二个Servlet里的时候获取的时候就能获取到,不然先执行第二个的话就会返回null
 
@@ -504,19 +504,19 @@ public class FirstDemo implements Servlet {
 
 现在这里在我的目录下有张照片,我现在读取进行相关操作:
 
-![image-20210827180134156](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827180134156.png)
+![image-20210827180134156](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827180134156.png)
 
 我现在在imgContext这个类里进行读取;
 
 按照以前我们的读取方法一般采用`FileInputStream file= new FileInputStream("1.png");`,因为这跟图片是处于同一目录下所以可以这样读取,但是我错了,因为这里会报错:
 
-![image-20210827180314460](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827180314460.png)
+![image-20210827180314460](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827180314460.png)
 
 这是为什么呢?
 
 ​	我们以前读取文件的时候,如果程序和文件在同一包名,可以直接通过文件名称获取得到的!这之间的原因很简单的,以前我们写的程序都是通过JVM来运行的,而现在,我们是通过Tomcat来运行的,根据web的目录规范,Servlet编译后的class文件时存放在WEB-INF\classes文件夹中的:
 
-![image-20210827180555991](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827180555991.png)
+![image-20210827180555991](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827180555991.png)
 
 可以发现是没有的,所以这里解决办法是:(采用绝对路径的形式:从盘符开始)
 
@@ -537,7 +537,7 @@ public class FirstDemo implements Servlet {
 
 结果:
 
-![image-20210827180810862](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827180810862.png)
+![image-20210827180810862](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827180810862.png)
 
 虽然加上绝对路径下是可以找到的,但是如果我读取文件的时候都要写上绝对路径,那么这样也太不灵活了,试想一下,如果我将该**读取文件的模块移到其他的web站点上**，我的代码就又要修改了【因为web站点的名字不一样】。
 
@@ -554,17 +554,17 @@ public class FirstDemo implements Servlet {
 
 结果:
 
-![image-20210827181535214](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827181535214.png)
+![image-20210827181535214](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827181535214.png)
 
 我的目录结构:
 
-![image-20210827181552716](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827181552716.png)
+![image-20210827181552716](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827181552716.png)
 
 **注意:**这里的1.png在上面目录没有而这里有,是因为我copy上去的,不然也会找不到的!
 
 这里记录一下,我们可以把图片或者资源啥的放在web站点,那么我们就可以直接获取:
 
-![image-20210827191137559](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827191137559.png)
+![image-20210827191137559](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827191137559.png)
 
 代码:
 
@@ -576,15 +576,15 @@ public class FirstDemo implements Servlet {
 
 结果:
 
-![image-20210827191204512](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827191204512.png)
+![image-20210827191204512](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827191204512.png)
 
 再记一次:
 
-![image-20210828173935743](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210828173935743.png)
+![image-20210828173935743](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210828173935743.png)
 
-![image-20210828173951379](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210828173951379.png)
+![image-20210828173951379](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210828173951379.png)
 
-![image-20210828173958259](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210828173958259.png)
+![image-20210828173958259](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210828173958259.png)
 
 ## 5.Request与Response
 
@@ -616,7 +616,7 @@ public class FirstDemo implements Servlet {
 
 页面:
 
-![image-20210827183852639](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827183852639.png)
+![image-20210827183852639](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827183852639.png)
 
 没问题,那输入中文呢?
 
@@ -626,7 +626,7 @@ public class FirstDemo implements Servlet {
 
 直接控制台就报错了:
 
-![image-20210827183947211](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827183947211.png)
+![image-20210827183947211](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827183947211.png)
 
 **为什么会出错呢?**
 
@@ -640,7 +640,7 @@ public class FirstDemo implements Servlet {
 
 页面:
 
-![image-20210827184329826](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827184329826.png)
+![image-20210827184329826](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827184329826.png)
 
 
 
@@ -652,7 +652,7 @@ public class FirstDemo implements Servlet {
 
 页面:
 
-![image-20210827184457845](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827184457845.png)
+![image-20210827184457845](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827184457845.png)
 
 发现也没有发现问题;
 
@@ -668,7 +668,7 @@ public class FirstDemo implements Servlet {
 
 页面:
 
-![image-20210827184910188](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827184910188.png)
+![image-20210827184910188](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827184910188.png)
 
 所以这也验证了为什么会,乱码,因为浏览器不支持
 
@@ -683,7 +683,7 @@ response.getOutputStream().write("中国".getBytes("UTF-8"));
 
 页面:
 
-![image-20210827185635178](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827185635178.png)
+![image-20210827185635178](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827185635178.png)
 
 说明:这是因为设置消息头的形式在浏览器显示数据的时,自动把页面的编码格式置换成UTF-8,那么这个时候乱码的问题也就解决了!
 
@@ -707,7 +707,7 @@ writer.write("你好啊");
 
 页面:
 
-![image-20210827190053550](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210827190053550.png)
+![image-20210827190053550](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210827190053550.png)
 
 这里就出现了乱码,这是为什么呢?都说了只能输出字符数据啊!
 
@@ -1001,41 +1001,41 @@ request.getRequestDispatcher("/Foot"). forward(request, response)
 
 区别:
 
-![image-20210828201056437](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210828201056437.png)
+![image-20210828201056437](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210828201056437.png)
 
 ## 7.工作机制
 
-https://gitee.com/miawei/pic-go-img/raw/master/imgs/2018120522281643.gif
+https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/2018120522281643.gif
 
 这里我引入了别人做好的gif图,来表示Servlet的工作机制!
 
 并且我插入了一张Servlet的工作流程:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/20180513204808318)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/20180513204808318)
 
 注意:在步骤3的时候会首先去缓存区查看是否存在Servlet对象,有的话就直接走第4的步骤
 
 这是执行流程:
 
-![image-20210828102351271](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210828102351271.png)
+![image-20210828102351271](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210828102351271.png)
 
 **理解:**Tomcat在启动的时候,就会去加载Tomcat文件夹里加载config文件夹中的`server.xml`和`web.xml`,去找Context标签指定的项目的路径,还有我们项目中的web.xml进行解析,然后解析出其中的一个标签指定到项目路径下解析web.xml中Servlet的配置,然后在浏览器进行访问的时候,首先就会去端口号和主机确定是本地的tomcat服务器,然后根据后面的路径会去Context标签匹配然后跳转指定的项目下,然后解析web.xml,找到关于Servlet的配置,找到映射路径为`<url-pattern>/gp</url-pattern>`,然后根据其`<servlet-name>GetPostServlet</servlet-name>`找到对应的`<servlet-class>`的地址,然后Tomcat会使用反射`Class.forName("").newInstance()`创建实例,不过在这之前就会去缓存区查看是否存在Servlet实例,有的话就直接通过反射调用service方法,没有的话就会去创建实例,而创建实例就会去调用构造方法,而这个构造方法就如同去调用init()方法,在创建Servlet实例的时候还会去检查ServletConfig是否有初始化的参数,有的话就会一并加载!还有在调用service的时候,Tomcat会将请求资源http解析为request对象,并且还会创建一个response对象,然后传进去,经过一系列处理之后,在返回给前端的时候,会将准备写出的东西放在response里的缓冲区,然后service方法处理完后,就将缓冲区中的数据封装为响应给浏览器的响应头响应行之类的给浏览器进行解析
 
 **注意**:我是这样去理解的我们常用的IDEA启动tomcat的时候,就好比自启动了一个tomcat的一个镜像(因为我们可以设置tomcat的端口号),然后我们需要配置项目访问路径就好比在tomcat的webapps里设置访问路径,然后通过浏览器路径path与解析后的web.xml中url进行匹配,然后继续执行后续的操作!
 
-![image-20210828104259787](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210828104259787.png)
+![image-20210828104259787](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210828104259787.png)
 
 
 
 **注意:**我们在部署项目的时候,可以拷贝项目到Tomcat中的webapps目录中去,在浏览器中访问的话默认是访问ROOT中,所以需要指定文件夹名然后进行访问,还有另一种就是可以直接设置默认项目,
 
-![image-20210828113728402](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210828113728402.png)
+![image-20210828113728402](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210828113728402.png)
 
 这个path为我们这个项目设置项目名,表示每次在浏览器访问都要在加上这个path,这个表示上下文路径
 
 比如:
 
-![image-20210828115017641](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210828115017641.png)
+![image-20210828115017641](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210828115017641.png)
 
 > 这个路径不能有特殊符号!且不能有中文
 

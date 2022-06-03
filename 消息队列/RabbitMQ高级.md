@@ -82,7 +82,7 @@ class SpringBootMqTtlApplicationTests {
 
 此时我们去图形化界面查看:
 
-![image-20211026154113214](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026154113214.png)
+![image-20211026154113214](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026154113214.png)
 
 这里就绪消息为0是因为我已经过了5秒钟了;
 
@@ -90,7 +90,7 @@ class SpringBootMqTtlApplicationTests {
 
 当然我们也可以点击这个队列详细信息里面去查看:
 
-![image-20211026154206641](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026154206641.png)
+![image-20211026154206641](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026154206641.png)
 
 思考?我第一次声明创建队列设置了过期时间有标识,那么下次我往队列投递消息的时候用代码的方式不设置过期时间那么这个消息会不会过期呢?
 
@@ -110,7 +110,7 @@ class SpringBootMqTtlApplicationTests {
 
 然后此时看控制台:
 
-![image-20211026154712417](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026154712417.png)
+![image-20211026154712417](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026154712417.png)
 
 说明了必须要设置过期时间并且必须跟第一次设置队列的过期时间保持一致,否则就会报错!也就是说队列一旦被创建如果你再次去修改添加参数它是不会去覆盖变更的而是会报错!!
 
@@ -118,7 +118,7 @@ class SpringBootMqTtlApplicationTests {
 
 在图形化界面上在这里设置:
 
-![image-20211026171024803](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026171024803.png)
+![image-20211026171024803](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026171024803.png)
 
 ### 1.3 设置消息TTL
 
@@ -156,11 +156,11 @@ public void ttlMessage() {
 
 这是投递到消息后的队列:
 
-![image-20211026161538698](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026161538698.png)
+![image-20211026161538698](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026161538698.png)
 
 这是过了5毫秒后的队列:
 
-![image-20211026161625055](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026161625055.png)
+![image-20211026161625055](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026161625055.png)
 
 **注意**:`expiration` 字段以微秒为单位表示 TTL 值。且与 x-message-ttl 具有相同的约束条件。因为 expiration 字段必须为字符串类型，broker 将只会接受以字符串形式表达的数字;当同时指定了 queue 和 message 的 TTL 值，则两者中较小的那个才会起作用。
 
@@ -188,7 +188,7 @@ DLX也是一个正常的交换机,和一般的交换就没有区别,它能在任
 
 要想使用死信队列,只需要在定义队列的时候设置队列参数,`x-dead-letter-exchange`指定交换机即可!
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy95eb209a-1bcd-487b-832a-e09d88da3beb.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy95eb209a-1bcd-487b-832a-e09d88da3beb.png)
 
 **注意**:当然使用死信队列前提得是设置队列TTL,因为只有过期队列里面的消息过期才会被写入到死信队列中,而普通队列中消息过期是直接被移除不会进行这样的操作的! 
 
@@ -260,23 +260,23 @@ DLX也是一个正常的交换机,和一般的交换就没有区别,它能在任
 
 3. 我们运行测试给这个过期队列对应的交换机里发送消息,看看会发生什么?
 
-   ![image-20211026173353495](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026173353495.png)
+   ![image-20211026173353495](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026173353495.png)
 
 这是死信交换机:
 
-![image-20211026175049332](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026175049332.png)
+![image-20211026175049332](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026175049332.png)
 
 ### 2.3 小结
 
 上面介绍了消息过期后被转移到死信队列,那么还要一种失效场景就是`消息数量达到最大数量`,比如我们设置参数`x-max-length`,比如设置5,那么在第六次往这个队列投递消息那么就会被将之前的5个一起转移到死信队列中去!那么在原来的过期队列上可以看见清晰的标识`Lim"`,如:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudye74b63ff-ce96-4f09-8df4-a0ff45701375.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudye74b63ff-ce96-4f09-8df4-a0ff45701375.png)
 
 **总结**:其实所谓的死信队列没有很高大上的那种,它呢说白了就是找一个普通的交换机给另一个队列说你要是过期就要消息放我这就可以了!要注意的点还是说如果是消息过期那么一定是过期队列才可以进行消息的转移,因为这种死信的队列的本质上来讲其实就是过期了那么你就消息投递到我们定义的死信交换机,然后死信交换机就会把消息进行分发到我们的死信队列中去,而如果是过期消息进行投递那么是不可以的!所以才说是过期队列才可以!
 
 来看一下这张图:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy4b80ded8-9524-4986-9485-aad2946124b2.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy4b80ded8-9524-4986-9485-aad2946124b2.png)
 
 ​	我们生产者将消息投递到交换机上,交换机经过路由key进行分发到队列中,而队列经过我们设置参数让其6秒过期或设置最大消息数量,而一旦超过这个峰值那么此时就会将消息投递我们自己定义的死信交换机上,然后经过分发到我们的指定死信队列中,--->那么就是这个的过程!
 
@@ -296,13 +296,13 @@ DLX也是一个正常的交换机,和一般的交换就没有区别,它能在任
 
 如下图在`Connections`那一栏:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy414d826e-5cea-4caa-aba2-92cd30be34f4.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy414d826e-5cea-4caa-aba2-92cd30be34f4.png)
 
 当出现`blocking`或`blocked`话说明到达了阈值和以及高负荷运行了。那么生产者生产者就无法把消息存储到消息队列中去了!说明现在的服务器以及内存不足,需要更换服务器内存!如果物理内存还很充足,那么你就需要去把这个参数值调大!如果不足就增加内存条之类的,
 
 当然我们首先得去这里看我们的磁盘以及内存的使用状况:
 
-![image-20211026184429751](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211026184429751.png)
+![image-20211026184429751](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211026184429751.png)
 
 在这里我们也可以看见内存与磁盘的过程,比如持久化机制,就是将内存中的数据写入到磁盘中去,一般默认的情况下MQ的默认极限大小为0.4,比如说我这里我电脑运行内存为16GB,然后16*0.4=6.4,再加上本身被瓜分走了85MiB,所以这里还剩余6.3GB的内存使用情况!而如果一旦出现报红的情况那么blocked就会全部关闭连接,不再接收消息!
 
@@ -337,11 +337,11 @@ fraction/value为内存阈值,默认情况是:0.4/2GB,代表含义是当RabbitMQ
 rabbitmqctl set_vm_memory_high_watermark absolute 50MB  // 输入这个命令
 ```
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy2a0177fc-9dd6-4285-8b26-1cc9cd0c6e35.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy2a0177fc-9dd6-4285-8b26-1cc9cd0c6e35.png)
 
 可以看见内存已经爆红,下面是48MB,当前已经使用了93MB那么已经触及到了极限!此时连接就应该全部挂起,不再连接:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy928db4f2-6860-470e-ba62-23e811eee586.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy928db4f2-6860-470e-ba62-23e811eee586.png)
 
 如果我们以后在生产环境中一旦看见这种警告或者内存报红,那么就要赶紧让老板去买内存条!
 
@@ -437,7 +437,7 @@ vm_memory_high_watermark_paging_ratio = 0.7（设置小于1的值）
 ps aux|grep rabbitmq
 ```
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy2b94c755-598f-42cc-ac4a-7672dcfe8e2a.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy2b94c755-598f-42cc-ac4a-7672dcfe8e2a.png)
 
 或者:
 
@@ -532,7 +532,7 @@ systemctl status rabbitmq-server
 
 7. 查看web监控
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy38859ae4-0723-45b7-ac1f-32095b2e28da.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy38859ae4-0723-45b7-ac1f-32095b2e28da.png)
 
 注意在访问的时候：web结面的管理需要给15672 node-1 和15673的node-2 设置用户名和密码。如下:
 
@@ -632,7 +632,7 @@ rabbitmqctl -n rabbit-2 set_permissions -p / admin ".*" ".*" ".*"
    5 配置[@RabbitListener](https://github.com/RabbitListener)/[@RabbitHandler](https://github.com/RabbitHandler)用于接收消息
    在默认情况下主要的配置如下：
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy1433dcb6-80f9-4592-a57e-2cbb15863fb8.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy1433dcb6-80f9-4592-a57e-2cbb15863fb8.png)
 
 3. 使用：
 
@@ -805,7 +805,7 @@ rabbitmqctl -n rabbit-2 set_permissions -p / admin ".*" ".*" ".*"
 
 管理界面监控需要我们开启对应的插件(rabbitmq-plugins enable rabbitmq_management) 然后访问[http://ip:15672](http://ip:15672/)
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudyefd35cc0-3b07-4298-9aac-afa7086350e6.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudyefd35cc0-3b07-4298-9aac-afa7086350e6.png)
 
 在管理控制台我们就可以直观的看到集群中的每一个节点是否正常,如果为红色则表示节点挂掉了,同时可以很方便的查看到各个节点的内存、磁盘等相关的信息，使用起来也是非常方便的。但是遗憾的该功能做的比较简陋,没有告警等一些列的个性化设置,同时如果想把他接入到公司其他的监控系统统一管理也是很难做到的,所以扩展性不强，一般在小型企业的小集群中使用;
 
@@ -830,7 +830,7 @@ rabbitmqctl -n rabbit-2 set_permissions -p / admin ".*" ".*" ".*"
 
 安装插件并开启 trace_on 之后，会发现多个 exchange：amq.rabbitmq.trace ，类型为：topic。
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudyd39998d5-9bc6-4acb-a379-08a576623b40.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudyd39998d5-9bc6-4acb-a379-08a576623b40.png)
 
 > 日志追踪:
 
@@ -842,15 +842,15 @@ rabbitmqctl -n rabbit-2 set_permissions -p / admin ".*" ".*" ".*"
 
 2. 查看trace
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy14b7aa6d-0816-453b-96d1-5e63cc0a711e.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy14b7aa6d-0816-453b-96d1-5e63cc0a711e.png)
 
 3. 点击Tracing查看Trace log files
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy3b05dced-e525-40ef-a0b1-59888679f9a5.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy3b05dced-e525-40ef-a0b1-59888679f9a5.png)
 
 4. 点击xuexiangban-trace.log确认消息轨迹正确性
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy265d609c-788a-4219-95eb-51c859cd9f26.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy265d609c-788a-4219-95eb-51c859cd9f26.png)
 
 > 定制自己的监控系统
 
@@ -876,7 +876,7 @@ RabbitMQ提供了很丰富的restful风格的api接口,我们可以通过这些�
 
 更多API的相关信息和描述可以访问http://ip:15672/api/
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy21c5efec-827c-4b3f-86d2-99704d5dee0f.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy21c5efec-827c-4b3f-86d2-99704d5dee0f.png)
 
 接下来我们使用RabbitMQ Http API接口来获取集群监控数据:
 
@@ -1144,7 +1144,7 @@ RabbitMQ提供了很丰富的restful风格的api接口,我们可以通过这些�
 
 3. 启动测试
 
-   ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy163bbaea-9c8e-4cc3-95ca-e1e44115894f.png)
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy163bbaea-9c8e-4cc3-95ca-e1e44115894f.png)
 
 > Zabbix 监控RabbitMQ
 
@@ -1156,7 +1156,7 @@ Zabbix是一个基于WEB界面提供分布式系统监视以及网络监视功�
 
 分布式事务指事务的操作位于不同的节点上,需要保证事务的ACID特性。
 
-![image-20211029181040786](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211029181040786.png)
+![image-20211029181040786](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211029181040786.png)
 
 例如：
 
@@ -1180,7 +1180,7 @@ Zabbix是一个基于WEB界面提供分布式系统监视以及网络监视功�
 
 协调者询问参与者事务是否正常执行成功,参与者发回事务执行结果
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy28c463a1-73a3-42a5-b498-265078248883.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy28c463a1-73a3-42a5-b498-265078248883.png)
 
 > 提交阶段
 
@@ -1188,7 +1188,7 @@ Zabbix是一个基于WEB界面提供分布式系统监视以及网络监视功�
 
 **注意**：在准备阶段参与者执行了事务但是还未提交，只有在提交阶段接收到协调者发来的通知后，才进行提交或回滚
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy1227423e-49da-4823-bab5-9a1530403086.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy1227423e-49da-4823-bab5-9a1530403086.png)
 
 **存在的问题**：
 
@@ -1238,7 +1238,7 @@ TCC其实就是采用的补偿机制,其核心思想是:针对每个操作,都�
 - 之后将本地消息表中的消息转发到Kafka等消息队列中,如果转发成功则将消息从本地消息表中删除,否则继续重新转发;
 - 在分布式事务操作的另一方从消息队列中读取一个消息,并执行消息中的操作;
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy316cc2e4-e23a-4874-a8a9-0ed14ba71989.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy316cc2e4-e23a-4874-a8a9-0ed14ba71989.png)
 
 优点:一种非常经典的实现,避免了分布式事务,实现了最终一致性
 
@@ -1255,7 +1255,7 @@ TCC其实就是采用的补偿机制,其核心思想是:针对每个操作,都�
 - 第一阶段Prepared消息,会拿到消息的地址。第二阶段执行本地事务，第三阶段通过第一阶段拿到的地址去访问消息，并修改状态
 - 也就是说在业务方法内要想消息队列提交两次请求，一次发送消息和一次确认消息。如果确认消息发送失败了RabbitMQ会定期扫描消息集群中的事务消息,这时候发现了Prepared消息,它会向消息发送者确认,所以生产方需要实现一个check接口,RabbitMQ会根据发送端设置的策略来决定是回滚还是继续确认消息,这样就保证了消息发送与本地事务同时成功或同时失败。
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudye6732a40-44e5-491d-8e3d-7070fc943151.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudye6732a40-44e5-491d-8e3d-7070fc943151.png)
 
 优点： 实现了最终一致性，不需要依赖本地数据库事务。
 
@@ -1269,13 +1269,13 @@ TCC其实就是采用的补偿机制,其核心思想是:针对每个操作,都�
 
 这里以一个美团来作为基础的原型来进行分析：
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy29ccc5e9-db2b-40ae-ae33-385e15519226.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy29ccc5e9-db2b-40ae-ae33-385e15519226.png)
 
 **分析**：首先用户在APP交易平台上选购商品，选购完成以后会有一个配送平台，会把我们商品订单信息会配送到我们的物流系统，物流系统就会通知骑手进行一系列的到店取餐和送达客户手中。对于这种架构肯定就会用到分布式架构来进行开发，也就是说用户会在APP这一端下单接下来就会通知我们的配送平台，然后由通知中心通知骑手去取餐，那么这里的订单系统和配送中心肯定是两个独立的服务，服务与服务之间的传递肯定就会用到消息中间件完成，一旦用到消息中间件就会引发分布式事务的问题，也即是数据的最终一致性问题；
 
 > 系统与系统之间的分布式事务问题
 
-![image-20211029192323574](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211029192323574.png)
+![image-20211029192323574](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211029192323574.png)
 
 比如说小明在我们美团上下了一个订单点了一个外卖，然后就会把订单数据通过一些主流方式进行传输到配送中心，然后呢我们的订单就完成了一个流转；从这里可以看出这里订单服务和配送中心的数据库是不一致的是独立的数据库、独立的JVM、独立的服务体系。比如说我这里订单服务下名单那么有自己的订单数据库,而配送中心也会有自己独立的配送数据库,通过一些远程调用的方式来达到系统与系统之间的通讯以后,那么这里就会牵扯到两个数据库连接,连接过程中事务的管理只能控制自身的系统而无法去回滚我们的配送中心;主要是两者之间都有自己独立的事务,事务与事务之间是无法进行控制的;
 
@@ -1330,7 +1330,7 @@ public class OrderService {
 
 > 基于MQ的分布式事务整体设计思路
 
-![image-20211029195421230](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211029195421230.png)
+![image-20211029195421230](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211029195421230.png)
 
 可以发现订单服务与配送中心之间的数据我们可以用RabbitMQ的消息中间件进行可靠传输,我们会把消息服务丢给RabbitMQ,然后配送中心监听收到消息来完成数据的传递,但是还是不能解决分布式事务引发的数据的不一致问题!所以我们一系列的策略和手段再结合消息中间件一起来达成这件事情!
 
@@ -1344,7 +1344,7 @@ public class OrderService {
 
 我们用消息队列的目的就是为了数据的最终一致性问题:就是我的数据跑到另一个服务中报错了,那么我的数据通过我的策略和机制会达到最终一致性的目的,那么可以通过这张图来进行解释:
 
-![image-20211029201205129](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211029201205129.png)
+![image-20211029201205129](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211029201205129.png)
 
 解释:首先我们的业务数据会往我们的生产者这边投递消息,然后就会把消息发送到交换机然后转发到队列中,而我们之前在业务数据投递的时候会有一个消息冗余字段之类的DB,因为可能消息中间件出现一些故障所以我们为了保证消息最终是一定投递到MQ的,会用到冗余机制,这个时候就会在本地数据库建立一个消息冗余表,说白了就是一个备机制,这个消息表不做任何事只用来存储跟订单信息一样,只是会去告诉消息服务是否会准确投递到消息队列中,会放一些状态用于判断你这消息是否确认收到了,那么就会给一个可靠回执,我们为了保证消息数据的不丢失正确的抵达,如果这个消息状态是0,那么进行重发机制,这种就可以防止MQ宕机网络故障而造成服务无法被写入的问题;然后就有一个定时器专门去判断你这个重发的次数,而一旦达到2次那么就说明这个消息有异常,而一旦有异常我们就把这个消息状态改为2,然后我们通过人工去解决排查;而说明有异常说明数据本身就是有问题,那么这就很好的排除一些问题了,很精准的定位到错误的问题; 这样很好的解决MQ宕机或者服务出现故障而数据的丢失,从而保证消息的可靠生产;
 
@@ -1352,11 +1352,11 @@ public class OrderService {
 
 不可靠生产问题:
 
-![image-20211029200851622](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211029200851622.png)
+![image-20211029200851622](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211029200851622.png)
 
 如果这个时候MQ服务器出现了异常和故障，那么消息是无法获取到回执信息。怎么解决呢？
 
-![image-20211029203108391](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211029203108391.png)
+![image-20211029203108391](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211029203108391.png)
 
 ```
 解释:
@@ -1371,7 +1371,7 @@ public class OrderService {
 
 **概念**:可靠消费的问题就是在可靠生产的前提下你的消息能正常放到MQ中,而MQ则将消息投递到运单中心,而运单就开始一系列的操作:
 
-![image-20211029210022476](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211029210022476.png)
+![image-20211029210022476](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211029210022476.png)
 
 面试题:"消费者在消息过程出现异常会发生什么情况":
 
@@ -1407,17 +1407,17 @@ channel.basicNack(tag,false,true)
 
 > 基于MQ的分布式事务消息的消息重发
 
-![image-20211030115344388](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211030115344388.png)
+![image-20211030115344388](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211030115344388.png)
 
 
 
 > 基于MQ的分布式事务消息的死信队列消息转移+人工转移
 
-![image-20211030115427927](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211030115427927.png)
+![image-20211030115427927](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211030115427927.png)
 
 > 如果死信队列报错就进行人工处理
 
-![image-20211030115455903](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211030115455903.png)
+![image-20211030115455903](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211030115455903.png)
 
 ### 5.4 总结
 
@@ -1557,7 +1557,7 @@ public class MessageConfirmCallback implements RabbitTemplate.ConfirmCallback {
 
 这是RabbitMQ的核心组成部分:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/kuangstudy62a1f9e3-027d-408a-8fb4-a176bd184d23.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/kuangstudy62a1f9e3-027d-408a-8fb4-a176bd184d23.png)
 
 ​	看这个首先你得有一个服务,这个服务我们统称为Broker,在这个服务上一层构建的话必须要有一个虚拟机也可理解为一个根节点也就是相当于我们电脑里面的C盘D盘一样的概念,这些概念构成以后在这里面就有一个交换机,因为ErLang语言本身就是基于交换机的一种语言编写的方式所以它是专门编写交换机的,然后有了交换机有了队列两者之间形成了一种绑定关系,所以就有了Bindings,如果消费者有很多我们要进行过滤所以我们就有了路由keyRoutingKey来进一步的过滤和筛选;然后接下来就有生产者和消费者,其中生产者也就是客户端负责开辟连接通道,通道呢负责将消息投递到交换机里面,而交换机必须明确一个概念:在没有指定交换机的队列的话,那么它一定会走一个默认的交换机,也就是说要记住一点消息的投递永远投放在交换机上;
 

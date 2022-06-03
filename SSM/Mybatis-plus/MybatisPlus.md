@@ -97,7 +97,7 @@
 
       这里我们点击BaseMapper就可以发现已经提供了基本的CRUD的代码，并且我们只需要传递一个泛型就行
 
-      ![image-20220213141639387](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202202131416503.png)
+      ![image-20220213141639387](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202202131416503.png)
 
    4. 实体类和在主启动类上添加@MapperScan("mapper的路径")省略
 
@@ -121,7 +121,7 @@
 
    6. 结果：
 
-      ![image-20220213141917957](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202202131419996.png)
+      ![image-20220213141917957](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202202131419996.png)
 
 ## 3.配置日志
 
@@ -136,13 +136,13 @@ mybatis-plus:
 
 这是其他日志：
 
-![image-20220213142652310](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202202131426363.png)
+![image-20220213142652310](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202202131426363.png)
 
 如果要导入例如：Log4J2或者Slf4J那么就需要导入对应的依赖即可！
 
 这是结果：
 
-![image-20220213142759280](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202202131427358.png)
+![image-20220213142759280](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202202131427358.png)
 
 
 
@@ -170,11 +170,11 @@ mybatis-plus:
 
 看结果：
 
-![image-20220213144713173](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202202131447225.png)
+![image-20220213144713173](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202202131447225.png)
 
 > 咦？为什么这个id这么长，难道不应该自增+1么？吓得我赶紧去看了下数据库表果然没有设置自增，那么点击自增然后重新运行看看呢？
 
-![image-20220213144830906](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202202131448945.png)
+![image-20220213144830906](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202202131448945.png)
 
 可以发现两者自增也是不规律啊！这个其实是这样子的：
 
@@ -198,7 +198,7 @@ snowflake是Twitter开源的分布式ID生成算法，结果是一个long型的I
 
 3. 启动重试插入测试：
 
-   ![image-20220213150523789](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202202131505840.png)
+   ![image-20220213150523789](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202202131505840.png)
 
 > INPUT手动输入
 
@@ -224,7 +224,7 @@ snowflake是Twitter开源的分布式ID生成算法，结果是一个long型的I
 
 4. 结果：
 
-   ![image-20220213151533706](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202202131515746.png)
+   ![image-20220213151533706](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202202131515746.png)
 
 ​	注意：如果你这里也没有给id，那么数据库如果有自增那么它就会接着继续自增！
 
@@ -255,13 +255,13 @@ void testUpdate(){
 }
 ```
 
-![image-20220213153318945](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202202131533984.png)
+![image-20220213153318945](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202202131533984.png)
 
 然后追加一下我再更新一个字段：
 
 `user.setEmail("wwww")`
 
-![image-20220213153736013](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202202131537049.png)
+![image-20220213153736013](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202202131537049.png)
 
 可以发现：这个自动拼接SQL是非常的方便了，按照我们以前的Mybatis来讲就得写if判断，可以说节省了很多的时间了！
 
@@ -269,14 +269,14 @@ void testUpdate(){
 
 创建时间、修改时间！这些个操作一遍都是自动化完成的，我们不希望手动更新！
 
-阿里巴巴Java开发手册：![image-20220319180117921](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202203191801971.png)
+阿里巴巴Java开发手册：![image-20220319180117921](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202203191801971.png)
 
 方式一：数据库级别
 
 1. 新增数据库字段`create_time`，类型为`dateTime`，默认为`CURRENT_TIMESTAMP`
 2. 新增后看效果
 
-![image-20220319180748315](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202203191807387.png)
+![image-20220319180748315](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202203191807387.png)
 
 **理解:**可以发现它的默认值就是获取当前时间，可以这是动的数据库如果我的主观意想不想新增这个字段那么就会是默认值，所以这个是不建议的！
 
@@ -359,7 +359,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
 数据库:
 
-![image-20220319183833844](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202203191838906.png)
+![image-20220319183833844](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202203191838906.png)
 
 
 
@@ -441,7 +441,7 @@ public void test1() throws Exception{
 }
 ```
 
-![image-20220320103607855](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202203201036907.png)
+![image-20220320103607855](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202203201036907.png)
 
 可以发现加了`@version`后就会在where条件中有version这一条件!
 
@@ -472,7 +472,7 @@ public void test2() throws Exception{
 
 控制台:
 
-![image-20220320110328056](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202203201103131.png)
+![image-20220320110328056](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202203201103131.png)
 
 ### 4.4 查询操作
 
@@ -562,7 +562,7 @@ public interface UserMapper extends BaseMapper<User> {
 }
 ```
 
-![image-20220320131632370](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202203201316436.png)
+![image-20220320131632370](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202203201316436.png)
 
 事实证明是可以的!
 
@@ -599,7 +599,7 @@ public class MybatisPlusConfig {
 
 代码还是跟之前一样--不变
 
-![image-20220320134217263](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202203201342336.png)
+![image-20220320134217263](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202203201342336.png)
 
 还是可以分页，嘻嘻嘻！
 
@@ -607,7 +607,7 @@ public class MybatisPlusConfig {
 
 ### 4.6 删除操作
 
-![image-20220320140540208](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202203201405274.png)
+![image-20220320140540208](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202203201405274.png)
 
 解释：
 
@@ -659,7 +659,7 @@ public class MybatisPlusConfig {
       }
       ```
 
-      ![image-20220320145748537](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202203201457593.png)
+      ![image-20220320145748537](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202203201457593.png)
 
 ​			可以发现，这里删除的SQL语句已经从delete修改为update更新了, 而且这里指定删除的状态的跟我们在yaml里是一样的!
 
@@ -672,7 +672,7 @@ public void test5() throws Exception{
 }
 ```
 
-![image-20220320150055129](https://gitee.com/miawei/pic-go-img/raw/master/imgs/202203201500185.png)
+![image-20220320150055129](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202203201500185.png)
 
 可以发现，在查询的时候已经自动给我们带上相关状态进行查询了！
 

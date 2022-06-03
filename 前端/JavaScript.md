@@ -9,7 +9,7 @@
 1. JavaScript是一种`解释性脚本语言`（代码不进行预编译），由浏览器解释执行，用来向页面添加交互行为；
 2. Java Script由三个主要组成部分：`ECMAScript`（核心），`BOM`（浏览器对象模型），`DOM`（文档对象模型）;
 
-![image-20210910105622328](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910105622328.png)
+![image-20210910105622328](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910105622328.png)
 
 **注意**:
 
@@ -280,7 +280,7 @@ promise:Promise是异步编程的一种解决方案, 所谓Promise，简单说�
 
 结果:
 
-![image-20210910142202708](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910142202708.png)
+![image-20210910142202708](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910142202708.png)
 
 解读:在JS语法中，数字是有取值边界的，超出最大数取值为Infinity【正无穷】，超出最小数取值为-Infinity【负无穷】，无穷数不能用于数值运算，一般使用`isFinite()`函数对一个数字进行判断是否是有穷的【有限的】，若传入的数据是无穷数，那么返回false，若传入的数据是有穷数，则返回为true;
 
@@ -294,7 +294,7 @@ promise:Promise是异步编程的一种解决方案, 所谓Promise，简单说�
 
 结果:
 
-![image-20210910142434212](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910142434212.png)
+![image-20210910142434212](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910142434212.png)
 
 ### 3.2 非数
 
@@ -319,11 +319,11 @@ promise:Promise是异步编程的一种解决方案, 所谓Promise，简单说�
 
 ### 4.1 赋值运算符:
 
-![image-20210910145115594](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910145115594.png) 
+![image-20210910145115594](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910145115594.png) 
 
 ### 4.2 算术运算符
 
-![image-20210910145203702](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910145203702.png)
+![image-20210910145203702](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910145203702.png)
 
 这个跟Java的运算符也是一致的,其中的"+"在同时数字类型与字符类型的时候也是会演变成字符串的拼接
 
@@ -392,7 +392,7 @@ js中的函数就跟Java中定义方法是一样的!只不过区别就是js在�
 
 结果:
 
-![image-20210910151907566](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910151907566.png)
+![image-20210910151907566](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910151907566.png)
 
 从以上可以发现:
 
@@ -420,7 +420,7 @@ js中的函数就跟Java中定义方法是一样的!只不过区别就是js在�
 
 如果没有声明返回名称,那么就会发生异常:
 
-![image-20210910153615207](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910153615207.png)
+![image-20210910153615207](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910153615207.png)
 
 ## 7.对象
 
@@ -459,7 +459,7 @@ js的对象有三大类:`内部对象`、`宿主对象`、`自定义对象`
 
 结果:
 
-![image-20210911174400913](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210911174400913.png)
+![image-20210911174400913](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210911174400913.png)
 
 当然也有解决办法:就是将对应的函数给声明给全局作用域:
 
@@ -481,7 +481,7 @@ js的对象有三大类:`内部对象`、`宿主对象`、`自定义对象`
 
 结果:
 
-![image-20210911174828046](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210911174828046.png)
+![image-20210911174828046](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210911174828046.png)
 
 #### 7.1.1 本地对象
 
@@ -493,9 +493,9 @@ js的对象有三大类:`内部对象`、`宿主对象`、`自定义对象`
 
    先看API:
 
-   ![image-20210910154937864](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910154937864.png)
+   ![image-20210910154937864](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910154937864.png)
 
-   ![image-20210910154948635](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910154948635.png)
+   ![image-20210910154948635](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910154948635.png)
 
    使用案例:
 
@@ -530,7 +530,7 @@ js的对象有三大类:`内部对象`、`宿主对象`、`自定义对象`
 
    以上就是一个实时显示时间的js,在页面呈现的效果如下:
 
-   ![image-20210910161047018](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910161047018.png)
+   ![image-20210910161047018](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910161047018.png)
 
    > 注意:其中的月份由于是从0开始的所以要+1!
 
@@ -582,7 +582,7 @@ js的对象有三大类:`内部对象`、`宿主对象`、`自定义对象`
 
    API:
 
-   ![image-20210910162030270](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910162030270.png)
+   ![image-20210910162030270](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910162030270.png)
 
    代码示例:
 
@@ -609,13 +609,13 @@ js的对象有三大类:`内部对象`、`宿主对象`、`自定义对象`
 
    结果:
 
-   ![image-20210910163713514](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910163713514.png)
+   ![image-20210910163713514](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910163713514.png)
 
 2. ### Math 数学对象
 
    API:
 
-   ![image-20210910163932873](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910163932873.png)
+   ![image-20210910163932873](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910163932873.png)
 
 ### 7.2 宿主对象
 
@@ -625,7 +625,7 @@ js的对象有三大类:`内部对象`、`宿主对象`、`自定义对象`
 
 BOM简称为浏览器对象模型:
 
-![image-20210910165743944](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910165743944.png)
+![image-20210910165743944](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910165743944.png)
 
 其中:
 
@@ -645,7 +645,7 @@ BOM简称为浏览器对象模型:
 
    API:
 
-   ![image-20210910170716285](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910170716285.png)
+   ![image-20210910170716285](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910170716285.png)
 
    
 
@@ -660,11 +660,11 @@ BOM简称为浏览器对象模型:
 
    页面:
 
-   ![image-20210910175821824](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910175821824.png)
+   ![image-20210910175821824](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910175821824.png)
 
    console:
 
-   ![image-20210910175853280](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910175853280.png)
+   ![image-20210910175853280](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910175853280.png)
 
 2. ## location
 
@@ -672,7 +672,7 @@ BOM简称为浏览器对象模型:
 
    这是API:
 
-   ![image-20210910175933792](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910175933792.png)
+   ![image-20210910175933792](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910175933792.png)
 
    代码示例:
 
@@ -687,7 +687,7 @@ BOM简称为浏览器对象模型:
 
    结果:
 
-   ![image-20210910180443126](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910180443126.png)
+   ![image-20210910180443126](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910180443126.png)
 
    > 这里window.location.href是获取当前浏览器地址栏,可以给地址栏设值,让其改变
 
@@ -695,17 +695,17 @@ BOM简称为浏览器对象模型:
 
 **概念**:DOM【Document Object Model】 ：文档对象模型。直白的讲就是通过程序解析结构化文档（xml，html）的时候，在内存中生成的包含当前结构化文档中所有内容的一个对象模型。文档中的每一个节点都会生成一个对象，这些对象与对象之间会形成一个层级关系，像一个树形结构，所以称之为DOM树!
 
-![image-20210910182046935](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910182046935.png)
+![image-20210910182046935](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910182046935.png)
 
 
 
 DOM模型就是结构化文档在内存中的另外一种表现形式:
 
-![image-20210910182158345](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910182158345.png)
+![image-20210910182158345](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910182158345.png)
 
 再解释一下DOM树:
 
-![image-20210910182326903](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210910182326903.png)
+![image-20210910182326903](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210910182326903.png)
 
 > 我们在使用DOM中的添加节点之类的,都是在在内存中进行操作,下一次重新加载不会修改硬盘上的数据
 
@@ -880,7 +880,7 @@ AJAX即Asynchronous Javascript And XML（异步JavaScript和XML），是**改善
 
 传统交互图:
 
-![image-20210911190956206](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210911190956206.png)
+![image-20210911190956206](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210911190956206.png)
 
 **缺点**:
 
@@ -891,7 +891,7 @@ AJAX即Asynchronous Javascript And XML（异步JavaScript和XML），是**改善
 
 AJAX交互图:
 
-![image-20210911191228531](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210911191228531.png)
+![image-20210911191228531](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210911191228531.png)
 
 **优点**:
 
@@ -980,4 +980,4 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/open
 
 然后这里列举一张常用API使用图:
 
-![image-20210912172052469](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210912172052469.png)
+![image-20210912172052469](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210912172052469.png)

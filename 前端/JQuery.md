@@ -19,7 +19,7 @@
 
 由于这是第三方框架不是其本身所自带的,所以需要引入JS包:
 
-![image-20210913102417562](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913102417562.png)
+![image-20210913102417562](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913102417562.png)
 
 而我们使用的话就直接引入外部JS就行:
 
@@ -65,7 +65,7 @@ $("#myDiv").html("这是JQuery修改后的"); //这里是选择为ID是myDIV,所
 
 结果:
 
-![image-20210913103604444](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913103604444.png)
+![image-20210913103604444](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913103604444.png)
 
 **注意**:在JQuery中都是用$来表示使用,那么这两者是等价也就是说我们可以用`jQuery("#myDiv")`来进行使用,但是也要注意大小写问题!
 
@@ -148,7 +148,7 @@ $("#myDiv").html("这是JQuery修改后的"); //这里是选择为ID是myDIV,所
 </script>
 ```
 
-![image-20210914151049530](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210914151049530.png)
+![image-20210914151049530](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210914151049530.png)
 
 ## 3.选择器
 
@@ -198,25 +198,25 @@ $("#myDiv").html("这是JQuery修改后的"); //这里是选择为ID是myDIV,所
 
 结果:
 
-![image-20210913134637875](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913134637875.png)
+![image-20210913134637875](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913134637875.png)
 
 ### 3.2 层次选择器
 
 1. 祖先+空格+后代:**在给定的祖先元素下匹配所有的后代元素**
 
-   ![image-20210913135717462](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913135717462.png)
+   ![image-20210913135717462](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913135717462.png)
 
 2. 父亲+空格+儿子:**在给定的父元素下匹配所有的子元素**
 
-   ![image-20210913135804101](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913135804101.png)
+   ![image-20210913135804101](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913135804101.png)
 
 3. 元素+加号+紧接下一个元素:**匹配所有紧接在 prev 元素后的 next 元素**
 
-   ![image-20210913140019373](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913140019373.png)
+   ![image-20210913140019373](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913140019373.png)
 
 4. ~:**匹配前一个元素同一辈分的元素**
 
-   ![image-20210913140150086](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913140150086.png)
+   ![image-20210913140150086](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913140150086.png)
 
 $("input:button"):表示获取input框中带有button元素的节点
 
@@ -280,7 +280,7 @@ $obj.each(function(index , obj){   //这里的obj是一个dom对象
 
 结果:
 
-![image-20210914174805528](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210914174805528.png)
+![image-20210914174805528](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210914174805528.png)
 
 ## 5.绑定事件
 
@@ -449,7 +449,7 @@ $(function() {
 
 结果:
 
-![image-20210914180308079](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210914180308079.png)
+![image-20210914180308079](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210914180308079.png)
 
 > 如何选择?一般委托方选择该节点的父标签,然后通过父标签绑定事件委托给子元素
 
@@ -488,11 +488,11 @@ $(function() {
 
 console:
 
-![image-20210913150647931](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913150647931.png)
+![image-20210913150647931](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913150647931.png)
 
 页面:
 
-![image-20210913150656774](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913150656774.png)
+![image-20210913150656774](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913150656774.png)
 
 ### 6.2 操作元素和节点
 
@@ -573,7 +573,7 @@ $("input[code]:first").clone(true).appendTo($("#filediv")); //浅克隆仅仅克
 
 console:
 
-![image-20210913153723543](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913153723543.png)
+![image-20210913153723543](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913153723543.png)
 
 #### 6.3.2 操作CSS
 
@@ -601,7 +601,7 @@ console:
 
 页面:
 
-![image-20210913154208812](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913154208812.png)
+![image-20210913154208812](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913154208812.png)
 
 ### 6.4 循环
 
@@ -630,7 +630,7 @@ $.each(result, function(i, field){
 
 console:
 
-![image-20210913155905982](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913155905982.png)
+![image-20210913155905982](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913155905982.png)
 
 其中:index遍历元素的下标（从0开始），obj表示每一个节点
 
@@ -663,11 +663,11 @@ type：指定服务器返回数据的类型，如果是字符串，基本值用t
 
 结果:
 
-![image-20210913163004305](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913163004305.png)
+![image-20210913163004305](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913163004305.png)
 
 在来看一下获取数据的断点:
 
-![image-20210913163110075](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913163110075.png)
+![image-20210913163110075](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913163110075.png)
 
 说明:可以看出在接收参数的时候返回是一个对象,然后通过对象.的方式获取到data数组,而数组中每个元素都是对象,然后通过循环的方式展示出来!
 
@@ -685,7 +685,7 @@ var canshu={username:"缪威", password: 123}
 
 我在后端接收并返回给JS,所以这里接收是接收成功了,这里发送数据就必须按照这种格式,无论get还是post
 
-![image-20210913164830434](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210913164830434.png)
+![image-20210913164830434](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210913164830434.png)
 
 这里还可以进行简写:
 
@@ -779,7 +779,7 @@ $.ajax({
 
 console:
 
-![image-20210914184932419](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210914184932419.png)
+![image-20210914184932419](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210914184932419.png)
 
 ### 8.1 JSON格式字符串转JSON对象
 
@@ -814,7 +814,7 @@ console:
 
 结果:
 
-![image-20210914182123735](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210914182123735.png)
+![image-20210914182123735](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210914182123735.png)
 
 > 也就是说我们使用字符串格式的JSON的时候,如果格式中的字段没加双引号那么就认定是不规范的JSON,那么使用JSON.parse或者JQuery.parseJSON都会转失败,因为格式标准不一样,而如果使用 eval("(" + jsonObj + ")"); 就会转为JSON对象,无论是规范还是不规范的都可以!
 
@@ -882,6 +882,6 @@ console:
 
 页面:
 
-![image-20210915184145756](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210915184145756.png)
+![image-20210915184145756](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210915184145756.png)
 
 > 使用这个案例就是一个发送请求然后添加到指定HTML结构而已

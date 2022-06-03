@@ -196,7 +196,7 @@ MVVM（Model-View-ViewModel）是一种**软件架构设计模式**，由微软 
 - 该层向上与视图层进行双向数据绑定
 - 向下与 Model 层通过接口请求进行数据交互
 
-![image-20211005102757784](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211005102757784.png)
+![image-20211005102757784](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211005102757784.png)
 
 MVVM 已经相当成熟了，当下流行的 MVVM 框架有 Vue.js ， AngularJS 等。
 
@@ -217,7 +217,7 @@ MVVM 模式和 MVC 模式一样，主要目的是分离视图（View）和模型
 
 ### 2.3 组成部分
 
-![image-20211005103040512](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211005103040512.png)
+![image-20211005103040512](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211005103040512.png)
 
 
 
@@ -268,7 +268,7 @@ MVVM 框架已经把最脏最累的一块做好了，我们开发者只需要处
 
 至此，我们就明白了，Vue.js 就是一个 MVVM 的实现者，他的核心就是实现了 DOM 监听 与 数据绑定
 
-![image-20211015102648080](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211015102648080.png)
+![image-20211015102648080](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211015102648080.png)
 
 ### 3.2 好处
 
@@ -352,7 +352,7 @@ Model层:
 ```
 
 ViewModel层:
-![image-20211005161213901](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211005161213901.png)
+![image-20211005161213901](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211005161213901.png)
 
 **解释**:这个`vue.message`是model,页面显示`哇塞`是视图,而ViewModel将其绑定起来了!我们之前的JS中,我们改变值理论上前后端不绑定,前端正常不刷新不重新加载是不会改变的。HTML写死了不会变数据的；此时我们在控制台直接输入vue.message来修改值，中间是可以省略data的，在这个操作中，我并没有主动操作DOM，就让页面的内容发生了变化，这就是借助了Vue的数据绑定功能实现的,那么这就是`ViewModel`,MVVM模式中要求ViewModel层就是使用观察者模式来实现数据的监听与绑定，以做到数据与视图的快速响应!
 
@@ -416,7 +416,7 @@ props:{
 
 效果:
 
-![image-20211005172248356](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211005172248356.png)
+![image-20211005172248356](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211005172248356.png)
 
 > 除了使用插值表达式{{}}进行数据渲染，也可以使用 v-bind指令，它的简写的形式就是一个冒号（:）
 
@@ -498,11 +498,11 @@ props:{
 
 页面:
 
-![image-20211005194808360](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211005194808360.png)
+![image-20211005194808360](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211005194808360.png)
 
 此时我们若是在控制台输入`vm.items.push({message: '哇塞哇塞'})` ，尝试追加一条数据，你会发现浏览器中显示的内容会增加一条:
 
-![image-20211005195118533](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211005195118533.png)
+![image-20211005195118533](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211005195118533.png)
 
 ### 4.4 v-on
 
@@ -595,11 +595,11 @@ Vue.js 是一个 MVVM 框架，即数据双向绑定，即当数据发生变化�
 
 1. 我们在input框输入,同时旁边message也会跟着发生变化:
 
-   ![image-20211006085541453](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006085541453.png)
+   ![image-20211006085541453](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006085541453.png)
 
 2. 我们在控制台对model层的message进行改变,那么view层的数据也都会发生改变:
 
-   ![image-20211006085631439](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006085631439.png)
+   ![image-20211006085631439](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006085631439.png)
 
 > input框跟textarea也是一样的,就不需要进行测试了,接下来测试一下单选框和复选框
 
@@ -635,7 +635,7 @@ Vue.js 是一个 MVVM 框架，即数据双向绑定，即当数据发生变化�
 
 演示:
 
-![image-20211006091143717](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006091143717.png)
+![image-20211006091143717](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006091143717.png)
 
 下拉框测试代码(JS都一样就不展示了):
 
@@ -653,7 +653,7 @@ Vue.js 是一个 MVVM 框架，即数据双向绑定，即当数据发生变化�
 
 演示:
 
-![image-20211006093049201](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006093049201.png)
+![image-20211006093049201](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006093049201.png)
 
 **注意**:如果 v-model 表达式的初始值未能匹配任何选项，< select> 元素将被渲染为“未选中”状态。在 iOS 中，这会使用户无法选择第一个选项。因为这样的情况下，iOS 不会触发 change 事件。因此，更推荐像上面这样提供一个值为空的禁用选项
 
@@ -689,7 +689,7 @@ Vue.js 是一个 MVVM 框架，即数据双向绑定，即当数据发生变化�
 
 演示:
 
-![image-20211006093525512](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006093525512.png)
+![image-20211006093525512](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006093525512.png)
 
 ### 4.6 v-show
 
@@ -742,7 +742,7 @@ js:
 
 通常一个应用会以一颗嵌套的组件树的形式来组织:
 
-![image-20211006094201140](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006094201140.png)
+![image-20211006094201140](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006094201140.png)
 
 比如:你可能会有页头、侧边栏、内容区等组件,每个组件又包含了其他的像导航链接、博文之类的组件，为了不出现大量重复的代码，那么我们应该将其抽取出来放在公共区！
 
@@ -955,7 +955,7 @@ Vue实例有一个完整的生命周期,也就是从开始创建、初始化数�
 
 在Vue的整个生命周期中,它提供了一系列的事件,它可以让我们在事件触发时注册JS方法,可以让我们用自己注册的JS方法控制整个大局,在这些事件响应方法中的this直接指向的是Vue的实例;
 
-![image-20211006141335242](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006141335242.png)
+![image-20211006141335242](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006141335242.png)
 
 解读:我们在`new Vue()`在实例化的时候并没有真正的去渲染,然后在创建实例化的时候就会立马去创建`钩子函数`,然后在初始化注入后跟在`el`判断是否存在之前还有一个事情就是创建`钩子`,而这些函数人家已经提供好了,我们只需要放在那里去使用,比如在初始化注入之前有个钩子函数是`beforeCreate`,我们就能直接使用;然后当el创建好了之后就要往里面渲染template数据,这个时候就要判断是否有template选项,如果有,那么就把数据插进去,然后编译成模板,然后将编译好的HTML替换掉el属性所指向的DOM,挂载之后,就是实时监听!
 
@@ -1124,7 +1124,7 @@ data.json:
 
 页面效果:
 
-![image-20211006152454487](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006152454487.png)
+![image-20211006152454487](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006152454487.png)
 
 ### 6.3 接口数据模拟-Mockjs
 
@@ -1264,7 +1264,7 @@ https://www.fastmock.site/
 
 新建项目,然后将地址粘贴到axios中全局替换!
 
-![image-20211018175233527](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211018175233527.png)
+![image-20211018175233527](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211018175233527.png)
 
 ## 7.计算属性
 
@@ -1316,11 +1316,11 @@ https://www.fastmock.site/
 
 演示:
 
-![image-20211006161343172](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006161343172.png)
+![image-20211006161343172](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006161343172.png)
 
 然后我们控制台做出以下测试:
 
-![image-20211006161358552](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006161358552.png)
+![image-20211006161358552](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006161358552.png)
 
 **解释**:我们第二次获取属性中时间戳,然后跟第一次没变化,说明被缓存起来了,然后我们修改了message属性,那么这个时候整个缓存就被刷新起来了,那么又会重新缓存!这个跟mybatis的一级缓存很相似,
 
@@ -1365,7 +1365,7 @@ watch可以让我们监控一个值的变化。从而做出相应的反应。
 </script>
 ```
 
-![image-20211015182359879](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211015182359879.png)
+![image-20211015182359879](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211015182359879.png)
 
 ## 8.内容分发-插槽
 
@@ -1449,7 +1449,7 @@ watch可以让我们监控一个值的变化。从而做出相应的反应。
 
 页面演示:
 
-![image-20211006171907389](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006171907389.png)
+![image-20211006171907389](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006171907389.png)
 
 解释:
 
@@ -1667,7 +1667,7 @@ watch可以让我们监控一个值的变化。从而做出相应的反应。
 
 **逻辑理解**:
 
-![image-20211006213605016](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006213605016.png)
+![image-20211006213605016](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006213605016.png)
 
 这里前端是可以直接调用Vue对象中的方法,因为这里前端跟Vue对象是绑定了的,通过`el:#APP`进行绑定;而组件跟前端也是绑定了的,是通过插槽的方式`<slot>`进行绑定;而我们想从组件3中进行删除Vue对象中的数据项,但是Vue是不能通过一个组件去调用Vue对象中去,那怎么办呢?我们只能通过前端这个东西进行搭桥,通过`this.#emit`跟前端自定义事件进行绑定,然后前端这个自定义事件的值就去调用Vue对象中的方法!
 
@@ -1718,7 +1718,7 @@ vue-cli 官方提供的一个脚手架,用于快速生成一个vue的项目模�
 
 > 脚手架:预先定义好的目录结构及基础代码,就好比咱们在创建Maven项目时可以选择创建一个骨架项目,这个骨架项目就是脚手架,它使我们的开发更加的快速!
 
-![image-20211006221809378](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006221809378.png)
+![image-20211006221809378](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006221809378.png)
 
 主要的功能:
 
@@ -1762,7 +1762,7 @@ NPM 的思路大概是这样的：
 
 确认node.js安装成功,我们在cmd命令里输入:*node -v*和*npm -v*
 
-![image-20211006223136303](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211006223136303.png)
+![image-20211006223136303](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211006223136303.png)
 
 > 这个npm,就是一个软件包管理工具,就和maven一样,这个npm里面有好多的软件,我们要的话直接放依赖就可以了
 
@@ -1782,11 +1782,11 @@ npm install npm@laset -g
 
 安装:
 
-![image-20211007085623114](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007085623114.png)
+![image-20211007085623114](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007085623114.png)
 
 那么我们可以去对应的安装目录查看:
 
-![image-20211007085739061](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007085739061.png)
+![image-20211007085739061](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007085739061.png)
 
 好以后我们安装就可以直接使用`cnpm`来进行安装,因为这个使用的是国内淘宝镜像,速度比直接使用`npm`访问国外要快许多
 
@@ -1801,11 +1801,11 @@ vue list
 
 安装完毕后在文件夹中可以查看:
 
-![image-20211007090724111](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007090724111.png)
+![image-20211007090724111](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007090724111.png)
 
 接下来我们查看有哪些模板?
 
-![image-20211007090926868](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007090926868.png)
+![image-20211007090926868](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007090926868.png)
 
 ### 10.2 快速使用
 
@@ -1822,7 +1822,7 @@ vue list
 
    这是输入的:
 
-   ![image-20211007092554804](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007092554804.png)
+   ![image-20211007092554804](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007092554804.png)
 
    说明:
 
@@ -1837,11 +1837,11 @@ vue list
 
 3. 执行完毕看文件夹:
 
-   ![image-20211007092745179](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007092745179.png)
+   ![image-20211007092745179](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007092745179.png)
 
    这是介绍图:
 
-   ![image-20211015184820406](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211015184820406.png)
+   ![image-20211015184820406](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211015184820406.png)
 
 4. 初始化运行
 
@@ -1856,7 +1856,7 @@ vue list
 
    注:安装依赖它是根据项目里有个文件`package.json`,我们点进去看全都是版本管理就跟maven的版本管理一样,它就会根据这个去安装依赖;
 
-   ![image-20211007093241216](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007093241216.png)
+   ![image-20211007093241216](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007093241216.png)
 
    我们等待依赖安装完毕那么这个项目就初始化完成了!
 
@@ -1868,7 +1868,7 @@ vue list
 
    表示要打包之后才能启动,它现在就在做打包这个事情!
 
-   ![image-20211007094117073](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007094117073.png)
+   ![image-20211007094117073](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007094117073.png)
 
 > 我们浏览器访问这地址我们就能看到项目了,而我们看8080这就是node的服务器,跟tomcat是一样的,node.js它是一个服务,他可以运行一些东西通过npm去运行安装依赖
 
@@ -1876,7 +1876,7 @@ vue list
 
 1. 目录结构
 
-   ![image-20211007095915830](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007095915830.png)
+   ![image-20211007095915830](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007095915830.png)
 
    - build 和 config：WebPack 配置文件,如果要改端口就去config文件夹下的index.js修改
    - node_modules：用于存放 npm install 安装的依赖文件
@@ -1899,7 +1899,7 @@ vue list
 
 2. src目录(目录是项目的源码目录，所有代码都会写在这里！):
 
-   ![image-20211007100211250](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007100211250.png)
+   ![image-20211007100211250](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007100211250.png)
 
    - main.js
 
@@ -2012,7 +2012,7 @@ npm install webpack-cli -g
 - webpack -v
 - webpack-cli -v
 
-![image-20211007105009001](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007105009001.png)
+![image-20211007105009001](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007105009001.png)
 
 配置:
 
@@ -2106,7 +2106,7 @@ module.exports = {
 
 8. 页面:
 
-   ![image-20211007143642068](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007143642068.png)
+   ![image-20211007143642068](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007143642068.png)
 
 > 以后我们的项目里html就直接导入打包好的JS,无论项目多复杂,只需要webpack打包压缩,然后我们只需导入就OK,这样说明了Vue为什么只有一个主入口,前端工程化了之后就不需要那么多的页面了,就全都是一个一个的Vue组件或者JS组件,这就是前端的模块化开发 
 
@@ -2299,11 +2299,11 @@ Vue.use(VueRouter);
    </style>
    ```
 
-6. ![image-20211007160747853](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007160747853.png)
+6. ![image-20211007160747853](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007160747853.png)
 
 7. 我们启动测试一下:**npm run dev**
 
-   ![image-20211007160654361](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007160654361.png)
+   ![image-20211007160654361](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007160654361.png)
 
 总结:总的来说就是我们有很多组件,然后我们通过一个js进行管理跳转这个组件,然后这个js就被需要的地方引入即可,他会自动去找这个路由!
 
@@ -2373,7 +2373,7 @@ export default new VueRouter({
 
 这样我们看页面路由:
 
-![image-20211007161909219](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007161909219.png)
+![image-20211007161909219](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007161909219.png)
 
 2. ## 404问题
 
@@ -2409,7 +2409,7 @@ export default new VueRouter({
 
    看效果:
 
-   ![image-20211007162124254](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007162124254.png)
+   ![image-20211007162124254](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007162124254.png)
 
 ## 12.Vue-ElementUI
 
@@ -2444,11 +2444,11 @@ npm run dev
 
 4. 此时看目录结构:
 
-   ![image-20211007202825376](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007202825376.png)
+   ![image-20211007202825376](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007202825376.png)
 
 5. 页面:
 
-   ![image-20211007202838045](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211007202838045.png)
+   ![image-20211007202838045](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211007202838045.png)
 
 ...接下来就去饿了么UI官网搬砖使用:
 
@@ -2458,7 +2458,7 @@ https://element.eleme.cn/#/zh-CN/
 
 思考一下为什么默认页面就是那个,执行流程是什么呢?
 
-![image-20211017093533295](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211017093533295.png)
+![image-20211017093533295](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211017093533295.png)
 
 ### 2.快速使用:
 
@@ -2643,11 +2643,11 @@ https://element.eleme.cn/#/zh-CN/
 
 6. 显示:
 
-   ![image-20211008195526008](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211008195526008.png)
+   ![image-20211008195526008](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211008195526008.png)
 
 文件夹:
 
-![image-20211008195612776](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211008195612776.png)
+![image-20211008195612776](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211008195612776.png)
 
 在将饿了么UI里的表单登录搬过来的时候,我们可以看出整个流程,登录和Main作为一个组件,这些组件作为一个视图进行展示,然后我们在index里面配置这些组件的路由,配置完毕我们将总配置路由加载到main.js里,然后我们首页加载的是APP.vue!
 
@@ -2672,7 +2672,7 @@ elementUI使用:
 
 嵌套路由又称子路由,在实际应用中,通常由多层嵌套的组件组合而成,同样地,URL中各段动态路径也按某种结构对应嵌套的各层组件,例如:
 
-![image-20211008201909492](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211008201909492.png)
+![image-20211008201909492](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211008201909492.png)
 
 比如说我这里访问`/user/foo/profile`路径那么它就会访问profile的内容,那么我再访问`/user/foo/posts`路径它就只会访问Posts的内容,只改变局部!这对于Vue很轻松,因为这对于Vue来说就是组件进行插槽拔插!
 
@@ -2893,5 +2893,4 @@ export default {
    }
    </script>
    ```
-
 

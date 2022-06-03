@@ -89,7 +89,7 @@
 
 4. 页面输入"http://localhost:8080/swagger-ui.html":
 
-   ![image-20211003101401716](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003101401716.png)
+   ![image-20211003101401716](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003101401716.png)
 
 > 暂时可以说我们可以看见swaager的页面了!
 
@@ -125,13 +125,13 @@ public ApiInfo apiInfo() {
 
 我们如果不配置,那么在源码底层人家就会默认给出这些信息:
 
-![image-20211003104249455](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003104249455.png)
+![image-20211003104249455](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003104249455.png)
 
 > 就有一个默认的配置信息
 
 看页面效果:
 
-![image-20211003104317610](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003104317610.png)
+![image-20211003104317610](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003104317610.png)
 
 ### 2.3 配置扫描接口
 
@@ -240,7 +240,7 @@ public class Docket implements DocumentationPlugin {
 
 如果我们设置为false,那么页面就是这样:
 
-![image-20211003143732258](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003143732258.png)
+![image-20211003143732258](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003143732258.png)
 
 那么思考?我只希望我的Swagger在生产环境中使用,在发布的时候不使用?
 
@@ -266,7 +266,7 @@ public Docket docket(Environment environment) {
 
 打印台:
 
-![image-20211003144901416](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003144901416.png)
+![image-20211003144901416](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003144901416.png)
 
 我们获取环境有三个方式:
 
@@ -303,11 +303,11 @@ public Docket docket(Environment environment) {
 
 不是dev环境:
 
-![image-20211003152039849](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003152039849.png)
+![image-20211003152039849](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003152039849.png)
 
 是dev环境:
 
-![image-20211003152056099](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003152056099.png)
+![image-20211003152056099](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003152056099.png)
 
 > 注意:这个开关关乎着整个swaager的开关!也就是哪怕我们下面的分组,不同的Docket,只要其中一个Docket中开关设置为false,那么整个swagger都会关闭
 
@@ -334,11 +334,11 @@ public class HelloController {
 
 控制台:
 
-![image-20211003150407853](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003150407853.png)
+![image-20211003150407853](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003150407853.png)
 
 > 注意:必须是通过注入的方式才能获取,如果是直接放在方法的接收参数中的话,就会报错!如:
 
-![image-20211003150535123](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003150535123.png)
+![image-20211003150535123](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003150535123.png)
 
 
 
@@ -350,7 +350,7 @@ public class HelloController {
 
 分组很简单,我们在swagger页面上可以发现:
 
-![image-20211003152749347](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003152749347.png)
+![image-20211003152749347](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003152749347.png)
 
 > 通常一个Docket实例对应一个分组!那么也就意味着我们在实际开发过程中我们每个开发人员为自己写的接口写一个Docket,也就分组,这样就会方便切换我们指定的人写的接口进行测试
 
@@ -373,11 +373,11 @@ public Docket docket2() {
 
 看效果:
 
-![image-20211003153526628](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003153526628.png)
+![image-20211003153526628](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003153526628.png)
 
 ### 2.6 实体配置
 
-![image-20211003155120636](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003155120636.png)
+![image-20211003155120636](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003155120636.png)
 
 来介绍这个models实体类的配置,也就是我们既然写进接口那么我们交互就是json,而我们后端就是将对象转为json,所以这里我们将展示接口的返回实体类信息:
 
@@ -415,7 +415,7 @@ public Docket docket2() {
 
 3. 页面:
 
-   ![image-20211003155642091](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003155642091.png)
+   ![image-20211003155642091](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003155642091.png)
 
 > 但是这样并不好看,我们得加上注解对这个实体类进行描述一下:
 
@@ -434,17 +434,17 @@ public class User {
 
 看效果:
 
-![image-20211003160010020](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003160010020.png)
+![image-20211003160010020](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003160010020.png)
 
 注:并不是因为*@ApiModel*这个注解让实体显示在这里了，而是只要出现在接口方法的返回值上的实体都会显示在这里，而*@ApiModel*和*@ApiModelProperty*这两个注解只是为实体添加注释的。
 
 - @ApiModel为类添加注释
 
-  ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/397648-20200518152915502-1667156516.png)
+  ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/397648-20200518152915502-1667156516.png)
 
 - @ApiModelProperty为类属性添加注释
 
-  ![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/397648-20200518152933653-887862377.png)
+  ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/397648-20200518152933653-887862377.png)
 
 
 
@@ -462,11 +462,11 @@ swagger也可以进行测试:
 
 比如说这里并没有参数,直接可以开测:
 
-![image-20211003162125153](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003162125153.png)
+![image-20211003162125153](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003162125153.png)
 
 然后点击执行测试:
 
-![image-20211003162202420](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003162202420.png)
+![image-20211003162202420](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003162202420.png)
 
 这就是swagger测试!
 
@@ -482,7 +482,7 @@ swagger也可以进行测试:
    </dependency>
    ```
 
-   ![image-20211003162732952](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003162732952.png)
+   ![image-20211003162732952](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003162732952.png)
 
 2. bootstrap-ui：页面访问:http://localhost:8080/doc.html
 
@@ -495,7 +495,7 @@ swagger也可以进行测试:
    </dependency>
    ```
 
-   ![image-20211003163034490](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003163034490.png)
+   ![image-20211003163034490](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003163034490.png)
 
    > 好看,推荐!
 
@@ -525,7 +525,7 @@ swagger也可以进行测试:
            </dependency>
    ```
 
-   ![image-20211003164005247](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20211003164005247.png)
+   ![image-20211003164005247](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20211003164005247.png)
 
 ### 2.8 小结
 

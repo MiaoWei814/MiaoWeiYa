@@ -70,7 +70,7 @@ System.out.println(optOrNull); // 输出：Optional[缪威]
 
 ​	之所以这里的`ofNullable`不会返回null,是因为:
 
-![image-20210727200526729](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210727200526729.png)
+![image-20210727200526729](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210727200526729.png)
 
 进行了三元表达式,在确定不为null就选择of()来创建Optinonal对象
 
@@ -163,7 +163,7 @@ public class OrElseOptionalDemo {
     opt.orElseThrow(()->new Exception("自定义异常"));
    ```
 
-![image-20210727204733947](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210727204733947.png)
+![image-20210727204733947](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210727204733947.png)
 
 以上都是建立在name值为null的基础上,可是如果name不为空,那么就不会执行以上这些方法.
 
@@ -183,7 +183,7 @@ public class GetOptionalDemo {
 
 这段程序在运行时会抛出异常：
 
-![image-20210727205347740](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210727205347740.png)
+![image-20210727205347740](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210727205347740.png)
 
 显然获取为空的话是会抛出异常的,这时可以推荐上面的获取默认值,也就是判断为空的话执行默认值.1.orElse 2.orElseGet()
 
@@ -267,7 +267,7 @@ public class OptionalMapFilterDemo {
 
 今天我在学习Optinonal的时候刚好看到了这个,就学习记录一下:
 
-![image-20210728101345341](https://gitee.com/miawei/pic-go-img/raw/master/imgs/image-20210728101345341.png)
+![image-20210728101345341](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/image-20210728101345341.png)
 
 这里就不说多了,直接上例子:
 
@@ -408,7 +408,7 @@ class Dog extends Animal {
 
 ## 5. ?跟T的区别:
 
-![img](https://gitee.com/miawei/pic-go-img/raw/master/imgs/v2-8fdbb04cddfbcf7cb25496c28086ef9b_720w.jpg)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/v2-8fdbb04cddfbcf7cb25496c28086ef9b_720w.jpg)
 
 
 
