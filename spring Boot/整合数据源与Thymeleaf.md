@@ -1221,6 +1221,233 @@ public MessageSourceProperties messageSourceProperties() {
 3. 实现`LocaleResolver`接口进行重写
 4. 将重写的类进行添加到Spring容器里去!
 
+### 3.6 完整整合在项目中
+
+这里记录自己真实在项目中开发的例子：
+
+1. 配置自己国际化组件（代码在 #3.国际化-> 3.4自定义配置解析中的第5个）
+
+2. 添加到SpringBean中（代码在 #3.国际化-> 3.4自定义配置解析中的第6个）
+
+   ![image-20220614134744321](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202206141347487.png)
+
+3. 添加工具类：
+
+   **SpringUtils:**
+
+   ```java
+   package com.beoka.iot.util;
+   
+   import org.springframework.aop.framework.AopContext;
+   import org.springframework.beans.BeansException;
+   import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+   import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+   import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+   import org.springframework.context.ApplicationContext;
+   import org.springframework.context.ApplicationContextAware;
+   import org.springframework.stereotype.Component;
+   
+   /**
+    * spring工具类 方便在非spring管理环境中获取bean
+    * 
+    * @author 缪威
+    */
+   @Component
+   public final class SpringUtils implements BeanFactoryPostProcessor, ApplicationContextAware 
+   {
+       /** Spring应用上下文环境 */
+       private static ConfigurableListableBeanFactory beanFactory;
+   
+       private static ApplicationContext applicationContext;
+   
+       @Override
+       public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException 
+       {
+           SpringUtils.beanFactory = beanFactory;
+       }
+   
+       @Override
+       public void setApplicationContext(ApplicationContext applicationContext) throws BeansException 
+       {
+           SpringUtils.applicationContext = applicationContext;
+       }
+   
+       /**
+        * 获取对象
+        *
+        * @param name
+        * @return Object 一个以所给名字注册的bean的实例
+        * @throws org.springframework.beans.BeansException
+        *
+        */
+       @SuppressWarnings("unchecked")
+       public static <T> T getBean(String name) throws BeansException
+       {
+           return (T) beanFactory.getBean(name);
+       }
+   
+       /**
+        * 获取类型为requiredType的对象
+        *
+        * @param clz
+        * @return
+        * @throws org.springframework.beans.BeansException
+        *
+        */
+       public static <T> T getBean(Class<T> clz) throws BeansException
+       {
+           T result = (T) beanFactory.getBean(clz);
+           return result;
+       }
+   
+       /**
+        * 如果BeanFactory包含一个与所给名称匹配的bean定义，则返回true
+        *
+        * @param name
+        * @return boolean
+        */
+       public static boolean containsBean(String name)
+       {
+           return beanFactory.containsBean(name);
+       }
+   
+       /**
+        * 判断以给定名字注册的bean定义是一个singleton还是一个prototype。 如果与给定名字相应的bean定义没有被找到，将会抛出一个异常（NoSuchBeanDefinitionException）
+        *
+        * @param name
+        * @return boolean
+        * @throws org.springframework.beans.factory.NoSuchBeanDefinitionException
+        *
+        */
+       public static boolean isSingleton(String name) throws NoSuchBeanDefinitionException
+       {
+           return beanFactory.isSingleton(name);
+       }
+   
+       /**
+        * @param name
+        * @return Class 注册对象的类型
+        * @throws org.springframework.beans.factory.NoSuchBeanDefinitionException
+        *
+        */
+       public static Class<?> getType(String name) throws NoSuchBeanDefinitionException
+       {
+           return beanFactory.getType(name);
+       }
+   
+       /**
+        * 如果给定的bean名字在bean定义中有别名，则返回这些别名
+        *
+        * @param name
+        * @return
+        * @throws org.springframework.beans.factory.NoSuchBeanDefinitionException
+        *
+        */
+       public static String[] getAliases(String name) throws NoSuchBeanDefinitionException
+       {
+           return beanFactory.getAliases(name);
+       }
+   
+       /**
+        * 获取aop代理对象
+        * 
+        * @param invoker
+        * @return
+        */
+       @SuppressWarnings("unchecked")
+       public static <T> T getAopProxy(T invoker)
+       {
+           return (T) AopContext.currentProxy();
+       }
+   
+       /**
+        * 获取当前的环境配置，无配置返回null
+        *
+        * @return 当前的环境配置
+        */
+       public static String[] getActiveProfiles()
+       {
+           return applicationContext.getEnvironment().getActiveProfiles();
+       }
+   
+       /**
+        * 获取当前的环境配置，当有多个环境配置时，只获取第一个
+        *
+        * @return 当前的环境配置
+        */
+       public static String getActiveProfile()
+       {
+           final String[] activeProfiles = getActiveProfiles();
+           return !isEmpty(activeProfiles) ? activeProfiles[0] : null;
+       }
+   
+       /**
+        * * 判断一个对象数组是否为空
+        *
+        * @param objects 要判断的对象数组
+        ** @return true：为空 false：非空
+        */
+       public static boolean isEmpty(Object[] objects)
+       {
+           return  objects == null || (objects.length == 0);
+       }
+   }
+   ```
+
+​	**MessageUtils:**
+
+```java
+/**
+ * 获取i18n资源文件
+ *
+ * @author beoka
+ */
+@Slf4j
+public class MessageUtils
+{
+    /**
+     * 根据消息键和参数 获取消息 委托给spring messageSource
+     *
+     * @param code 消息键
+     * @param args 参数
+     * @return 获取国际化翻译值
+     */
+    public static String message(String code, Object... args)
+    {
+        String messageSourceMessage = code;
+        Locale locale = null;
+        MessageSource messageSource = SpringUtils.getBean(MessageSource.class);
+        try {
+            locale = LocaleContextHolder.getLocale();
+            messageSourceMessage = messageSource.getMessage(code, args, locale);
+        }catch (Exception e){
+            log.error("【{}】待翻译【{}】在国际化【{}】文件中找不到此语义可供替换！", DateUtil.now(), code, locale);
+        }
+        return messageSourceMessage;
+    }
+}
+```
+
+然后我们就可以有需要的地方去动态获取国际化！
+
+注意：如果要想要动态传参的话：如：
+
+```properties
+length.not.valid=长度必须在{0}到{1}个字符之间
+```
+
+那么传的时候那么就这样：
+
+```java
+String min = "【最小1】";
+String max = "【最大】";
+MessageUtils.message("length.not.valid", min, max)
+```
+
+结果：
+
+![image-20220614141354823](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202206141413896.png)
+
 ## 4.整合JDBC
 
 在整合之前先介绍一下SpringData这个东西,因为对于数据访问层,无论是SQL(关系型数据库)还是NOSQL(非关系型数据库),**SpringBoot底层都是采用Spring Data的方式进行统一处理**.
