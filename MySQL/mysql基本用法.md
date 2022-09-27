@@ -565,3 +565,13 @@ select distinct job from emp;
 ```
 
 **注意:**distinct关键字只能出现在所有字段的最前面(含义:是对后面的字段联合起来去除重复记录),只对查询结果去重,不对表数据进行修改
+
+
+
+## 5.4 exists
+
+exists这个关键字在子查询时，主要用于判断子查询的结果集是否为空，如果不为空，则返回ture，反之则返回false
+
+注：在使用exists时，当子查询有结果时，不关心子查询的内容，执行主查询操作，当子查询没有结果时，则不执行主查询操作
+
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202209211335781.png)

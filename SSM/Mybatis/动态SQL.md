@@ -279,3 +279,30 @@ xml:
     //单个参数直接取就可以了
 ```
 
+# 8.collection中的column
+
+我们在`collection`中如果想根据查询出来的字段去单独查询一段SQL语句那么就可以用`select`与`column`一起使用！
+
+```xml-dtd
+<select id="selectDeviceDetail" resultMap="selectDeviceDetailMap">
+	select * from xx
+</select>
+
+<resultMap id="selectDeviceDetailMap" type="com.beoka.iot.project.device.domain.dto.DeviceDetailDto">
+	<collection property="attrLanguageList" ofType="com.beoka.iot.project.device.domain.to.DeviceDetailTo">
+            <collection property="attrDto" ofType="com.beoka.iot.project.device.domain.dto.DeviceAttrDto" select="selectDeviceInfoAttr"
+				column="deviceId=device_id,nameCode=nameCode">
+            </collection>
+    </collection>
+</resultMap>
+
+<select id="selectDeviceInfoAttr" resultType="com.beoka.iot.project.device.domain.dto.DeviceAttrDto">
+        select device_info_id as 'infoId',
+               info_title as 'name',
+               info_des as 'value' from d_device_info where device_id=#{deviceId} and dict_code=#{nameCode}
+</select>
+```
+
+- **column**: 数据库的列名或者列标签别名,是关联查询往下一个语句传送值。注意：在处理组合键时，您可以使用column=“{prop1=col1,prop2=col2}”这样的语法，设置多个列名传入到嵌套查询语句。这就会把prop1和prop2设置到目标嵌套选择语句的参数对象中。
+
+注意：select查询的时候经测试还是使用别名进行对应，不能写入到collection内部进行字段映射

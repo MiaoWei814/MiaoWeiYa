@@ -1317,3 +1317,42 @@ public boolean add(E e) {
 
 ### 4.3 Map
 
+```java
+public class MapTest {
+    public static void main(String[] args) {
+        HashMap<String , Object> map = new HashMap<>();
+        //循环创建线程去修改
+        for (int i = 1; i <= 30; i++) {
+            new Thread(() -> {
+                map.put(Thread.currentThread().getName(), UUID.randomUUID().toString().substring(0, 5));
+                System.out.println(map);
+            }, String.valueOf(i)).start();
+        }
+    }
+}
+```
+
+![image-20220703124545167](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202207031245639.png)
+
+> 结论：Map也是多线程同时修改操作的情况下是不安全的
+
+在谈论Map线程安全方案之前我们需要回顾一下Map的底层原理！
+
+---
+
+Map的底层知识我在【JavaSE->集合框架->HashMap】中就有详细的阐述，这里只是大概回顾一下!
+
+```clike
+1. Map构造方法中加载因子：0.75,初始容量：16 
+    加载因子：指map容量在达到75%的时候就会触发扩容操作。加载因子越小容易触发扩容发生碰撞的概率越小，这个决定了hashMap数据的密度！
+    	如：阈值为16*0.75=12，当map容量为12的时候就会触发扩容2倍，也就是16*2=32的容量
+    初始容量：指默认加载的容量
+2. 数据结构：
+    jdk1.8之前：数组+链表
+    jdk1.8之后: 数组+链表+红黑树
+3.push原理：
+   直接去看吧，我懒得再去写了    
+```
+
+#### ConcurrentHashMap
+
