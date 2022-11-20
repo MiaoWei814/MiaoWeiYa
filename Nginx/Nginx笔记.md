@@ -356,3 +356,30 @@ https://www.jianshu.com/p/ad4c21ab2266
 
 ![image-20220501153320188](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/imgs/202205011533252.png)
 
+## 7.服务器配置
+
+1. 这是其中配置纯HTML资源文件配置：
+
+   ```bash
+   location /pc {
+   		    alias D:/Software/nginx/nginx-1.18.0/html/beoka-Acecool-Home/html/pc/;
+               index index.html index.htm;
+   }
+   		
+   location /mobile {
+   		    alias D:/Software/nginx/nginx-1.18.0/html/beoka-Acecool-Home/html/mobile/;
+               index index.html index.htm;
+   }
+   		
+   location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|css|js|eot|svg|ttf|woff|woff2|properties|json)?$ {
+                        root D:/Software/nginx/nginx-1.18.0/html/beoka-Acecool-Home/;
+                        if (-f $request_filename) {
+                        expires 1d;
+                        break;
+                        }
+   }
+   ```
+
+   location的匹配：https://blog.csdn.net/weixin_45880055/article/details/118710006
+
+   
