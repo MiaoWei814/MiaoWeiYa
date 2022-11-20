@@ -365,6 +365,8 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
 **理解：**这里给我感觉就是加了那个注解之后然后此时就会经过处理器，然后给对应的字段赋值，这里更像一种拦截器一样，不过这种自动更新我觉得还很麻烦！然后在处理器中需要做一个判断，如果该值为null那么就用自动化时间赋值，否则就不做改变直接存数据库！
 
+更新操作：https://blog.csdn.net/weixin_45817985/article/details/126764318
+
 ### 4.3 乐观锁
 
 > 乐观锁：顾名思义十分乐观，它总是认为不会出现问题！无论干什么都不会上锁，如果出现了问题，再次更新值测试!
@@ -827,3 +829,69 @@ public class KuangCode {
 ```
 
 以上只适合3.0之前的版本，如果是最新的版本如3.5那么就直接看官网的新的代码生成器，那么就可以；不过像这种都是百度一抓一大把，所以一次配置终生使用，知道有这回事如何使用知道怎么用就行了！！！
+
+## 7.一些记录
+
+### 7.1 日志打印
+
+```java
+# 方式一：这种会打印比较详细，会将sqlSession级别的信息都会打印且是全局
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 方式二：这种会打印比较清晰，只打印请求参数和SQL片段
+logging:
+  level:
+    com.baomidou.example.mapper: debug  # 指定 mapper 文件所在的包，如果有多级mapper包可以这样写：com.xx.xx.*.dao: debug
+        
+关闭日志打印：
+mybatis-plus:
+  configuration:
+	log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+```
+
+### 7.2 更新操作
+
+根据ID更新 updateById：
+
+```java
+ @Test
+    void updateTest(){
+        User user = new User();
+        user.setId(19); //查询id的条件
+        user.setRole("updateTest"); //更新字段的值
+        System.out.println(userDao.updateById(user));
+        //返回int类型，这里修改的是一条，返回1就是成功了，如果修改多条，就返回多少个数量，
+        //如果返回的是0表示没有搜索到这条数据，修改不成功。
+    }
+}
+```
+
+根据条件更新update:
+
+```java
+方式1:使用QueryWrapper 操作:
+ @Test
+    void updateTest(){
+        User user = new User();
+        user.setRole("updatewhere"); //更新的字段
+        // Query对象，用于设置条件，传User实体
+        QueryWrapper<User> wrapper = new QueryWrapper<>(); 
+        wrapper.eq("role","asdf"); // 设置查询条件
+        userDao.update(user, wrapper);
+    }
+
+方式2:使用UpdateWrapper操作(推荐)
+@Test
+    void updateTest2(){
+        //UpdateWrapper更新操作
+        UpdateWrapper<User> warp = new UpdateWrapper<>();
+        //通过set设置需要修改的内容，eq设置条件
+        warp.set("pwd","warpper").set("token","warptoken").eq("user","zyh4");
+        System.out.println(userDao.update(null,warp));
+	}
+```
+
+
+
