@@ -655,6 +655,35 @@ cat: f3: No such file or directory
 
 
 
+## 4.6 文件打包和解压
+
+> 打包
+
+```basic
+tar -czvf tom.tar.gz tom  #把 tom 打包成tom.tar.gz
+```
+
+> 解包
+
+```basic
+tar -xzvf tom.tar.gz -C /usr/local #把tom.tar.gz解压到/usr/local
+```
+
+参数：
+
+```
+-c	创建一个新的tar文件           
+-t	参看压缩文件内容
+-v	显示运行过程信息	
+-j	调用bzip2压缩命令执行压缩
+-f	指定文件名称	      
+-C 指定需要解压到的目录
+-z	调用gzip压缩命令执行压缩   	
+-x	解开tar文件
+```
+
+
+
 # 5. Vim 编辑器
 
 ## 5.1 什么是Vim编辑器
@@ -1219,85 +1248,14 @@ rpm（Jdk：在线发布一个SringBoot项目！）
 解压缩（tomcat，启动并通过外网访问，发布网站）
 yum在线安装（docker：直接安装运行跑起来docker就可以！）！
 ```
-> JDK安装
+## 9.1 防火墙
 
-我们开发java程序必须要的环境！
+Linux的防火墙端口是开启的，如果是阿里云，需要保证阿里云的安全组策略是开放的！
 
-1 、下载JDK rpm。去oralce 官网下载即可！
-
-2 、安装java环境
-
-```
-# 检测当前系统是否存在java环境！ java -version
-# 如果有的话就需要卸载
-# rpm -qa|grep jdk # 检测JDK版本信息
-# rpm -e --nodeps jdk_几
-# 卸载完毕后即可安装jdk
-# rpm -ivk rpm包
-# 配置环境变量！
-```
-
-如果存在可以提前卸载：
-
-
-
-安 装：
-
-配置环境变量： /etc/profile 在文件的最后面增加java的配置和 window安装环境变量一样！
-
-让这个配置文件生效！ source /etc/profile
-
-我们来发布一个项目试试！
-
-```
-
-```
-```
-# 卸载完毕后即可安装jdk
-# rpm -ivk rpm包
-```
-```
-# 配置环境变量！
-```
-```
-JAVA_HOME=/usr/java/jdk1.8.0_221-amd64
-CLASSPATH=%JAVA_HOME%/lib;%JAVA_HOME%/jre/lib
-PATH=$JAVA_HOME/bin;$JAVA_HOME/jre/bin
-export PATH CLASSPATH JAVA_HOME
-```
-```
-# 开启防火墙端口
-firewall-cmd --zone=public --add-port=9000/tcp --permanent
-# 重启防火墙
-systemctl restart firewalld.service
-# 查看所有开启的端口，如果是阿里云，需要配置安全组规则！
-firewall-cmd --list-ports
-```
-
-## Tomcat 安装
-
-ssm war 就需要放到tomcat 中运行！
-
-1 、下载tomcat。官网下载即可 tomcat9 apache-tomcat-9.0.22.tar.gz
-
-2 、解压这个文件
-
-3 、启动tomcat测试！ ./xxx.sh 脚本即可运行
-
-### 如果防火墙 8080 端口开了并且阿里云安全组也开放了这个时候就可以直接访问远程了！
-
-```
-tar -zxvf apache-tomcat-9.0.22.tar.gz
-```
-```
-# 执行 ./startup.sh
-# 停止 ./shotdown.sh
-```
-```
+```basic
 # 查看firewall服务状态
 systemctl status firewalld
-```
-```
+
 # 开启、重启、关闭、firewalld.service服务
 # 开启
 service firewalld start
@@ -1305,99 +1263,245 @@ service firewalld start
 service firewalld restart
 # 关闭
 service firewalld stop
-```
-```
+
 # 查看防火墙规则
-firewall-cmd --list-all # 查看全部信息
-firewall-cmd --list-ports # 只看端口信息
-```
-```
+firewall-cmd --list-all    # 查看全部信息
+firewall-cmd --list-ports  # 只看端口信息
+
 # 开启端口
-开端口命令：firewall-cmd --zone=public --add-port= 8080 /tcp --permanent
+开端口命令：firewall-cmd --zone=public --add-port=80/tcp --permanent
 重启防火墙：systemctl restart firewalld.service
-```
-```
+
 命令含义：
 --zone #作用域
---add-port= 80 /tcp  #添加端口，格式为：端口/通讯协议
+--add-port=80/tcp  #添加端口，格式为：端口/通讯协议
+--permanent   #永久生效，没有此参数重启后失效
 ```
 
-### 上传完毕的项目直接购买自己的域名，备案解析过去即可！ 1 年级都会做！
 
-域名解析后，如果端口是80 - http 或者 443-https 可以直接访问，如果是 9000 8080，就需要通过
-Apcahe或者Nginx做一下反向代理即可，配置文件即可，十分之简单，大家如果想要上线自己的网站，
-到目前为止，那么你可以如愿以偿了！
 
-## Docker（yum安装）
+## 9.2 JDK安装
+
+我们开发java程序必须要的环境！
+
+1 、下载JDK rpm。去oralce 官网下载即可！
+
+rpm下载地址http://www.oracle.com/technetwork/java/javase/downloads/index.htmlq
+
+2 、安装java环境
+
+```basic
+# 检测当前系统是否存在java环境！ java -version
+# 如果有的话就需要卸载
+# rpm -qa|grep jdk # 检测JDK版本信息
+# rpm -e --nodeps jdk_几-----卸载
+
+# 卸载完毕后即可安装jdk
+# rpm -ivk rpm包
+# 配置环境变量！
+```
+
+如果存在可以提前卸载：
+
+![image-20221121092628176](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202211210926242.png)
+
+安 装：
+
+![image-20221121093203963](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202211210932025.png)
+
+配置环境变量： `/etc/profile` 在文件的最后面增加java的配置和 window安装环境变量一样！
+
+![image-20221122154952387](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202211221549405.png)
+
+```bash
+JAVA_HOME=/usr/java/jdk1.8.0_221-amd64			# 找到jdk的安装目录-java的根路径
+CLASSPATH=%JAVA_HOME%/lib:%JAVA_HOME%/jre/lib	# 配置环境变量-类路径文件
+PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin	# $取变量-环境变量的文件
+export PATH CLASSPATH JAVA_HOME					# 导出让系统识别
+# 注意：:在Linux中标示分隔路径，最好是直接赋值粘贴到这个文件的最下面，然后退出后输入下面的命令让文件生效
+```
+
+让这个配置文件生效！ `source /etc/profile` 让新增的环境变量生效！
+
+我们来发布一个项目试试！
+
+注意点：
+
+1. 先去阿里云安全组和防火墙都要一并开启：https://blog.csdn.net/lfdfhl/article/details/126880975
+2. 先将jar包传到服务器home目录下的用户目录下
+3. 前台运行直接`java -jar Beoka.jar`就可以运行了，如果不想运行直接Ctrl+C就直接退出了
+
+## 9.3 Tomcat 安装
+
+ssm war 就需要放到tomcat 中运行！
+
+1 、下载tomcat。官网下载即可 tomcat9 apache-tomcat-9.0.22.tar.gz
+
+2 、解压这个文件
+
+```bash
+tar -zxvf apache-tomcat-9.0.22.tar.gz
+```
+
+3 、启动tomcat测试！ ./xxx.sh 脚本即可运行
+
+```basic
+# 执行：startup.sh -->启动tomcat
+# 执行：shutdown.sh -->关闭tomcat
+./startup.sh
+./shotdown.sh
+```
+
+![image-20221122171603490](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202211221716961.png)
+
+
+
+## 9.4 Docker（yum安装）
 
 联网的情况下 yum install -y yum源
 
 官网安装参考手册：https://docs.docker.com/install/linux/docker-ce/centos/
 
-我们现在是在Linu下执行，一定要联网 ，yum 在线安装！
-
-将心比心！为什么要做这些事情的一个思想！
-
-分享！
-
-### 安装
+我们现在是在Linux下执行，一定要联网 ，yum 在线安装！
 
 1 、检测CentOS 7
 
-### 2 、安装我们的准备环境
-
-### 3 、清楚以前的版本！后面根据官网安装即可，我就不在这里写了!
-
-## 宝塔面板（懒人式安装）
-
-具体的教程 https://www.bilibili.com/video/BV177411K7bH
-
-# 扩展：Vmware使用
-
-很多小伙伴，比较吝啬，买不起 70 一年的服务器 ！ Vmware本地安装包！
-
-## 快照
-
-### 保留当前系统信息为快照，随时可以恢复，以防未来系统被你玩坏，就好比游戏中的归档！
-
+```basic
+[root@192 Desktop]# cat /etc/redhat-release
+CentOS Linux release 7.2.1511 (Core)
 ```
---permanent #永久生效，没有此参数重启后失效
-```
-```
-[root@kuangshen bin]# cat /etc/redhat-release
-CentOS Linux release 7 .7.1908 (Core)
-```
-```
-yum -y install 包名 # yum install 安装命令 -y 所有的提示都为 y
+
+2、yum安装gcc相关（需要确保 虚拟机可以上外网 ）
+
+```basic
+yum -y install 包名   # yum install 安装命令 -y 所有的提示都为 y
 yum -y install gcc
 yum -y install gcc-c++
 ```
 
-### 平时的话，我们每配置一个东西就可以拍摄一个快照，保留信息！
+3、卸载旧版本
 
-## 本地网络配置
+```basic
+yum -y remove docker docker-common docker-selinux docker-engine
+# 官网版本
+yum remove docker \
+          docker-client \
+          docker-client-latest \
+          docker-common \
+          docker-latest \
+          docker-latest-logrotate \
+          docker-logrotate \
+          docker-engine
+```
 
-### 大一学的计算机网络原理中有！
+4、安装需要的软件包
 
-需要保证 Linux虚拟机和本机处在同一个网段！
+```
+yum install -y yum-utils device-mapper-persistent-data lvm2
+```
 
-windows
+5、设置stable镜像仓库
 
-Linux 也必须要配置到 对应的网段 192.168.0.110
+```basic
+# 错误
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+## 报错
+[Errno 14] curl#35 - TCP connection reset by peer
+[Errno 12] curl#35 - Timeout
 
-/etc/sysconfig/network-scripts/
+# 正确推荐使用国内的
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+
+6、更新yum软件包索引
+
+```
+yum makecache fast
+```
+
+7、安装Docker CE
+
+```
+yum -y install docker-ce docker-ce-cli containerd.io
+```
+
+8、启动docker
+
+```
+systemctl start docker
+```
+
+9、测试
+
+```
+docker version
+
+docker run hello-world
+
+docker images
+```
 
 
-### 桥接模式 : 192.168.0.110 192.168.0. 160
 
-### 一定要桥接到正确的网卡即可！
+## 9.5 宝塔面板（懒人式安装）
 
-### 静态的话就需要配置IP地址，IPADDR=192.168.0.110，以下是静态的网络配置，这两种方式，都可以让
+具体的教程 https://www.bilibili.com/video/BV177411K7bH
 
-### 虚拟机连接外网从而实现网络开发！
+# 10.启动程序
 
-### 傻瓜式配置，只能在图形界面下有效！
+我们在开发的时候经常要启动程序然后关闭程序：
 
+## 10.1 后台
 
-### 配置完毕即可上网！
+以后台方式启动：
+
+> 启动命令
+
+```basic
+nohup python -u test.py > test_out.out 2>&1 &
+```
+
+含义：
+
+- “nohup” ：保证程序不被挂起
+- 末尾的“&”：表示后台运行程序
+- “python”：是执行python代码的命令(Python3使用python3)
+- “-u”：是为了禁止缓存，让结果可以直接进入日志文件 test_out.out（如果不加-u，则会导致日志文件不会实时刷新代码中的print函数的信息）
+- “test.py”：要执行的python的源代码文件
+- “>”：是指将打印信息指定到日志文件
+- “test_out.out”：是输出的日志文件
+- “2>&1”：将标准错误输出转变化标准输出，可以将错误信息也输出到日志文件中（0-> stdin, 1->stdout, 2->stderr）
+
+> 检查是否成功
+
+使用 jobs 命令：
+
+```
+[root@localhost test]# jobs
+[4]+  Running                 nohup python -u test.py > test_out.out 2>&1 &
+```
+
+使用 ps -ef | grep python 或者 ps -ef | grep Job 命令，查看进程：
+
+```
+# ps -ef|grep python
+或
+# ps -ef|grep Job
+```
+
+使用 ps aux 命令，查看程序的进程号：
+
+```
+[root@localhost test]# ps aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root     22246  0.0  0.3 125572  6304 pts/0    S    17:29   0:00 python -u test.py
+```
+
+> 关闭挂起进程
+
+使用 kill -9 进程号，关闭指定进程号的程序
+
+```
+[root@localhost test]# kill -9 60000
+```
 
