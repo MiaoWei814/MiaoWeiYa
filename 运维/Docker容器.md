@@ -170,6 +170,15 @@ Docker：打包镜像发布测试，一键运行
 
 Docker是内核级别的虚拟化，可以在一个物理机上运行很多个容器实例！服务器的性能可以被压榨到极致。（比如1核2G使用容器化技术可以运行几十个Tomcat，做集群完全没有问题）
 
+> 业务场景
+
+- Web 应用的自动化打包和发布。
+- 自动化测试和持续集成、发布。
+- 在服务型环境中部署和调整数据库或其他的后台应用。
+- 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境。
+
+
+
 ---
 
 
@@ -263,7 +272,14 @@ REDHAT_SUPPORT_PRODUCT_VERSION="7"
 
 https://docs.docker.com/engine/install/centos/
 
-1. 卸载旧版本-直接复制即可
+1. yum安装gcc相关环境（需要确保 虚拟机可以上外网）
+
+   ```shell
+   yum -y install gcc
+   yum -y install gcc-c++
+   ```
+
+2. 卸载旧版本-直接复制即可
 
    ```shell
    yum remove docker \
@@ -278,36 +294,52 @@ https://docs.docker.com/engine/install/centos/
 
    ![image-20221125153716570](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202211251537660.png)
 
-```shell
+3. 安装需要的软件包
 
+   ```shell
+   #2.需要的安装包（安装 yum-utils 包(它提供了 yum-config-manager 实用程序)并设置存储库。）
+   yum install -y yum-utils
+   ```
 
+4. 设置镜像的仓库
 
-#2.需要的安装包（安装 yum-utils 包(它提供了 yum-config-manager 实用程序)并设置存储库。）
-yum install -y yum-utils
+   ```shell
+   yum-config-manager \
+       --add-repo \
+       https://download.docker.com/linux/centos/docker-ce.repo
+   #上述方法默认是从国外的，不推荐
+   
+   #推荐使用国内的阿里云镜像-比较快
+   yum-config-manager \
+       --add-repo \
+       https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+   ```
 
-#3.设置镜像的仓库
-yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
-#上述方法默认是从国外的，不推荐
+5. 更新yum软件包索引
 
-#推荐使用国内的阿里云镜像-比较快
-yum-config-manager \
-    --add-repo \
-    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-  
-#4. 更新软件包索引 
-yum makecache fast
+   ```shell
+   yum makecache fast
+   ```
 
-#5. 安装docker docker-ce 社区版 而ee是企业版
-yum install docker-ce docker-ce-cli containerd.io # 这里我们使用社区版即可
+6. 安装Docker CE
 
-#6. 启动docker
-systemctl start docker
+   ```shell
+   #安装docker docker-ce 社区版 而ee是企业版
+   yum install docker-ce docker-ce-cli containerd.io # 这里我们使用社区版即可
+   ```
 
-#7. 使用docker version 查看是否安装成功
-docker version
-```
+7. 启动Docker
+
+   ```shell
+   systemctl start docker
+   ```
+
+8. 测试命令
+
+   ```shell
+   #使用docker version 查看是否安装成功
+   docker version
+   ```
 
 ![image-20221125154725520](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202211251547641.png)
 
@@ -328,11 +360,14 @@ docker run hello-world
 了解：卸载docker
 
 ```shell
+# 停止docker
+systemctl stop docker
+
 #1.卸载依赖
-yum remove docker-ce docker-ce-cli containerd.io
+yum -y remove docker-ce docker-ce-cli containerd.io
 
 #2. 删除资源
-rm -rf /var/lib/docker
+rm -rf  /var/lib/docker
 # /var/lib/docker 	是docker的默认工作路径！
 ```
 
@@ -340,7 +375,7 @@ rm -rf /var/lib/docker
 
 **1、登录阿里云找到容器服务——>镜像加速器**
 
-![image-20200610155156310](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202211261342117.png)
+![image-20221220111554431](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201115509.png)
 
 **2、配置使用**
 
@@ -375,7 +410,7 @@ sudo systemctl restart docker
 
 > 容器的实质是进程，与宿主机上的其他进程是共用一个内核，但与直接在宿主机执行的进程不同，容器进程运行在属于自己的独立的命名空间。命名空间隔离了进程间的资源，使得a,b进程可以看到S资源，而c进程看不到。
 
-## 2.5 与VM比较
+## 2.5 虚拟化技术和容器化技术
 
 首先来看两组图：
 
@@ -524,7 +559,10 @@ docker.io/library/mysql:5.7
 docker run -it nginx:latest /bin/bash
 ```
 
-注意：常见的坑，docker 容器使用后台运行，就必须要有一个前台进程，docker发现没有应用（对外提供的应用）会自动停止nginx,容器启动后，发现自己没有提供服务，就会立刻停止，就是没有程序了，所以应该是docker run -it 镜像名，然后不停止退出：Ctrl+p+q，当然还有一种办法能正常后台启动且不进去，那就是<mark>docker run -dit nginx</mark>
+注意：
+
+1. 常见的坑，docker 容器使用后台运行，就必须要有一个前台进程，docker发现没有应用（对外提供的应用）会自动停止nginx,容器启动后，发现自己没有提供服务，就会立刻停止，就是没有程序了，所以应该是docker run -it 镜像名，然后不停止退出：Ctrl+p+q，当然还有一种办法能正常后台启动且不进去，那就是<mark>docker run -dit nginx</mark>
+2. 如果启动的时候镜像不加tag版本号那么自动去找最新版！
 
 踩个坑：
 
@@ -713,7 +751,13 @@ test.java  ztx
 
 - **PIDs:** 容器创建的进程或线程数。
 
-  
+> **docker network**用于管理网络，子命令创建，列出，检查，删除，连接和断开网络
+
+https://www.yiibai.com/docker/network.html
+
+
+
+
 
 
 
@@ -1159,9 +1203,9 @@ docker commit -m="描述信息" -a="作者" 容器id 目标镜像名:[版本TAG]
 
 **为什么使用数据卷：容器的持久化和同步操作！容器间也是可以数据共享的！**
 
-## 7.2 使用数据卷
+## 7.2 容器与本地同步
 
-> 方式一：直接使用命令来挂载
+### 1. 直接使用命令挂载
 
 ```shell
 docker run -it -v 主机目录:容器目录
@@ -1198,7 +1242,7 @@ docker run -it -v 主机目录:容器目录
 
 **好处**：我们以后修改只需要在本地修改即可，容器内会自动同步！
 
-## 7.3 实战：安装MySQL
+#### 实战：安装MySQL
 
 思考：MySQL的数据持久化的问题！
 
@@ -1232,10 +1276,10 @@ docker run -it -v 主机目录:容器目录
 
 发现，我们挂载到本地的数据卷依旧没有丢失，这就实现了容器数据持久化功能！
 
-## 7.4 具名和匿名挂载
+####  具名和匿名挂载
 
 ```shell
-# 匿名挂载
+# 匿名挂载，就跟Java的匿名类一样没有名字
 -v 容器内路径
 docker run -d -P --name nginx01 -v /etc/nginx nginx
 
@@ -1247,7 +1291,7 @@ local               2dd0379216c9ee4441ed56f8ce53461c19abe78b8cfd024ac5fbe07c3b8f
 
 # 这里发现，这种就是匿名挂载，我们在 -v 后只写了容器内的路径，没有写容器外的路径！
 
-# 具名挂载
+# 具名挂载，注意不要在具名前加/斜杠，不然这就是绝对路径！
 [root@localhost home]# docker run -d -P --name nginx02 -v juming-nginx:/etc/nginx nginx
 5ba5708389bf71b2156fdbcedc50a62b16ac27adb2a3dfac42c52e9da5ace79f
 [root@localhost home]# docker volume ls
@@ -1258,14 +1302,14 @@ local               juming-nginx
 # 查看一下这个卷  # 先找到卷所在路径 docker volume inspect 卷名，如下图：
 ```
 
-![image-20200611235522418](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200611235522418.png)
+![image-20200611235522418](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212020920426.png)
 
 所有的docker容器内的卷，没有指定目录的情况下都是在**/var/lib/docker/volumes/xxxx/_data**下！
 我们通过具名挂载可以方便的找到我们的一个卷，大多数情况使用 **具名挂载**
 
 ```shell
 # 如何确定是具名挂载还是匿名挂载，还是指定路径挂载！
--v	容器内路径		       # 匿名挂载
+-v	容器内路径		       # 匿名挂载，随机生成一串字符串作为名字
 -v	卷名:容器内路径	 	 # 具名挂载
 -v	/宿主机路径:容器内路径   # 指定路径挂载！
 ```
@@ -1285,9 +1329,15 @@ docker run -d -P --name nginx05 -v juming:/etc/nginx:rw nginx
 # ro 只要看到ro就说明这个路径只能通过宿主机来操作，容器内部是无法操作！
 ```
 
-## 初始Dockerfile
+> **docker volume**管理Docker卷
 
-Dockerfile 就是用来构建 docker镜像的构建文件！命令脚本！ 先体验一下！
+![image-20221202093049109](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212020930276.png)
+
+### 2. Dockerfile体验
+
+Dockerfile 就是用来构建 docker镜像的构建文件！
+
+Dockerfile就是一堆命令脚本！ 先体验一下！
 
 通过这个脚本可以生成镜像，镜像是一层一层的，脚本是一个个的命令，每个命令都是最终镜像的一层！
 
@@ -1296,32 +1346,43 @@ Dockerfile 就是用来构建 docker镜像的构建文件！命令脚本！ 先�
 
 [root@localhost docker-test-volume]# vim dockerfile
 # 文件中的内容：指令(大写) 参数
-FROM centos
 
+# 当前镜像使用xx作为基础
+FROM centos 
+
+# 挂载卷
 VOLUME ["volume01","volume02"]
 
+# 生成完后发一段消息
 CMD echo"----end----"
 
+# 构建完后进入默认走这命令
 CMD /bin/bash
 
 # 这里的每个命令，就是镜像的一层！
 ```
 
-![image-20200612003052844](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612003052844.png)
+build-构建
+
+-f：文件地址
+
+-t：目标文件名
+
+![image-20200612003052844](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212051536177.png)
 
 注意：我们这里的 dockerfile  是我们编写的文件名哦！
 
-![image-20200612003717223](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612003717223.png)
+![image-20200612003717223](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212051537921.png)
 
 这两个卷和外部一定有两个同步的目录！
 
-![image-20200612003946028](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612003946028.png)
+![image-20200612003946028](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212051537596.png)
 
 查看一下卷挂载在主机上的路径
 
 **docker inspect 容器id**
 
-![image-20200612004608027](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612004608027.png)
+![image-20200612004608027](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212051721988.png)
 
 测试一下刚才的文件是否同步出去了！
 
@@ -1333,33 +1394,59 @@ CMD /bin/bash
 -v 卷名:容器内路径 
 ```
 
-## 数据卷容器
+## 7.3 容器与容器同步
 
-**多个mysql同步数据！**
+本意：实现容器与容器之间数据的**共享**！
 
-![image-20200612223759573](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612223759573.png)
+![image-20221205155218748](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212051552821.png)
 
-![image-20200612224621379](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612224621379.png)
+核心命令：`--volumes-from`
 
-![image-20200612225358172](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612225358172.png)
+1. **docker build -f dockerfile -t miaowei/centos .**构建一个dockerFile的镜像
 
-在docker03下创建docker03文件后，进入docker01发现也依旧会同步过来：
+2. **docker run -it --name docker01 miaowei/centos**  启动容器。注意：镜像没加tag版本就是去找最新,且命令docker01为父容器，接下来的02和03都是子容器
 
-![image-20200612225641266](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612225641266.png)
+   ![image-20221205160849911](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212051608997.png)
+
+3. **docker run -it --name docker02 --volumes-from docker01 miaowei/centos** 
+   以继承的方式来达到父级容器的数据卷同步共享的目的
+
+4. 进入到父容器docker01后在数据卷Volume01里创建一个文件，然后在子容器docker02里查看是否同步了---可以发现同步成功
+
+   ![image-20221205165400108](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212051654184.png)
+
+5. 在docker02里创建一个文件，再去docker01父容器看是否同步--同步成功！
+
+   ![image-20221205170054298](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212051700359.png)
+
+   
+
+测试：
 
 ```shell
 # 测试1：删除docker01后，docker02和docker03是否还可以访问原来docker01下创建的的文件？
 # 测试1的结果为：依旧可以访问！！！
 
 # 测试2：删除docker01后，docker02和docker03之间是否可以相互同步文件？
-# 测试2的结果为：docket02和docker03之间一九可以完成同步！！！ 见下图：
+# 测试2的结果为：docket02和docker03之间依旧可以完成同步！！！
+
+# 测试3：如果docker01退出并且停止运行，然后进入docker02中删除掉docker01创建的文件，然后再进去	docker01看是否同步？
+#测试3的结果为：删除后重新登录docker01，数据已被删除，表示正常完成同步！！！
 ```
 
-![image-20200612231431551](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612231431551.png)
+> 结论：远观来看是数据共享同步，围观来看是数据的拷贝与备份！
+>
+> ​		容器之间的配置信息的传递，数据卷容器的生命周期一直持续到没有容器使用为止。
+>
+> 但是一旦你持久化到了本地，这个时候，本地的数据是不会删除的！
 
-![image-20200612231603498](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612231603498.png)
 
-**多个mysql实现数据共享**
+
+
+
+
+
+**案例：多个mysql实现数据共享（不同容器装一个本地MySQL保证数据同步）**
 
 ```shell
 ➜  ~ docker run -d -p 3306:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysql01 mysql:5.7
@@ -1367,19 +1454,15 @@ CMD /bin/bash
 # 这个时候，可以实现两个容器数据同步！
 ```
 
-**结论：**
 
-容器之间的配置信息的传递，数据卷容器的生命周期一直持续到没有容器使用为止。
-
-但是一旦你持久化到了本地，这个时候，本地的数据是不会删除的！
 
 ---
 
 
 
-# DockerFile
+# 8. DockerFile
 
-## DockerFile介绍
+## 8.1 DockerFile介绍
 
 `dockerfile`是用来构建docker镜像的文件！命令参数脚本！
 
@@ -1387,23 +1470,32 @@ CMD /bin/bash
 
 1、 编写一个dockerfile文件
 
-2、 docker build 构建称为一个镜像
+2、 `docker build` 构建称为一个镜像
 
-3、 docker run运行镜像
+3、 `docker run`运行镜像
 
-4、 docker push发布镜像（DockerHub 、阿里云仓库)
+4、 `docker push`发布镜像（DockerHub 、阿里云仓库)
+
+> 命令`docker build -f dockerfile文件路径 -t 镜像名:[tag] .`
+
+注意：
+
+1. 如果dockerfile文件的名字是Dockerfile那么就可以省略**-f dockerfile**，系统会自动去匹配路径
+2. 生成的镜像名必须全部为小写
+
+
 
 查看官方是怎么做的！
 
-![image-20200612233951676](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612233951676.png)
+![image-20221206094157600](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212060941691.png)
 
-![image-20200612234022746](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612234022746.png)
+![image-20221208134339255](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212081343325.png)
 
 很多官方镜像都是基础包，很多功能没有，我们通常会自己搭建自己的镜像！
 
 官方既然可以制作镜像，那我们也可以！
 
-## DockerFile构建过程
+## 8.2 DockerFile构建过程
 
 **基础知识：**
 
@@ -1413,22 +1505,33 @@ CMD /bin/bash
 
 3、# 表示注释
 
-4、每一个指令都会创建提交一个新的镜像曾，并提交！
+4、每一个指令都会创建提交一个新的镜像层，并提交！
 
-![image-20200612234419262](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200612234419262.png)
+```dockerfile
+#比如这里就是四层镜像
+FROM centos 
+# 挂载卷
+VOLUME ["volume01","volume02"]
+# 生成完后发一段消息
+CMD echo"----end----"
+# 构建完后进入默认走这命令
+CMD /bin/bash
+```
+
+![image-20200612234419262](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212081405300.png)
 
 Dockerfile是面向开发的，我们以后要发布项目，做镜像，就需要编写dockerfile文件，这个文件十分简单！
 
 Docker镜像逐渐成企业交付的标准，必须要掌握！
 
-DockerFile：构建文件，定义了一切的步骤，源代码
+**DockerFile**：构建文件，定义了一切的步骤，源代码
 
-DockerImages：通过DockerFile构建生成的镜像，最终发布和运行产品。
+**DockerImages**：通过DockerFile构建生成的镜像，最终发布和运行产品。
 
-Docker容器：容器就是镜像运行起来提供服务。
+**Docker容器**：容器就是镜像运行起来提供服务。
 
 
-## DockerFile的指令
+## 8.3 DockerFile的指令
 
 ```shell
 FROM			# 基础镜像，一切从这里开始构建
@@ -1438,7 +1541,7 @@ ADD				# 步骤：tomcat镜像，这个tomcat压缩包！ 添加内容
 WORKDIR			# 镜像的工作目录
 VOLUME			# 挂载的目录
 EXPOSE          # 暴露端口配置，跟 -p 是一个道理
-CMD				# 指定这个容器启动时要执行的命令,只有最后一个命令会生效，可悲替代
+CMD				# 指定这个容器启动时要执行的命令,只有最后一个命令会生效，可被替代
 ENTRYPOINT		# 指定这个容器启动的时候要执行的命令，可以追加命令
 ONBUILD			# 当构建一个被继承DockerFile 这个时候就会运行ONBUILD的指令。触发指令
 COPY			# 类似ADD,将我们文件拷贝到镜像中
@@ -1448,30 +1551,31 @@ ENV				# 构建的时候设置环境变量，跟 -e 是一个意思
 # 若CMD 和 ENTRYPOINT 后跟的都是 ls -a 这个命令，当docker run 一个容器时，添加了 -l 选项，则CMD里的ls -a 命令就会被替换成-l;而ENTRYPOINT中的 ls -a会追加-l变成 ls -a -l  
 ```
 
-![image-20200613000838850](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613000838850.png)
+![image-20200613000838850](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212081429197.png)
 
-## 实战测试
+## 8.4 实战测试
 
 Docker Hub中99%镜像都是从这个基础镜像过来的( **FROM scratch** )，然后配置需要的软件和配置来构建。
-
-![image-20200613001130237](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613001130237.png)
 
 > 创建一个自己的 centos
 
 ```shell
 # 1、编写DockerFile文件，内容如下：
 [root@localhost dockerfile]# cat mydockerfile-centos
-FROM centos						
+# 来自于centos基础镜像
+FROM centos
+# 标注这个镜像的作者信息
 MAINTAINER ztx<123456@qq.com> 
-
+# 设置环境变量 
 ENV MYPATH /usr/local
+# 设置当前镜像的工作目录
 WORKDIR $MYPATH
-
+# 在线安装vim跟net-tools
 RUN yum -y install vim
 RUN yum -y install net-tools
-
+# 指定对外端口
 EXPOSE 80
-
+# cmd执行并进入命令行
 CMD echo $MYPATH
 CMD echo "----end----"
 CMD /bin/bash
@@ -1490,15 +1594,15 @@ Successfully tagged mycentos:0.1
 
 **之前的原生的centos**
 
-![image-20200613004551789](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613004551789.png)
+![image-20200613004551789](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212081451705.png)
 
 **我们增加之后的镜像**
 
-![image-20200613005056516](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613005056516.png)
+![image-20200613005056516](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212081451834.png)
 
 注：net-tools 包含一系列程序，构成了 Linux 网络的基础。
 
-我们可以列出本地镜像的变更历史：
+我们可以列出本地镜像的一步一步变更历史：
 
 ![image-20200613005625844](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613005625844.png)
 
@@ -1567,73 +1671,66 @@ lrwxrwxrwx   1 root root    9 May 11  2019 lib64 -> usr/lib64 ....
 
 Dockerfile中很多命令都十分的相似，我们需要了解它们的区别，我们最好的学习就是对比他们然后测试效果！
 
-## 实战：Tomcat镜像
+## 8.5 实战：Tomcat镜像
 
-1、准备镜像文件tomcat压缩包，jdk压缩包！
+1、准备tomcat和jdk 到当前目录，编写好README帮助文档 （touch README.txt）
 
-![image-20200613151500712](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613151500712.png)
+![image-20221209112531882](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212091125951.png)
 
-2、编写Dockerfile文件，官方命名: **Dockerfile** ，build会自动寻找这个文件，就不要 -f 指定了！
+2、编写dockerfile文件，官方命名：`Dokerfile`，build会自动寻找这个文件，就不需要-f指定了！
 
-```shell
-FROM centos
-MAINTAINER kuangshen<123456@qq.com>
+```dockerfile
+FROM centos:7 										# 基础镜像centos
+MAINTAINER miaowei<2439135122@qq.com>					# 作者
 
-COPY readme.txt /usr/local/readme.txt
 
-ADD jdk-8u161-linux-x64.tar.gz    /usr/local/
-ADD apache-tomcat-8.0.53.tar.gz   /usr/local
+COPY README.txt /usr/local/README.txt 				# 复制README文件
+ADD jdk-8u351-linux-x64.tar.gz /usr/local/ 			# 添加jdk，ADD 命令会自动解压，根据自己下载的压缩包进行修改
+ADD apache-tomcat-9.0.69.tar.gz /usr/local/ 		# 添加tomcat，ADD 命令会自动解压
 
-RUN yum -y install vim
-ENV MYPATH /usr/local
+RUN yum -y install vim								# 安装 vim 命令
+ENV MYPATH /usr/local 								# 环境变量设置 工作目录
 WORKDIR $MYPATH
 
-
-ENV JAVA_HOME /usr/local/jdk1.8.0_161
+ENV JAVA_HOME /usr/local/jdk1.8.0_351 				# 环境变量： JAVA_HOME环境变量
 ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-ENV CATALINA_HOME /usr/local/apache-tomcat-8.0.53
-ENV CATALINA_BASH /usr/local/apache-tomcat-8.0.53
-ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin
 
-EXPOSE 8080
+ENV CATALINA_HOME /usr/local/apache-tomcat-9.0.69 	# 环境变量： tomcat环境变量
+ENV CATALINA_BASH /usr/local/apache-tomcat-9.0.69
+ 
+# 设置环境变量 分隔符是：
+ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin 	
 
-CMD /usr/local/apache-tomcat-8.0.53/bin/startup.sh && tail -F /usr/local/apache-tomcat-8.0.53/bin/logs/catalina.out
+EXPOSE 8080 										# 设置暴露的端口
 
+# && 多个命令一起执行
+# tail -F 打印输出且一直监听命令
+CMD /usr/local/apache-tomcat-9.0.69/bin/startup.sh && tail -F /usr/local/apache-tomcat-9.0.69/logs/catalina.out 		                    # 设置默认命令
+
+#保存:wq
 ```
 
 3、构建镜像
 
 ```shell
-# docker build -t diytomcat .     diytomcat是定义的镜像名
+# 因为dockerfile命名使用默认命名 因此不用使用-f 指定文件
+$ docker build -t mytomcat:0.1 .
 ```
 
 4、启动镜像，创建容器
 
 ```shell
-# docker run -d -p 9090:8080 --name kuangshentomcat02 -v /home/kuangshen/build/tomcat/test:/usr/local/apache-tomcat-8.0.53/webapps/test -v /home/kuangshen/build/tomcat/tomcatlogs/:/usr/local/apache-tomcat-8.0.53/logs diytomcat
-
+# -d:后台运行 -p:暴露端口 --name:别名 -v:绑定路径 
+$ docker run -d -p 8080:8080 --name tomcat01 -v /home/miao/build/tomcat/test:/usr/local/apache-tomcat-9.0.62/webapps/test -v /home/miao/build/tomcat/tomcatlogs/:/usr/local/apache-tomcat-9.0.62/logs mytomcat:0.1
 ```
 
-5、访问测试
+5、访问测试-成功
 
-![image-20200613175551231](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613175551231.png)
+![image-20221209112909285](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212091129385.png)
 
 6、发布项目（由于做了卷挂载，我们就可以直接在本地发布项目了）
 
-在/home/kuangshen/build/tomcat/test目录下创建WEB-INF目录，在里面创建web.xml文件：
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-                               http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-           version="2.5">
-
-</web-app>
-```
-
-在回到test目录，添加一个index.jsp页面：
+走到挂载在本地的目录<mark> /home/miao/build/tomcat/test</mark>
 
 ```html
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -1655,23 +1752,21 @@ System.out.println("---my test web logs---");
 
 发现：test项目部署成功，可以直接访问！
 
-![image-20200613180033633](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613180033633.png)
+![image-20221209113604311](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212091136435.png)
 
-注意：这时进入/home/kuangshen/build/tomcat/tomcatlogs/目录下就可以看到日志信息了：
+注意：这时进入<mark>/home/miao/build/tomcat/tomcatlogs</mark>目录下就可以看到日志信息了：
 
 ```shell
 [root@localhost tomcatlogs]# cat catalina.out 
 ```
 
-![image-20200613180355186](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613180355186.png)
-
-之前一直访问失败是web.xml配置有问题，最后也是查看该日志提示，才得以解决！！！
+![image-20200613180355186](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212091031692.png)
 
 我们以后开发的步骤：需要掌握Dockerfile的编写！我们之后的一切都是使用docker镜像来发布运行！
 
-## 发布自己的镜像
+## 8.6 发布自己的镜像
 
-> Docker Hub
+###  DockerHub
 
 1、地址 https://hub.docker.com/
 
@@ -1679,70 +1774,41 @@ System.out.println("---my test web logs---");
 
 3、在我们服务器上提交自己的镜像
 
-```shell
-[root@localhost tomcat]# docker login --help
-
-Usage:	docker login [OPTIONS] [SERVER]
-
-Log in to a Docker registry.
-If no server is specified, the default is defined by the daemon.
-
-Options:
-  -p, --password string   Password
-      --password-stdin    Take the password from stdin
-  -u, --username string   Username
-
-# 登录dockerhub
-[root@localhost tomcat]# docker login -u ztx115
-Password: 
-WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
-Configure a credential helper to remove this warning. See
-https://docs.docker.com/engine/reference/commandline/login/#credentials-store
-
-Login Succeeded
-```
+![image-20221209162909673](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212091629767.png)
 
 4、登录完毕后就可以提交镜像了，就是一步 docker push
 
-```shell
-# push自己的镜像到服务器上！
-[root@localhost tomcat]# docker push diytomcat
-The push refers to repository [docker.io/library/diytomcat]
-c5593011cd68: Preparing 
-d3ce40b8178e: Preparing 
-02084c67dcc9: Preparing 
-2b7c1c6c89c5: Preparing 
-0683de282177: Preparing 
-denied: requested access to the resource is denied  # 拒绝
+​	![image-20221209163843569](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212091638654.png)
 
-# push镜像的问题？
-# 解决：增加一个tag         docker tag  指定镜像的id   dockerhub的用户名/镜像重命名:[tag]
-[root@localhost tomcat]# docker tag bb64ab96b432 ztx115/tomcat:1.0
-```
-
-![image-20200613211709842](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613211709842.png)
-
-**注意：镜像的重命名前一定要加当前的dockerhub的用户名，否则将会push失败！！！！**（如：把ztx115改成ztx,  push一定失败！）
+​	解决：
 
 ```shell
-# docekr push上去即可！  自己平时发布的镜像尽量带上版本号
-[root@localhost tomcat]# docker push ztx115/tomcat:1.0
-The push refers to repository [docker.io/ztx115/tomcat]
-c5593011cd68: Pushed 
-d3ce40b8178e: Pushed 
-02084c67dcc9: Pushed 
-2b7c1c6c89c5: Pushed 
-0683de282177: Pushed 
-1.0: digest: sha256:b6733deccf85ad66c6f4302215dd9ea63e1579817f15a099b5858785708ed408 size: 1372
+# 第一种 build的时候添加你的dockerhub用户名，然后在push就可以放到自己的仓库了
+# 作者名/镜像名:版本号
+$ docker build -t miaowei8721/mytomcat:0.1 .
+
+# 第二种：增加一个tag         docker tag  指定镜像的id   dockerhub的用户名/镜像重命名:[tag]
+$ docker tag 容器id miaowei8721/mytomcat:1.0 
+# 再次push
+$ docker push hxl/mytomcat:1.0
 ```
 
-![image-20200613210147709](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613210147709.png)
+**注意：镜像的重命名前一定要加当前的dockerhub的用户名，否则将会push失败！！！！**（如：把miaowei8721改成任意内容,  push一定失败！）
 
-发现，提交时也是按照镜像的层级来进行提交的！
+![image-20221209165037159](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212091650248.png)
+
+发现
+
+1. 提交时也是按照镜像的层级来进行提交的！
+2. 自己平时发布的镜像尽量带上版本号
+3. 推送的话会比较很慢，可以开VPN！
+4. 由于推送到DockerHub上所以在tag更换标签时 前面为dockerhub用户名/自定义名字:版本号
 
 
 
-> 发布到阿里云镜像服务上（狂神视频截图）
+### 阿里云
+
+> 发布到阿里云镜像服务上
 
 1、登录阿里云
 
@@ -1750,185 +1816,186 @@ d3ce40b8178e: Pushed
 
 3、创建命名空间
 
-![image-20200613212823736](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613212823736.png)
+![image-20221209165447211](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212091654276.png)
 
 4、创建容器镜像仓库
 
-![image-20200613213014849](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613213014849.png)
+![image-20221209165625036](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212091656106.png)
 
-![image-20200613213135466](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613213135466.png)
+​	选择本地仓库并点击创建
 
-![image-20200613213222587](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613213222587.png)
+5、浏览阿里云，照着步骤来就行
 
-5、浏览阿里云
+![image-20221209171114269](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212091711369.png)
 
-![image-20200613214159792](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613214159792.png)
+> 手动演示进行推送阿里云镜像仓库
+>
+
+第一步：登录阿里云镜像空间
+
+```shell
+docker login --username=喵小威 registry.cn-chengdu.aliyuncs.com
+```
+
+第二步：更改tag推送信息,这里版本号自定义由本身业务决定
+
+```shell
+docker tag [ImageId] registry.cn-chengdu.aliyuncs.com/miaowei_save/miaowei-repository:[镜像版本号]
+```
+
+第三步：将更换后的镜像进行推送，这里版本号是上一步的版本号
+
+```shell
+docker push registry.cn-chengdu.aliyuncs.com/miaowei_save/miaowei-repository:[镜像版本号]
+```
+
+![image-20221209172010545](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212091720628.png)
+
+此时我们去看阿里云仓库：
+
+![image-20221212090636346](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212120906442.png)
+
+填写好要拉取的版本号就可以直接将阿里云远程仓库的镜像拉取到本地了：
+
+```shell
+docker pull registry.cn-chengdu.aliyuncs.com/miaowei_save/miaowei-repository:[镜像版本号]
+```
 
 
 
-使用阿里云容器镜像的参考官方指南即可！！！（即上图）
+注：阿里云仓库的话其实会发现一个仓库里推送的话只能根据版本号来进行拉取，所以在实际业务开发过程中一个仓库就代表一个项目！
 
-## 小结
+## 8.7 小结
 
 ![image-20200613214846464](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613214846464.png)
+
+​	用Dockerfile编写所有的源代码用`build`构建一个镜像，然后使用`tag`更换标签再`push`到远程仓库，需要时就`pull`拉取到本地！
+
+​	镜像使用`run`运行为容器，容器本身可以`stop、start、restart`进行停止、启动、重启，当操作好以后就`commit`提交为新的层级镜像。
+
+​	如果想把镜像提交打包为tar压缩包则可以使用`save`命令，然后想加载则使用`load`。---本质上跟DockerHub远程是一样的道理，这里只是备份tar解压和压缩，而远程则直接拉取和提交!
+
+
 
 ---
 
 
 
-# Docker网络
+# 9. Docker网络(容器互联)
 
-##  理解Docker0
+##  9.1 Docker的网卡-docker0
 
-清空所有环境
+首先随便启动一个容器，然后在Linux的终端输入：`ip addr`
 
-> 测试
+![image-20221212141416283](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212121414460.png)
 
-![image-20200613224119526](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613224119526.png)
+出现了四个网卡：
 
-```shell
-# 问题： docker是如何处理容器网络访问的？
-```
+1. lo：本机地址<mark>127.0.0.1</mark>
+2. etho：云服务器内网地址<mark>172.20.203.94</mark>
+3. docker0: docker地址<mark>172.17.0.1</mark>
+4. `163: veth0c2a844@if162`:这个是某容器内部的网卡
 
-![image-20200613220806390](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613220806390.png)
+------
 
-```shell
-# [root@localhost /]# docker run -d -P --name tomcat01 tomcat
+进入到此容器内部后执行`ip addr`
 
-# 查看容器的内部网络地址   ip addr,  发现容器启动的时候会得到一个 eth0@if43 ip地址，docker分配的！
-[root@localhost /]# docker exec -it tomcat01 ip addr
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-42: eth0@if43: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
-    link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0
-    inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
-       valid_lft forever preferred_lft forever
+> 如果在容器内部中出现bash:ip:commandnot found
+>
+> 解决办法：
+>
+> 1. **yum -y install initscripts**
+> 2. https://blog.csdn.net/winnyrain/article/details/127313184
 
-# 思考：linux能不能ping通docker容器内部！
-[root@localhost /]# ping 172.17.0.2
-PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
-64 bytes from 172.17.0.2: icmp_seq=1 ttl=64 time=0.476 ms
-64 bytes from 172.17.0.2: icmp_seq=2 ttl=64 time=0.099 ms
-64 bytes from 172.17.0.2: icmp_seq=3 ttl=64 time=0.105 ms
-...
-# linux 可以ping通docker容器内部
-```
+![image-20221212142809517](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212121428654.png)
+
+发现：容器在启动的时候会分配一个网卡，而这个网卡是跟容器外某个网卡是意义一一对应的，并且在你发现docker的地址是**172.17.0.1**跟容器内的ip地址**172.17.0.2**是递增并且在Linux端去ping是可以ping通的容器内部的！
 
 > 原理
 
-1、我们每启动一个docker容器，docker就会给docker容器分配一个ip，我们只要装了docker，就会有一个docker01网卡。
+1. 我们每启动一个docker容器, docker就会给docker容器分配一个ip ,我们只要安装了docker ,就会有一个网卡docker0。
 
-桥接模式，使用的技术是veth-pair技术！
+2. 该技术被称为桥接模式,使用的技术是evth-pair 技术。evth-pair 就是`成对`的虚拟设备接口(容器带来网卡都是一对的)，他们都是成对出现的正因为有这个特性，evth-pair充当一个桥粱，连接各种虚拟网络设备的。**一端连着协议，一端彼此相连**
 
-再次测试 ip addr，发现多了一对网卡 : 
+3. docker两个容器之间的网络交互也是可以ping通的，使用的也是evth-pair技术
+4. docker0（Linux那端）充当docker两个容器之间的路由器，也就是说**docker两个容器之间不是直接互联的，而是通过docker0链接**
 
-![image-20200613224311838](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613224311838.png)
+网络模型画图：
 
-2、再启动一个容器测试，发现又多了一对网卡！！！
-
-![image-20200613224610781](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613224610781.png)
-
-```shell
-# 我们发现这个容器带来网卡，都是一对对的
-# veth-pair 就是一对的虚拟设备接口，他们都是成对出现的，一段连着协议，一段彼此相连
-# 正因为有这个特性，veth-pair 充当一个桥梁，连接各种虚拟网络设备
-# OpenStack，Docker容器之间的连接，OVS的连接都是使用veth-pair技术
-```
-
-3、我们来测试下tomcat01和tomcat02是否可以ping通！
-
-```shell
-[root@localhost /]# docker exec -it tomcat02 ping 172.17.0.2
-PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
-64 bytes from 172.17.0.2: icmp_seq=1 ttl=64 time=0.556 ms
-64 bytes from 172.17.0.2: icmp_seq=2 ttl=64 time=0.096 ms
-64 bytes from 172.17.0.2: icmp_seq=3 ttl=64 time=0.111 ms
-...
-
-# 结论：容器与容器之间是可以相互ping通的！！！
-```
-
-**绘制一个网络模型图：**
-
-![image-20200613231046553](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613231046553.png)
+![image-20221212161355034](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212121613112.png)
 
 **结论：tomcat01 和 tomcat02 是公用一个路由器，即 docker0 !** 
 
 所有的容器不指定网络的情况下，都是经 docker0 路由的，docker 会给我们的容器分配一个默认的可用ip
 
-
+**也就是说dokcer0是docker容器们的网关，docker容器们共同构成一个子网**
 
 > 小结
 
 Docker使用的是Linux的桥接技术，宿主机是一个Docker容器的网桥 docker0
 
-![image-20200613232031835](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200613232031835.png)
+![image-20200613232031835](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212121618867.png)
 
 **注意：**Docker中所有网络接口都是虚拟的，虚拟的转发效率高！（内网传递文件）
 
 只要容器一删除，对应的一对网桥就没有！
 
-## --link
+## 9.2 容器互联的方法
 
-> 思考一个场景：我们编写了一个微服务，database url = ip ，项目不重启，数据库ip换掉了，我们希望可以处理这个问题，可以通过名字来访问容器？
+### --link
+
+**优点**：直接在tomcat02里面ping tomcat01 容器名，照样ping通
+
+**缺点**：单向绑定，较为麻烦！
+
+**效果**：该命令可以把两个容器连接为一组容器，该命令主要解决的问题是：在tomcat02容器中ping tomcat01 容器，不需要ping tomcat01 容器的ip，只需要ping tomcat01 容器名（就是tomcat01）即可。
+
+> 业务场景：在一个微服务中我们可以通过ip进行连接，但是万一ip更换了重新分配，那么就连接失败了，那么在这里容器互联如果能用名字来连接访问容器呢？
+
+**--link=[]: 添加链接到另一个容器；**
+
+例：docker run -d -P --name tomcat03 --link tomcat02 tomcat
+
+在tomcat03里去ping tomcat2
+
+![image-20221212171410591](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212121714706.png)
+
+那么反向ping试试呢？-发现tomcat02不能ping通tomcat03
+
+![image-20221212171502960](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212121715039.png)
+
+-----
+
+1. **docker network ls **列出网络
+2. **docker network inspect** 显示一个或多个网络的详细信息
+
+![image-20200614002609300](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212131000164.png)
+
+![image-20200614002832045](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212131016300.png)
+
+
+
+**该命令原理其实就是在A容器中配置host，使B容器的ip映射到B容器名。**
 
 ```shell
-# tomcat02 想通过直接ping 容器名（即"tomcat01"）来ping通，而不是ip，发现失败了！
-[root@localhost /]# docker exec -it tomcat02 ping tomcat01
-ping: tomcat01: Name or service not known
-
-# 如何解决这个问题呢？
-# 通过--link 就可以解决这个网络联通问题了！！！      发现新建的tomcat03可以ping通tomcat02
-[root@localhost /]# docker run -d -P --name tomcat03 --link tomcat02 tomcat
-87a0e5f5e6da34a7f043ff6210b57f92f40b24d0d4558462e7746b2e19902721
-[root@localhost /]# docker exec -it tomcat03 ping tomcat02
-PING tomcat02 (172.17.0.3) 56(84) bytes of data.
-64 bytes from tomcat02 (172.17.0.3): icmp_seq=1 ttl=64 time=0.132 ms
-64 bytes from tomcat02 (172.17.0.3): icmp_seq=2 ttl=64 time=0.116 ms
-64 bytes from tomcat02 (172.17.0.3): icmp_seq=3 ttl=64 time=0.116 ms
-64 bytes from tomcat02 (172.17.0.3): icmp_seq=4 ttl=64 time=0.116 ms
-
-# 反向能ping通吗？       发现tomcat02不能oing通tomcat03
-[root@localhost /]# docker exec -it tomcat02 ping tomcat03
-ping: tomcat03: Name or service not known
-```
-
-探究：inspect  ！！！
-
-![image-20200614002609300](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614002609300.png)
-
-![image-20200614002832045](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614002832045.png)
-
-其实这个tomcat03就是在本地配置了到tomcat02的映射：
-
-```shell
-# 查看hosts 配置，在这里发现原理！  
-[root@localhost /]# docker exec -it tomcat03 cat /etc/hosts
+root@ec1742fd1571:/usr/local/tomcat# cat /etc/hosts
 127.0.0.1	localhost
 ::1	localhost ip6-localhost ip6-loopback
 fe00::0	ip6-localnet
 ff00::0	ip6-mcastprefix
 ff02::1	ip6-allnodes
 ff02::2	ip6-allrouters
-172.17.0.3	tomcat02 95303c12f6d9    # 就像windows中的 host 文件一样，做了地址绑定
-172.17.0.4	87a0e5f5e6da
+172.18.0.2	tomcat01 dce458284287 # 就是这一行给配置了host  就像windows中的 host 文件一样，做了地址绑定
+172.18.0.4	ec1742fd1571
 ```
 
-本质探究：--link  就是我们在hosts 配置中增加了一个 172.17.0.3	tomcat02   95303c12f6d9 （三条信息都是tomcat02 的）
 
-我们现在玩Docker已经不建议使用 --link 了！！！
 
-**自定义网络，不使用docker0！**
-
-docker0问题：不支持容器名连接访问！
-
-## 自定义网络
+### 自定义网络
 
 > 查看所有的docker网络
 
-‘![image-20200614004445923](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614004445923.png)
+![image-20221213104219083](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212131042182.png)
 
 **网络模式**
 
@@ -1942,6 +2009,8 @@ container  ：容器网络连通，容器直接互联！（用的少！局限很
 
 **测试**
 
+**使用 --net 命令选择网络**
+
 ```shell
 # 我们之前直接启动的命令 (默认是使用--net bridge，可省)，这个bridge就是我们的docker0 
 docker run -d -P --name tomcat01 tomcat   
@@ -1954,6 +2023,7 @@ docker run -d -P --name tomcat01 --net bridge tomcat
 # --driver bridge    		网络模式定义为 ：桥接
 # --subnet 192.168.0.0/16	定义子网 ，范围为：192.168.0.2 ~ 192.168.255.255
 # --gateway 192.168.0.1		子网网关设为： 192.168.0.1 
+# 192.168.0.0/16: 有了计算机网络的CIDR记法知识（和前文说的原理一样），可知该命令指定了前16位是网络号，后16位是主机号。能分配的主机个数是65535个；默认网关是192.168.0.1 ， 网络名就叫mynet
 [root@localhost /]# docker network create --driver bridge --subnet 192.168.0.0/16 --gateway 192.168.0.1 mynet
 7ee3adf259c8c3d86fce6fd2c2c9f85df94e6e57c2dce5449e69a5b024efc28c
 [root@localhost /]# docker network ls
@@ -1962,12 +2032,11 @@ NETWORK ID          NAME                DRIVER              SCOPE
 c501704cf28e        host                host                local
 7ee3adf259c8        mynet               bridge              local  	#自定义的网络
 9354fbcc160f        none                null                local
-
 ```
 
 **自己的网络就创建好了：**
 
-![image-20200614011229854](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614011229854.png)
+![image-20200614011229854](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212131118666.png)
 
 
 
@@ -2056,13 +2125,34 @@ redis——不同的集群使用不同的网络，保证了集群的安全和健
 
 mysql——不同的集群使用不同的网络，保证了集群的安全和健康
 
-![image-20200614015209053](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614015209053.png)
+![image-20200614015209053](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212131118117.png)
 
-## 网络连通
+**那么两个子网之间是隔离的。这样可以保证集群的安全和健康！！！**
+**可是如果有需求让两个子网联通，那么该怎么操作呢？引出了下一个话题——网络连通**
 
-![image-20200614013625192](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614013625192.png)
+## 9.3 网络连通
 
-![image-20200614013801842](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614013801842.png)
+![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212131131858.png)
+
+**想实现上图的需求，需要先将 tomcat-01 与【mynet】 这个网关打通（见黄色字体），才能做到容器间打通**
+
+`docker network connect` 命令用于将容器连接到网络。可以按名称或ID连接容器。 一旦连接，容器可以与同一网络中的其他容器通信 
+
+<mark>实现的是不同网段的容器实现通信</mark>
+
+选项：
+
+- `--alias` 为容器添加网络范围的别名  
+- `--ip` 指定IP地址 
+- `--ip6` 指定IPv6地址 
+- `--link` 添加链接到另一个容器
+- `--link-local-ip` 添加容器的链接本地地址 
+
+示例：
+
+![image-20200614013625192](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212141545859.png)
+
+![image-20200614013801842](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212141545086.png)
 
 ```shell
 # 测试打通 tomcat01 — mynet
@@ -2073,7 +2163,9 @@ mysql——不同的集群使用不同的网络，保证了集群的安全和健
 [root@localhost /]# docker network inspect mynet
 ```
 
-![image-20200614014544797](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614014544797.png)
+你会发现在mynet的元数据中除了tomcat-net-01、02还加了一个刚刚放入的tomcat01容器网络！
+
+![image-20200614014544797](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212141545736.png)
 
 ```shell
 # tomcat01 连通ok
@@ -2094,188 +2186,910 @@ ping: tomcat-net-01: Name or service not known
 
 **结论：**假设要跨网络操作别人，就需要使用docker network connect  连通。。。
 
-## 实战：部署Redis集群
-
-![image-20200614124559172](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614124559172.png)
-
-启动6个redis容器，上面三个是主，下面三个是备！
-
-使用shell脚本启动！
-
-```shell
-# 创建redis集群网络
-docker network create redis --subnet 172.38.0.0/16
-
-# 通过脚本创建六个redis配置
-[root@localhost /]# for port in $(seq 1 6);\
-> do \
-> mkdir -p /mydata/redis/node-${port}/conf
-> touch /mydata/redis/node-${port}/conf/redis.conf
-> cat <<EOF>>/mydata/redis/node-${port}/conf/redis.conf
-> port 6379
-> bind 0.0.0.0
-> cluster-enabled yes
-> cluster-config-file nodes.conf
-> cluster-node-timeout 5000
-> cluster-announce-ip 172.38.0.1${port}
-> cluster-announce-port 6379
-> cluster-announce-bus-port 16379
-> appendonly yes
-> EOF
-> done
-
-# 查看创建的六个redis
-[root@localhost /]# cd /mydata/
-[root@localhost mydata]# \ls
-redis
-[root@localhost mydata]# cd redis/
-[root@localhost redis]# ls
-node-1  node-2  node-3  node-4  node-5  node-6
-
-# 查看redis-1的配置信息
-[root@localhost redis]# cd node-1
-[root@localhost node-1]# ls
-conf
-[root@localhost node-1]# cd conf/
-[root@localhost conf]# ls
-redis.conf
-[root@localhost conf]# cat redis.conf 
-port 6379
-bind 0.0.0.0
-cluster-enabled yes
-cluster-config-file nodes.conf
-cluster-node-timeout 5000
-cluster-announce-ip 172.38.0.11
-cluster-announce-port 6379
-cluster-announce-bus-port 16379
-appendonly yes
-```
+# 10. 实战
 
 
 
-```shell
-docker run -p 6371:6379 -p 16371:16379 --name redis-1 \
--v /mydata/redis/node-1/data:/data \
--v /mydata/redis/node-1/conf/redis.conf:/etc/redis/redis.conf \
--d --net redis --ip 172.38.0.11 redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
+## 1. 实战：部署Redis集群
 
-docker run -p 6372:6379 -p 16372:16379 --name redis-2 \
--v /mydata/redis/node-2/data:/data \
--v /mydata/redis/node-2/conf/redis.conf:/etc/redis/redis.conf \
--d --net redis --ip 172.38.0.12 redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
+![image-20200614124559172](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212141601223.png)
 
-docker run -p 6373:6379 -p 16373:16379 --name redis-3 \
--v /mydata/redis/node-3/data:/data \
--v /mydata/redis/node-3/conf/redis.conf:/etc/redis/redis.conf \
--d --net redis --ip 172.38.0.13 redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
+启动6个redis容器，上面三个是主，下面三个是备！ 如果发现有一个主挂了那么备会立即顶上去
 
-docker run -p 6374:6379 -p 16374:16379 --name redis-4 \
--v /mydata/redis/node-4/data:/data \
--v /mydata/redis/node-4/conf/redis.conf:/etc/redis/redis.conf \
--d --net redis --ip 172.38.0.14 redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
-
-docker run -p 6375:6379 -p 16375:16379 --name redis-5 \
--v /mydata/redis/node-5/data:/data \
--v /mydata/redis/node-5/conf/redis.conf:/etc/redis/redis.conf \
--d --net redis --ip 172.38.0.15 redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
-
-docker run -p 6376:6379 -p 16376:16379 --name redis-6 \
--v /mydata/redis/node-6/data:/data \
--v /mydata/redis/node-6/conf/redis.conf:/etc/redis/redis.conf \
--d --net redis --ip 172.38.0.16 redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
-```
-
-![image-20200614133829277](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614133829277.png)
+<mark>如果是集群那么这里就要建立redis集群的</mark>
 
 
 
-```shell
-[root@localhost conf]# docker exec -it redis-1 /bin/sh
-/data # ls
-appendonly.aof  nodes.conf
-/data # redis-cli --cluster create 172.38.0.11:6379 172.38.0.12:6379 172.38.0.13:6379 172.38.0.14:6379 172.38.0.15:6379 172.38.0.16:6379 --cluster-replicas 1
->>> Performing hash slots allocation on 6 nodes...
-Master[0] -> Slots 0 - 5460
-Master[1] -> Slots 5461 - 10922
-Master[2] -> Slots 10923 - 16383
-Adding replica 172.38.0.15:6379 to 172.38.0.11:6379
-Adding replica 172.38.0.16:6379 to 172.38.0.12:6379
-Adding replica 172.38.0.14:6379 to 172.38.0.13:6379
-M: c5551e2a30c220fc9de9df2e34692f20f3382b32 172.38.0.11:6379
-   slots:[0-5460] (5461 slots) master
-M: d12ebd8c9e12dbbe22e7b9b18f0f143bdc14e94b 172.38.0.12:6379
-   slots:[5461-10922] (5462 slots) master
-M: 825146ce6ab80fbb46ec43fcfec1c6e2dac55157 172.38.0.13:6379
-   slots:[10923-16383] (5461 slots) master
-S: 9f810c0e15ac99af68e114a0ee4e32c4c7067e2b 172.38.0.14:6379
-   replicates 825146ce6ab80fbb46ec43fcfec1c6e2dac55157
-S: e370225bf57d6ef6d54ad8e3d5d745a52b382d1a 172.38.0.15:6379
-   replicates c5551e2a30c220fc9de9df2e34692f20f3382b32
-S: 79428c1d018dd29cf191678658008cbe5100b714 172.38.0.16:6379
-   replicates d12ebd8c9e12dbbe22e7b9b18f0f143bdc14e94b
-Can I set the above configuration? (type 'yes' to accept): yes
->>> Nodes configuration updated
->>> Assign a different config epoch to each node
->>> Sending CLUSTER MEET messages to join the cluster
-Waiting for the cluster to join
-....
->>> Performing Cluster Check (using node 172.38.0.11:6379)
-M: c5551e2a30c220fc9de9df2e34692f20f3382b32 172.38.0.11:6379
-   slots:[0-5460] (5461 slots) master
-   1 additional replica(s)
-S: 79428c1d018dd29cf191678658008cbe5100b714 172.38.0.16:6379
-   slots: (0 slots) slave
-   replicates d12ebd8c9e12dbbe22e7b9b18f0f143bdc14e94b
-M: d12ebd8c9e12dbbe22e7b9b18f0f143bdc14e94b 172.38.0.12:6379
-   slots:[5461-10922] (5462 slots) master
-   1 additional replica(s)
-S: e370225bf57d6ef6d54ad8e3d5d745a52b382d1a 172.38.0.15:6379
-   slots: (0 slots) slave
-   replicates c5551e2a30c220fc9de9df2e34692f20f3382b32
-S: 9f810c0e15ac99af68e114a0ee4e32c4c7067e2b 172.38.0.14:6379
-   slots: (0 slots) slave
-   replicates 825146ce6ab80fbb46ec43fcfec1c6e2dac55157
-M: 825146ce6ab80fbb46ec43fcfec1c6e2dac55157 172.38.0.13:6379
-   slots:[10923-16383] (5461 slots) master
-   1 additional replica(s)
-[OK] All nodes agree about slots configuration.
->>> Check for open slots...
->>> Check slots coverage...
-[OK] All 16384 slots covered.
+步骤：
 
-```
+1. 创建redis的集群网络
 
-docker搭建redis集群完成！
+   ```shell
+   docker network create redis --subnet 172.38.0.0/16
+   ```
 
-![image-20200614141549867](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614141549867.png)
+2. 执行shell脚本
 
-我们使用docker之后，所有的技术都会慢慢变得简单起来！
+   ```shell
+   #通过脚本一次创建6个redis配置
+   for port in $(seq 1 6); \
+   do \
+   mkdir -p /mydata/redis/node-${port}/conf
+   touch /mydata/redis/node-${port}/conf/redis.conf
+   cat << EOF >/mydata/redis/node-${port}/conf/redis.conf
+   port 6379
+   bind 0.0.0.0
+   cluster-enabled yes
+   cluster-config-file nodes.conf
+   cluster-node-timeout 5000
+   cluster-announce-ip 172.38.0.1${port}
+   cluster-announce-port 6379
+   cluster-announce-bus-port 16379
+   appendonly yes
+   EOF
+   
+   # 通过脚本一次启动6个redis容器
+   docker run -p 637${port}:6379 -p 1637${port}:16379 --name redis-${port} \
+   -v /mydata/redis/node-${port}/data:/data \
+   -v /mydata/redis/node-${port}/conf/redis.conf:/etc/redis/redis.conf \
+   -d --net redis --ip 172.38.0.1${port} redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
+   
+   done
+   ```
+
+​	![image-20221216093828406](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212160938589.png)
+
+​	
+
+![image-20221216093851501](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212160938590.png)
+
+3. 查看正在运行的容器
+
+   ![image-20221216094025952](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212160940102.png)
+
+4. 创建集群
+
+   ```shell
+   # docker exec -it redis-1 /bin/sh
+   # redis-cli --cluster create 172.38.0.11:6379 172.38.0.12:6379 172.38.0.13:6379 172.38.0.14:6379 172.38.0.15:6379 172.38.0.16:6379 --cluster-replicas 1
+   ```
+
+5. 开始测试
+
+<img src="https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212161004371.png" alt="image-20200614141549867" style="zoom:200%;" />
+
+
 
 ---
 
 
 
-# Springboot微服务打包Docker镜像
+## 2. Springboot微服务打包Docker镜像
 
 1、构建springboot项目，打包应用
 
-![image-20200614155721369](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614155721369.png)
+![image-20200614155721369](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212161029649.png)
 
 2、编写Dockerfile，连同项目的jar包一并上传指定目录下
 
-![image-20200614153734161](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614153734161.png)
+![image-20200614153734161](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212161030689.png)
 
-![image-20200614154114656](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614154114656.png)
+![image-20200614154114656](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212161030487.png)
 
 3、构建镜像
 
-![image-20200614154355597](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614154355597.png)
+![image-20200614154355597](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212161030965.png)
 
 4、创建项目容器，发布运行！！！
 
-![image-20200614155034087](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614155034087.png)
+![image-20200614155034087](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212161030395.png)
 
-![image-20200614155340519](C:\Users\MiaoDaWei\Desktop\狂神docker笔记（超详细）\docekr进阶\docker容器数据卷.assets\image-20200614155340519.png)
+![image-20200614155340519](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212161030146.png)
 
-以后我们使用了Docker之后，给别人交付就是一个镜像即可！
+以后我们使用了Docker之后，给别人交付就是一个镜像即可！我们也可以把自己的镜像push到阿里云上
 
+
+
+# 11. Docker Compose
+
+## 概念
+
+​	**Docker-Compose** 是用来管理容器的，类似用户容器管家，我们有N多台容器或者应用需要启动的时候，如果手动去操作，是非常耗费时间的，如果有了 **Docker-Compose** 只需要一个配置文件就可以帮我们搞定，但是 **Docker-Compose** 只能管理当前主机上的 Docker，不能去管理其他服务器上的服务。意思就是单机环境。docker-compose是基于docker的编排工具，使容器的操作能够批量的，可视的执行，是一个管理多个容器的工具，比如可以解决容器之间的依赖关系，当在宿主机启动较多的容器时候，如果都是手动操作会觉得比较麻烦而且容器出错，这个时候推荐使用 dockerd的单机编排工具 docker-compose。
+
+​	docker-compose是基于docker的开源项目，托管于github上，由python实现，调用 docker服务的API负责实现对docker容器集群的快速编排，即通过一个单独的yaml文件，来定义一组相关的容器来为一个项目服务。
+
+　　所以，docker-compose默认的管理对象是项目，通过子命令的方式对项目中的一组容器进行生命周期的管理。
+
+> 理解: docker-compose就是一个单机批量操作多容器的一键部署解决方案。
+
+**在后面我们可以docker-compose up 100个服务。**
+
+相关术语：
+
+1. 服务 (service)：一个应用容器，实际上可以运行多个相同镜像的实例
+2. 项目 (project)：由一组关联的应用容器组成的一个完整业务单元
+
+可见，一个项目可以由多个服务（容器）关联而成，Compose 面向项目进行管理
+
+## 安装-卸载
+
+```shell
+# 官网提供 （没有下载成功-很慢）
+curl -L "https://github.com/docker/compose/releases/download/2.14.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+ 
+# 国内地址，下载速度很快
+curl -L https://get.daocloud.io/docker/compose/releases/download/2.14.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+```
+
+授权：
+
+```shell
+chmod +x /usr/local/bin/docker-compose
+```
+
+验证是否安装成功:
+
+![image-20221219095623047](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212190956190.png)
+
+卸载：
+
+```shell
+rm /usr/local/bin/docker-compose
+```
+
+**以上是通过二进制包方式安装的，所以这里删除二进制文件即可**
+
+## 快速开始
+
+这是官方快速开始的例子：https://docs.docker.com/compose/gettingstarted/
+
+这里例子的话根据官网来的，一个计数器!
+
+1. 创建目录
+
+   ```shell
+   mkdir composetest
+   cd composetest
+   ```
+
+2. 目录下创建文件`app.py`,并复制其内容
+
+   ```python
+   import time
+   
+   import redis
+   from flask import Flask
+   
+   app = Flask(__name__)
+   cache = redis.Redis(host='redis', port=6379)
+   
+   def get_hit_count():
+       retries = 5
+       while True:
+           try:
+               return cache.incr('hits')
+           except redis.exceptions.ConnectionError as exc:
+               if retries == 0:
+                   raise exc
+               retries -= 1
+               time.sleep(0.5)
+   
+   @app.route('/')
+   def hello():
+       count = get_hit_count()
+       return 'Hello World! I have been seen {} times.\n'.format(count)
+   ```
+
+3. 创建一个导入的依赖包`requirements.txt`文件，并复制其内容：
+
+   ```
+   flask
+   redis
+   ```
+
+4. 创建一个`Dockerfile`文件，并复制其内容：
+
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM python:3.7-alpine
+   WORKDIR /code
+   ENV FLASK_APP=app.py
+   ENV FLASK_RUN_HOST=0.0.0.0
+   RUN apk add --no-cache gcc musl-dev linux-headers
+   COPY requirements.txt requirements.txt
+   RUN pip install -r requirements.txt
+   EXPOSE 5000
+   COPY . .
+   CMD ["flask", "run"]
+   ```
+
+5. 创建一个`docker-compose.yml`文件
+
+   ```yaml
+   version: "3"	
+   services:	# 服务列表
+     web:
+       build: .	# 同价为dockerfile进行build进行构建，如果这里只写一个.那么就表示会自动去寻找构建Dockerfile文件，如果想要指定则下一行输入 dockerfile：文件地址名称
+       ports:
+         - "8000:5000"		# 暴露端口
+     redis:
+       image: "redis:alpine" 	#从官方镜像上进行拉取镜像
+   ```
+
+6. 运行命令`docker-compose up`,然后看效果：
+
+   ![image-20221219110229491](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212191102558.png)
+
+> 核心就四步骤：
+
+1. 准备应用-项目应用
+2. 编辑Dockerfile文件并准备打包镜像
+3. Docker-compose yaml文件（定义整个服务，需要的环境 web、redis） 完整的上线服务！
+4. 启动compose项目（docker-compose up）
+
+流程：
+
+1. 创建网络
+2. 执行Docker-compose.yaml
+3. 启动服务![image-20221219111905207](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212191119378.png)
+
+
+
+## 默认规则
+
+1. 在启动后查看镜像：
+
+![image-20221219112410326](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212191124399.png)
+
+发现：以前我们需要手动的一个一个pull拉取run运行，现在只需要在yaml里面配置即可!就可批量启动！
+
+2. 查看启动后的容器：
+
+   ![image-20221219113450957](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212191134014.png)
+
+这里命名格式为：**文件夹名\_服务名_num**
+
+解释：在集群中如果有多个相同服务，那么这里的num就表示副本数量
+
+记住一点：我们的服务都不可能只有一个运行实例，我们的服务都是弹性的！
+
+3. 网络规则
+
+查看网络：
+
+![image-20221219132716778](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212191327848.png)
+
+这是刚刚会默认创建的网络，我们再看一下这个元数据：
+
+![image-20221219132904932](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212191329049.png)
+
+此时我们发现其中两个服务已自动添加到当前网络并配置ip地址，这样有个好处就是：
+
+在我们访问其redis的主机时就可以不用以ip来ping而是以域名来ping，比如：
+
+```python
+在刚刚上面写的app.py里访问redis的主机
+cache = redis.Redis(host='redis', port=6379)
+好处：不管每次启动或者ip变化而去修改，以域名访问也可以
+```
+
+## 相关命令
+
+**docker-compose**命令要在指定有docker-compose.yml下进行使用，因为这些命令也是要找到后才会执行，否则就会失败！
+
+> 停止容器
+
+1. docker-compose down
+2. ctrl+c
+
+![image-20221219142032576](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212191420659.png)
+
+发现：这里停止了对应的容器后进行移除，并且移除了网络！
+
+并且这是批量操作的省略了我们一个一个停止的操作！
+
+**通过docker-compose编写yaml配置文件，就可以通过compose一键启动所有服务，停止！**
+
+## yaml规则
+
+https://docs.docker.com/compose/compose-file/#depends_on
+
+编写规则其实只要记住核心就**三层**。
+
+```yaml
+# 3层
+version: ' ' 	# 1. 版本
+services:	# 2. 服务
+	服务1：web
+		# 服务配置
+		images:	
+        	build:
+        	network:
+	服务2：redis
+	....
+# 3. 其他配置 网络/卷、 全局规则
+volumes:
+networks:
+configs:
+```
+
+个别注意的点：
+
+> depends_on： 项目中出现启动顺序问题时可以由这个进行指定
+
+案例：
+
+```yaml
+services:
+  web:
+    build: .
+    depends_on:	# 启动web时先启动db、redis
+      - db
+      - redis
+  redis:
+    image: redis
+  db:
+    image: postgres
+```
+
+## 实战
+
+### 博客
+
+根据官方例子:https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/wordpress/
+
+
+
+1. 编写`docker-compose.yaml`文件：
+
+   ```yaml
+   #指定 docker-compose.yml 文件的版本
+   version: '3.3'
+   
+   # 定义所有的 service 信息, services 下面的第一级别的 key 既是一个 service 的名称
+   services:
+      db:
+        image: mysql:5.7
+        volumes:
+          - db_data:/var/lib/mysql
+        # 定义容器重启策略
+        restart: always
+        # 设置环境变量， environment 的值可以覆盖 env_file 的值 
+        environment:
+          MYSQL_ROOT_PASSWORD: somewordpress
+          MYSQL_DATABASE: wordpress
+          MYSQL_USER: wordpress
+          MYSQL_PASSWORD: wordpress
+   
+      wordpress:
+        #docker-compose up 以依赖顺序启动服务，先启动db
+        depends_on:
+          - db
+        image: wordpress:latest
+        # 建立宿主机和容器之间的端口映射关系,容器的 80 端口和宿主机的 8000 端口建立映射关系
+        ports:
+          - "8000:80"
+        restart: always
+        environment:
+          WORDPRESS_DB_HOST: db:3306
+          WORDPRESS_DB_USER: wordpress
+          WORDPRESS_DB_PASSWORD: wordpress
+          WORDPRESS_DB_NAME: wordpress
+   # 定义容器和宿主机的卷映射关系, 其和 networks 一样可以位于 services 键的二级key和 compose 顶级key, 如果需要跨服务间使用则在顶级key定义, 在 services 中引用
+   volumes:
+       db_data: {}
+   ```
+
+2. 如果需要文件，比如我们自己的本地应用等则需要编辑Dockerfile文件
+
+3. 一键启动容器
+
+   ```dockerfile
+   dokcer-compose up -d
+   ```
+
+4. 如果需要停止
+
+   ```sh
+   该命令docker compose down删除容器和默认网络，但保留您的 WordPress 数据库。
+   
+   该命令docker compose down --volumes删除容器、默认网络和 WordPress 数据库。
+   ```
+
+   ![img](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212191658169.png)
+
+
+
+
+
+### 自己编写服务上线
+
+1. 新建一个springBoot服务，此处我springBoot版本`2.5.14`,java版本`11`,版本过高报了些奇奇怪怪的异常
+
+2. 新建controller
+
+   ```java
+   @RestController
+   public class TestController {
+   
+       @Autowired
+       private StringRedisTemplate redisTemplate;
+   
+       @GetMapping("/hello")
+       public String test(){
+           Long increment = redisTemplate.opsForValue().increment("a");
+           return "Hello miaowei，you is good " + increment;
+       }
+   }
+   ```
+
+3. 编写application.properties
+
+   ```properties
+   # 这里连接redis的主机直接就是域名，这里名字是docker-compose.yml里的redis的名字
+   spring.redis.host=redis    
+   ```
+
+4. 新建Dockerfile
+
+   ```dockerfile
+   FROM openjdk:11	# 传统java:11 在官方仓库里已经没有了
+   
+   COPY *.jar /app.jar	# 将外层里的jar包复制进该构建的镜像里面去
+   
+   CMD ["--server.port=8080"]
+   
+   EXPOSE 8080
+   
+   ENTRYPOINT ["java","-jar","/app.jar"]	# 后面在run启动该容器时执行该jar包
+   ```
+
+5. 新建docker-compose.yml
+
+   ```yaml
+   version: '3.3'
+   services:
+     miaoapp:	# 服务名，后面run容器的中会出现这个名称
+       build: .	# 后面有个点，表示在当前目录下寻找Dockerfile文件并进行构建
+       image: miaoweiapp	# 标注这个镜像的名字
+       depends_on:
+         - redis	# 表示优先启动redis这个服务
+       ports:		# 对外展示的端口
+         - "8080:8080"
+     redis:	# 这里名字自定，在jar包中连接redis，主机名跟这个保持一致就可连接
+       image: "redis:alpine"	# 镜像
+   ```
+
+6. 复制到Linux中同一目录下（将写好的代码进行打包）：
+
+   ![image-20221220101923716](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201019784.png)
+
+7. 执行命令`docker-compose up -d`
+
+   ![image-20221220102221317](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201022378.png)
+
+8. 界面访问：
+
+   ![image-20221220102251526](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201022585.png)
+
+9. 查看运行的容器：
+
+   ![image-20221220102512952](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201025014.png)
+
+10. 结束停止访问`docker-compose down`
+
+> 记住：所有的docker-compose的命令都是建立在当前目录下有docker-compose.yml文件才能执行，否则都是找不到！
+
+# 12. Docker Swarm
+
+## 概念
+
+官网文档连接：https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/
+
+解释：
+
+​	Docker Engine 1.12 引入了 swarm 模式，使您能够创建一个或多个 Docker 引擎的集群，称为 swarm。**一个 swarm 由一个或多个节点组成**
+
+架构：
+
+![image-20221220153029223](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201530540.png)
+
+
+
+> 工作模式
+
+节点分为两种：manages和works。
+
+![Swarm 模式集群](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201322061.png)
+
+有图可知：
+
+1. manager是管理节点，worker是工作节点
+2. 操作都在manager节点上，且工作节点之间是可以互相管理的。manager可以操作worker，但worker不能操作manager。
+3. Raft一致性算法是为了保证上面三个管理节点的可用性，无论谁挂了都可以保证一台节点的存活！整个成为一个高可用！
+
+
+
+**注意**：Raft协议要求管理节点至少得3台以上，如果是双主，一个主节点挂了，另外一个不能继续使用！
+
+```ejs
+Error response from daemon: rpc error: code = Unknown desc = The swarm does not have a leader. It's possible that too few managers are online. Make sure more than half of the managers are online.
+```
+
+## 常用命令
+
+```dockerfile
+# 初始化集群
+docker swarm init 	#针对机器只有一个IP的情况
+docker swarm init --advertise-addr 172.16.1.13 # 针对机器有多个IP的情况，需要指定一个IP，一般都是指定内网IP
+ 
+# 查看工作节点的 token
+ docker swarm join-token worker 	
+ 
+# 查看管理节点的 token
+ docker swarm join-token manager
+ 
+# 加入集群
+ docker swarm join
+```
+
+节点相关：
+
+```shell
+# 查看集群所有节点
+ docker node ls 
+	
+# 查看当前节点所有任务
+ docker node ps
+ 
+# 删除节点（-f强制删除）
+docker node rm 节点名称| 节点ID
+ 
+# 查看节点详情
+docker node inspect 节点名称| 节点ID 
+	
+# 节点降级，由管理节点降级为工作节点
+docker node demote 节点名称| 节点ID 	
+ 
+# 节点升级，由工作节点升级为管理节点
+docker node promote 节点名称| 节点ID 	
+ 
+# 更新节点
+docker node update 节点名称| 节点ID 	
+```
+
+服务相关：
+
+```shell
+#创建服务
+ docker service create
+ 
+# 查看所有服务
+ docker service ls 	
+ 
+# 查看服务的详细信息
+ docker service inspect 服务名称|服务ID
+ 	
+# 查看服务日志
+ docker service logs 服务名称|服务ID
+ 	
+# 删除服务（-f强制删除）
+ docker service rm 服务名称|服务ID
+ 	
+# 设置服务数量
+ docker service scale 服务名称|服务ID=n 	
+ 
+# 更新服务
+ docker service update 服务名称|服务ID 	
+```
+
+其他：
+
+```shell
+#管理节点，解散集群
+docker swarm leave --force
+#普通节点：
+docker swarm leave
+
+#在任意 Manager 节点中运行 docker info 可以查看当前集群的信息
+docker info 
+```
+
+
+
+
+
+## 购买服务器
+
+> 至少选择1核2G的，并且预算不足可以使用按量付费模式
+
+1. 账户余额至少充值100，才能开始使用按量付费模式
+
+2. 创建实例
+
+   ![image-20221220112030308](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201120700.png)
+
+3. 选择
+
+   ```
+   1. 选择按量付费
+   2. 选择离自己较近的区域（可用区随便选择）
+   3. 选择共享型（便宜）
+   	3.1 选择1核2G的
+   4. 实例数量（由自己选择）
+   5. 镜像选择（Centos 版本7）
+   ```
+
+4. 下一步
+
+   ```
+   1. 带宽计费模式： 选择按使用流量
+   2. 带宽峰值： 直接拉满，毕竟是按照按流量模式，这里无所谓的
+   3. 安全组：选择自己之前创建的，这样后面的都在一个安全组内，互相ping不走外网不费流量，省钱
+   ```
+
+5. 下一步
+
+   选择自定义密码，然后输入登录密码都是一样，方便记忆和登录
+
+6. 确认订单
+
+   ![image-20221220112912069](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201129160.png)
+
+7. ![image-20221220112943046](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201129113.png)
+
+8. 在本地FinalShell进行连接，然后执行相同命令发送到其他会话里
+
+   ![image-20221220113509624](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201135731.png)
+
+9. 都安装docker
+
+   。。。。
+
+10. 相同会话发送位置在这里：
+
+    ![image-20221220114210993](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201142078.png)
+
+## Swarm集群搭建
+
+就两步：
+
+1. 生成主节点init
+2. 加入（管理者、worker)
+
+
+
+​	在任意节点下通过 `docker swarm init` 命令创建一个新的 Swarm 集群并加入，且该节点会默认成为 Manager 节点。一般任意一台机器上运行该命令即可。通常第一个加入集群的管理节点将成为 `Leader`，后来加入的管理节点都是 `Reachable`。当前的 Leader 如果挂掉，所有的 Reachable 将重新选举一个新的 Leader。
+
+> 创建集群
+
+首先通过`ip addr`获取到linux内网地址： 172.26.221.63
+
+然后创建一个集群并初始化：
+
+![image-20221220141347353](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201413466.png)
+
+> 加入集群
+
+​	Docker 中内置的集群模式自带了公钥基础设施(PKI)系统，使得安全部署容器变得简单。集群中的节点使用传输层安全协议(TLS)对集群中其他节点的通信进行身份验证、授权和加密。
+
+
+
+​	默认情况下，通过 `docker swarm init` 命令创建一个新的 Swarm 集群时，Manager 节点会生成新的根证书颁发机构（CA）和密钥对，用于保护与加入群集的其他节点之间的通信安全。
+
+
+
+​	Manager 节点会生成两个令牌，供其他节点加入集群时使用：一个 Worker 令牌，一个 Manager 令牌。每个令牌都包括根 CA 证书的摘要和随机生成的密钥。当节点加入群集时，加入的节点使用摘要来验证来自远程管理节点的根 CA 证书。远程管理节点使用密钥来确保加入的节点是批准的节点。
+
+----
+
+Manager:
+
+​	若要向该集群添加 Manager 节点，管理节点先运行 `docker swarm join-token manager` 命令查看管理节点的令牌信息。
+
+![image-20221220142221316](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201422413.png)
+
+表示：要想加入swarm集群，则执行以下这个命令来指示！
+
+![image-20221220142511019](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201425099.png)
+
+运行 `docker swarm join` 并携带令牌参数加入 Swarm 集群，该节点角色为 Manager。
+
+-----
+
+Worker:
+
+​	通过创建集群时返回的结果可以得知，要向这个集群添加一个 Worker 节点，运行下图中的命令即可。或者管理节点先运行 `docker swarm join-token worker` 命令查看工作节点的令牌信息。
+
+![image-20221220142744236](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201427334.png)
+
+然后在其他节点上运行 `docker swarm join` 并携带令牌参数加入 Swarm 集群，该节点角色为 Worker
+
+![image-20221220143245810](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201432890.png)
+
+> 查看集群节点
+
+在任意 Manager 节点中运行 `docker node ls` 可以查看当前集群节点信息。
+
+![image-20221220143522959](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201435048.png)
+
+​	`*` 代表当前节点，现在的环境为 2 个管理节点构成 1 主 1 从，以及 2 个工作节点。 节点 `MANAGER STATUS` 说明：表示节点是属于 Manager 还是 Worker，没有值则属于 Worker 节点。
+
+- `Leader`：该节点是管理节点中的主节点，负责该集群的集群管理和编排决策；
+- `Reachable`：该节点是管理节点中的从节点，如果 Leader 节点不可用，该节点有资格被选为新的 Leader；
+- `Unavailable`：该管理节点已不能与其他管理节点通信。如果管理节点不可用，应该将新的管理节点加入群集，或者将工作节点升级为管理节点
+
+
+
+节点 `AVAILABILITY` 说明：表示调度程序是否可以将任务分配给该节点。
+
+- `Active`：调度程序可以将任务分配给该节点；
+- `Pause`：调度程序不会将新任务分配给该节点，但现有任务仍可以运行；
+- `Drain`：调度程序不会将新任务分配给该节点，并且会关闭该节点所有现有任务，并将它们调度在可用的节点上
+
+## 节点的删除
+
+> Manager
+
+​	删除节点之前需要先将该节点的 `AVAILABILITY` 改为 `Drain`。其目的是为了将该节点的服务迁移到其他可用节点上，确保服务正常。最好检查一下容器迁移情况，确保这一步已经处理完成再继续往下。
+
+```shell
+docker node update --availability drain 节点名称|节点ID
+```
+
+然后，将该 Manager 节点进行降级处理，降级为 Worker 节点。
+
+```shell
+docker node demote 节点名称|节点ID
+```
+
+然后，在已经降级为 Worker 的节点中运行以下命令，离开集群
+
+```shell
+docker swarm leave
+```
+
+最后，在管理节点中对刚才离开的节点进行删除。
+
+```shell
+docker node rm 节点名称|节点ID
+```
+
+> Worker
+
+​	删除节点之前需要先将该节点的 `AVAILABILITY` 改为 `Drain`。其目的是为了将该节点的服务迁移到其他可用节点上，确保服务正常。最好检查一下容器迁移情况，确保这一步已经处理完成再继续往下。
+
+```shell
+docker node update --availability drain 节点名称|节点ID
+```
+
+然后，在准备删除的 Worker 节点中运行以下命令，离开集群
+
+```shell
+docker swarm leave
+```
+
+最后，在管理节点中对刚才离开的节点进行删除。
+
+```shell
+docker node rm 节点名称|节点ID
+```
+
+## 弹性服务
+
+​	以前是docker run来启动容器，后来通过docker-compose up 来启动一个项目，但这些都是单机版的！现在在企业中为了高可用变成了集群，那么就是swarm docker-service!
+
+**服务具有动态扩缩容、滚动更新的功能**
+
+### 创建服务
+
+```sh
+docker service create --replicas 1 --name mynginx -p 80:80 nginx
+```
+![image-20221220162031255](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201620355.png)
+
+- `docker service create`：创建服务；
+- `--replicas`：指定一个服务有几个实例运行；
+- `--name`：服务名称。
+
+浏览器访问:
+
+![image-20221220162422982](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201624061.png)
+
+验证：四台机器，每台无论是主还是从 都可以访问nginx；可以认为集群就是一个整体！也就是说该集群下任意节点的IP地址都能访问到该服务。
+
+> 查看正在运行的服务
+
+可以通过`docker service ls` 查看运行的服务。
+
+![image-20221220162615174](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201626244.png)
+
+注意：仅限于管理节点上操作，工作节点无法进行操作！
+
+
+
+> 查看服务运行在哪些节点上
+
+可以通过 `docker service ps 服务名称|服务ID` 查看服务运行在哪些节点上。
+
+![image-20221220163333817](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201633897.png)
+
+在对应的任务节点上运行 `docker ps` 可以查看该服务对应容器的相关信息。
+
+注意：是在对应的任务节点上，这个在创建服务时是任意分配的！其他没有安装的节点上是查询不存在的！
+
+### 弹性服务
+
+​	将 service 部署到集群以后，可以通过命令弹性扩缩容 service 中的容器数量。在 service 中运行的容器被称为 task（任务）。 
+
+1. 通过`docker service scale服务名称|服务ID=n`可以将service运行的任务扩缩容为n个。 
+2. 通过`docker service update --replicas n 服务名称|服务ID`也可以达到扩缩容的效果。将mynginx service 运行的任务扩展为5个：
+
+![image-20221220165924255](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201659335.png)
+
+扩容了5台，然后我们查看这5台分配到不同的节点上进行部署！
+
+![image-20221220165855784](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201658885.png)
+
+---
+
+想要运行指定数量的服务，docker swarm实现了动态化的**扩缩**！
+
+### 删除服务
+
+通过 `docker service rm 服务名称|服务ID` 即可删除服务。
+
+```shell
+[root@manager1 ~]# docker service rm mynginx
+ 
+mynginx
+ 
+[root@manager1 ~]# docker service ls
+ID                NAME              MODE              REPLICAS          IMAGE             PORTS
+```
+
+### 容器的滚动更新及回滚
+
+Redis 版本如何滚动升级至更高版本再回滚至上一次的操作。
+
+> 首先创建5个Redis服务副本，版本为 5，详细命令如下：
+
+```shell
+docker service create --replicas 5 --name redis \
+--update-delay 10s \
+--update-parallelism 2 \
+--update-failure-action continue \
+--rollback-monitor 20s \
+--rollback-parallelism 2 \
+--rollback-max-failure-ratio 0.2 \
+redis:5
+```
+
+![image-20221220170919584](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201709694.png)
+
+解释：
+
+​	创建 5 个副本，每次更新 2 个，更新间隔 10s，20% 任务失败继续执行，超出 20% 执行回滚，每次回滚 2 个
+
+- --update-delay：定义滚动更新的时间间隔；
+- --update-parallelism：定义并行更新的副本数量，默认为 1；
+- --update-failure-action：定义容器启动失败之后所执行的动作；
+- --rollback-monitor：定义回滚的监控时间；
+- --rollback-parallelism：定义并行回滚的副本数量；
+- --rollback-max-failure-ratio：任务失败回滚比率，超过该比率执行回滚操作，0.2 表示 20%。
+
+> 开始滚动更新redis的版本：
+
+```shell
+docker service update --image redis:6 redis
+```
+
+![image-20221220171604534](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201716681.png)
+
+> 回滚服务，只能回滚到上一次操作的状态，并不能连续回滚到指定操作
+
+```shell
+docker service update --rollback redis
+```
+
+![image-20221220171747791](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201717961.png)
