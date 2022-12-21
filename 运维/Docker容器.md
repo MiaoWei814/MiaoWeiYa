@@ -2420,6 +2420,8 @@ rm /usr/local/bin/docker-compose
 
    ![image-20221219110229491](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212191102558.png)
 
+注意：如果Docker-compose.yml不在当前目录下，需要指定，则需要在`docker-compose up 文件地址`来指定
+
 > 核心就四步骤：
 
 1. 准备应用-项目应用
@@ -2680,6 +2682,21 @@ services:
 
 > 记住：所有的docker-compose的命令都是建立在当前目录下有docker-compose.yml文件才能执行，否则都是找不到！
 
+## 小结
+
+- Docker Compose是一个开源项目，用来统一编排多个应用的
+- 多个应用=服务->这些应用都会在同一个网络下->可通过域名直接访问
+- 默认的服务名为：文件夹名称\_镜像名_副本数量（运行数量）
+- Dockerfile 用于构建镜像，docker-compose.yaml 用于编排项目，同时组装多个应用
+- docker-compose.yaml 文件结构总共三层
+  - docker compose版本
+  - 服务
+  - 其他配置
+- 如何使用:
+  1. 准备好项目并编写 Dockerfile（可省略，如果直接使用仓库镜像的话）
+  2. 编写docker-compose.yaml 编排项目
+  3. 在当前目录（docker-compose.yaml文件所在目录）运行`docker-compose up`; 停止`docker-compose down`
+
 # 12. Docker Swarm
 
 ## 概念
@@ -2759,6 +2776,8 @@ docker node update 节点名称| 节点ID
 ```
 
 服务相关：
+
+service的相关命令：https://blog.csdn.net/cold___play/article/details/125341414
 
 ```shell
 #创建服务
@@ -3093,3 +3112,530 @@ docker service update --rollback redis
 ```
 
 ![image-20221220171747791](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212201717961.png)
+
+
+
+## 相关概念解释
+
+> Swarm
+
+集群的管理和编排，docker可初始化一个swarm集群，其他节点可加入（manager、worker）
+
+> Node
+
+就是一个docker节点，多个节点组成了一个网络集群（manager、worker）
+
+> Service
+
+服务、可管理节点或者工作节点运行
+
+![image-20221221094119543](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212210941654.png)
+
+swarm 接收服务并且调度任务给 worker 节点manager：
+
+![image-20221221094419168](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212210944271.png)
+
+manager：
+
+```
+1. 接收命令并创建service
+2. 循环创建并调度 service
+3. 分配 ip 地址给task
+4. 分配 task 给节点
+5. 命令 worker 运行 task
+```
+
+worker node：
+
+```
+1. 连接并确认被分配的 task
+2. 执行 tasks
+```
+
+
+
+
+
+
+
+
+
+> Task
+
+容器内的命令
+
+![image-20221221093143749](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212210931849.png)
+
+## 服务副本与全局服务
+
+有两种service的部署模式，**复制与全局**
+
+> 复制（默认）
+
+在设置task任务的时候会根据当前已有的节点进行创建并部署相同副本的http服务，
+
+> 全局
+
+不能指定task的数量，每次增加一个节点，协调器会创建一个task，并有调度器分配到新节点上！
+
+----
+
+![image-20221221095944254](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212210959358.png)
+
+命令：
+
+```shell
+--mode
+docker service create --mode replicated 默认的  --mode global
+场景：
+日志收集：每一个节点有自己的日志收集器，过滤，再把所有日志最终传给日志中心。
+服务监控
+```
+
+理解：
+
+**服务副本**：默认的，可以设置创建副本的数量然后根据当前有多少节点进行分配，如果此时创建新的节点不会进行处理，除非又重新设置创建节点副本才可能会分配task任务。
+
+**全局服务**：不能设置task数量，整个集群有多少个节点就分配多少个task任务，每创建添加一个节点就将任务添加分配！
+
+## 小结
+
+- Docker Swarm 是docker-compose的集群版，采用的是 Raft 协议
+
+  1. 最多容忍 N-1/2个节点 挂掉
+
+- 两种类型的节点
+
+  1. manager：主节点
+     - 可查看集群信息、扩缩容、运行服务等
+  2. worker：工作节点
+     - 仅可运行服务，不允许控制扩缩容等
+
+- service=多个服务=多个node节点
+
+  1. 服务=task+容器
+
+- 服务分为全局服务和服务副本（默认）
+
+  
+
+  
+
+# 13. Docker stack
+
+概念：
+
+​	Docker-Compose的缺点是不能在分布式多机器上使用。此时我们学习了Docker-Swarm但缺点是不能同时编排多个服务，那么此时Docker-Stack的优点就出来了：**可以在分布式多机器上同时编排多个任务**。
+
+  
+
+案例：https://www.jianshu.com/p/d250b91c7adf
+
+相关命令：
+
+![image-20221221100927714](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212211009800.png)
+
+一个stack 是一组相互关联的 service，这组 service共享依赖，可被安排在一起运行和扩展：
+
+```shell
+# docker-compose 单机部署
+docker-compose up -d
+# docker stack 集群部署
+# docker stack deploy -c [docker-compose.yml] [service name]
+docker stack deploy -c docker-compose.yml mygoweb
+docker stack deploy myapps --compose-file=/wordpress.yaml
+# 查看所有stack
+docker stack ls
+```
+
+# 14. Docker Secret
+
+官网描述：Manage Docker secrets 管理 Docker 机密
+
+1. 用户名密码
+2. SSH Key
+3. TLS认证
+4. 任何不想让别人看到的数据
+
+​	我们知道有的service是需要设置密码的，比如mysql服务是需要设置密码的。比如：docker-compose.yml中的service密码都是明文，这样就导致了不是很安全。
+
+![image-20221221101227876](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212211012958.png)
+
+我们知道manager节点保持状态的一致是通过Raft Database这个分布式存储的数据库，它本身就是将信息进行了secret，所以可以利用这个数据库将一些敏感信息，例如账号、密码等信息保存在这里，然后通过给service授权的方式允许它进行访问，这样达到避免密码明文显示的效果。
+
+
+
+总之，secret的Swarm中secret的管理通过以下步骤完成：
+
+1. secret存在于Swarm Manager节点的的Raft Database里
+
+2. secret可以assign给一个service，然后这个service就可以看到这个secret
+3. 在container内部secret看起来像文件，实际上就是内存
+
+
+
+## 创建与使用
+
+1. docker secret的帮助命令：
+
+   ![image-20221221101802190](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212211018296.png)
+
+2. 查看secret的创建命令：
+
+   ![image-20221221102242749](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212211022850.png)
+
+开始：
+
+```shell
+#首先先创建一个文件用于存放mysql密码 密码为：root
+[root@localhost home]# vim mysql-password
+[root@localhost home]# cat mysql-password
+root
+#创建secret 基于文件创建
+#这些都是建立在有一个集群的基础上的。要搭建好docker swarm.
+#mysql-pass是secret的名称，mysql-password是我们建立存储密码的文件，这样执行后就相当于将文件中的密码存储在Swarm中manager节点的Raft Database中了
+[root@localhost home]# docker secret create mysql-pass
+mysql-password
+uwrfxavvhpm3opyx7hyvdxkhk
+#为了安全起见，现在可以直接将这个文件删掉，因为Swarm中已经有这个密码了。
+[root@localhost home]# rm -f mysql-password
+#查看secret列表
+[root@localhost home]# docker secret ls
+ID             NAME     DRIVER  CREATED UPDATED
+uwrfxavvhpm3opyx7hyvdxkhk  mysql-pass       About aminute ago  About a minute ago
+#创建secret 基于命令创建
+#docker secret create [OPTIONS] CONFIG file|-
+[root@localhost home]# echo "root" | docker secret create mysql-pass2 -
+#查看secret列表
+[root@localhost home]# docker secret ls
+ID             NAME     DRIVER  CREATED     UPDATED
+uwrfxavvhpm3opyx7hyvdxkhk  mysql-pass        2 minutes ago  2 minutes ago
+9mis56r456xj55tkvnn3npq42  mysql-pass2       7 seconds ago  7 seconds ago
+#查看更多信息
+# docker secret inspect mysql-pass2
+[
+ {
+    "ID": "9mis56r456xj55tkvnn3npq42",
+    "Version": {
+      "Index": 101
+   },
+    "CreatedAt": "2022-04-01T02:42:51.986190083Z",
+    "UpdatedAt": "2022-04-01T02:42:51.986190083Z",
+    "Spec": {
+      "Name": "mysql-pass2",
+      "Labels": {}
+   }
+ }
+]
+#删除secret
+[root@localhost home]# docker secret rm mysql-pass2
+mysql-pass2
+[root@localhost home]# docker secret ls
+ID             NAME     DRIVER  CREATED UPDATED
+uwrfxavvhpm3opyx7hyvdxkhk  mysql-pass       4 minutes ago  4 minutes ago
+#Secret在单容器中的使用
+#容器中查看secret,启动一个服务后，将其授权给特定的服务使其可以看到
+#docker service create -secret mysql-pass(密码名字) 创建服务时可以给服务暴露出secret
+#创建服务
+[root@localhost home]# docker service create --name demo --secret mysql-pass busybox sh -c "while true; do sleep 3600; done"
+l5tc9hplb9kdue0ogu7tzazc2
+overall progress: 1 out of 1 tasks
+1/1: running 
+verify: Service converged
+#查看这个服务运行在那个节点上
+[root@localhost home]# docker service ls
+ID       NAME    MODE     REPLICAS  IMAGE   PORTS
+l5tc9hplb9kd  demo    replicated  1/1   busybox:latest j5yu04xqlfe1
+[root@localhost home]# docker service ps demo
+ID       NAME   IMAGE      NODE       DESIRED STATE  CURRENT STATE     ERROR PORTS
+c1b8oz3ppbn6  demo.1  busybox:latest localhost.localdomain  Running     Running about a minute agomy-ngnix  replicated  3/3    nginx:latest *:8888->80/tcp
+#可以看到这个服务运行在localhost.localdomain主机的节点上，去这个节点上进入到容器内部，查看secret：
+[root@localhost home]# docker ps
+CONTAINER ID  IMAGE      COMMAND    CREATED       STATUS       PORTS   NAMES
+bd823abfcf67  busybox:latest  "sh -c 'while true; …"  About a minute ago  Up About a minute demo.1.c1b8oz3ppbn685shhvg83egik
+[root@localhost home]# docker exec -it bd823abfcf67
+/bin/sh
+/ # cd /run/secrets/
+/run/secrets # ls
+mysql-pass
+/run/secrets # cat mysql-pass
+root
+```
+
+## 实战MySQL
+
+```shell
+#mysql服务
+#关于mysql镜像官网有关于secret的描述：
+#作为通过环境变量传递敏感信息的替代方法，_FILE可以将其附加到先前列出的环境变量中，从而使初始化脚本从容器中存在的文件中加载那些变量的值。
+#特别是，这可用于从/run/secrets/<secret_name>文件中存储的DockerSecret加载密码。例如：
+#$ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql-root -d ysql:tag
+#目前，这仅支持MYSQL_ROOT_PASSWORD，MYSQL_ROOT_HOST，
+MYSQL_DATABASE，MYSQL_USER，和MYSQL_PASSWORD。
+#所以我们需要先创建一个文件secret用于存储数据库的敏感信息，因为之前已
+经创建过，这里无需再创建：
+#再次查看secret 命令多打打才不容易忘记
+[root@localhost home]# docker secret ls
+ID             NAME     DRIVER  CREATED PDATED
+uwrfxavvhpm3opyx7hyvdxkhk  mysql-pass       4 inutes ago  4 minutes ago
+#启动mysql服务：
+[root@localhost home]# docker service create --name db-mysql --secret mysql-pass -e
+MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql-pass mysql:5.7
+w1ptd75g4locdme9zct7opiy2
+overall progress: 0 out of 1 tasks
+1/1: preparing
+^COperation continuing in background.
+Use `docker service ps w1ptd75g4locdme9zct7opiy2` to check
+progress.
+[root@localhost home]# docker service ps
+w1ptd75g4locdme9zct7opiy2
+ID       NAME     IMAGE    NODE    DESIRED STATE  CURRENT STATE       ERROR  PORTS
+fv4arc2gq6y8  db-mysql.1  mysql:5.7 
+localhost.localdomain  Running     Preparing 3
+minutes ago
+#查看mysql服务在那个节点上：
+[root@localhost ~]# docker ps
+CONTAINER ID  IMAGE     COMMAND   CREATED     STATUS     PORTS    NAMES
+Secret在Stack中的使用
+Stack利用的就是docker-compose.yml文件来部署stack，那么如何在
+docker-compose.yml中来定义secret呢？
+55feeb983b81  mysql:5.7    "docker-entrypoint.s…"  2
+minutes ago  Up 2 minutes   3306/tcp, 33060/tcp  db-
+mysql.1.fv4arc2gq6y8g7lr1m4c7sefn
+#在该节点中进入该服务的容器中查看secret：
+[root@localhost ~]# docker exec -it 55feeb983b81 /bin/sh
+# cd /run/secrets/
+# ls
+mysql-pass
+# cat mysql-pass
+root
+#这样知道了密码就可以进入到mysql数据库中了。
+# mysql -uroot -p
+Enter password:
+Welcome to the MySQL monitor. Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.36 MySQL Community Server (GPL)
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation
+and/or its
+affiliates. Other names may be trademarks of their
+respective
+owners.
+Type 'help;' or '\h' for help. Type '\c' to clear the
+current input statement.
+mysql>
+```
+
+## Secret在Stack中的使用
+
+Stack利用的就是docker-compose.yml文件来部署stack，那么如何在docker-compose.yml中来定义secret呢？
+
+```yaml
+mysql:
+ image: mysql
+ secrets:
+   - my-pw
+ environment:
+  MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql-pass #
+制定secret
+  MYSQL_DATABASE: wordpress
+```
+
+显然我们在运行这个docker-compose.yml文件之前必须先要进行对应的secret文件的创建。然后就可以通过docker stack deploy命令来部署这个stack了。
+
+
+
+部分参考 https://www.cnblogs.com/shenjianping/p/12272847.html
+
+# 15. Docker Config
+
+在集群环境中配置文件的分发，可以通过将配置文件放入镜像中、设置环境变量、挂载volume、挂载目录的方式，当然也可以通过 docker config来**管理集群中的配置文件**，这样的方式也更加通用。
+
+## 基本命令
+
+```shell
+#一切命令从help学起
+[root@localhost home]# docker config --help
+Usage:  docker config COMMAND
+
+Manage Docker configs
+
+Commands:
+  create      Create a config from a file or STDIN
+  inspect     Display detailed information on one or more configs
+  ls          List configs
+  rm          Remove one or more configs
+
+Run 'docker config COMMAND --help' for more information on a command.
+
+[root@localhost home]# docker config create --help
+Usage:  docker config create [OPTIONS] CONFIG file|-
+
+Create a config from a file or STDIN
+#可以看出创建可以分为 文件创建，命令创建
+Options:
+  -l, --label list               Config labels
+      --template-driver string   Template driver
+
+  
+#文件创建   
+[root@localhost home]# vim default.conf
+[root@localhost home]# cat default.conf
+server {
+ listen    88;
+ server_name localhost;
+ location / {
+   root  /usr/share/nginx/html;
+   index index.html index.htm;
+ }
+}
+#创建config
+[root@localhost home]# docker config create conf
+default.conf
+ouyt1mlylntrzyd4qw74f5qx6
+#查看config
+[root@localhost home]# docker config ls
+ID             NAME   CREATED    UPDATED
+ouyt1mlylntrzyd4qw74f5qx6  conf    19 seconds ago  19 seconds ago
+#从标准输入创建
+#Usage: docker config create [OPTIONS] CONFIG file|-
+[root@localhost home]# echo "listen 80" | docker config
+create conf2 -
+[root@localhost home]# docker config ls
+ID             NAME   CREATED    UPDATED
+ouyt1mlylntrzyd4qw74f5qx6  conf    7 minutes ago   7 minutes ago
+7eqao1yfzpjqfk4zhh35o7osj  conf2   34 seconds ago  34 seconds ago
+#查看config详细信息
+[root@localhost home]# docker config inspect conf
+[
+ {
+    "ID": "ouyt1mlylntrzyd4qw74f5qx6",
+    "Version": {
+      "Index": 117
+   },
+    "CreatedAt": "2022-04-01T03:29:25.097432457Z",
+    "UpdatedAt": "2022-04-01T03:29:25.097432457Z",
+    "Spec": {
+      "Name": "conf",
+      "Labels": {},
+      "Data":
+"c2VydmVyIHsKICAgIGxpc3RlbiAgICAgICA4ODsKICAgIHNlcnZlcl9uY
+W1lICBsb2NhbGhvc3Q7CgogICAgbG9jYXRpb24gLyB7CiAgICAgICAgcm9
+vdCAgIC91c3Ivc2hhcmUvbmdpbngvaHRtbDsKICAgICAgICBpbmRleCAga
+W5kZXguaHRtbCBpbmRleC5odG07CiAgICB9Cn0K"
+   }
+ }
+]
+#对conf进行base64解码
+[root@localhost home]# docker config inspect -f '{{json.Spec.Data}}' conf | cut -d '"' -f2 | base64 -d
+#出现结果
+server {
+ listen    88;
+ server_name localhost;
+ location / {
+   root  /usr/share/nginx/html;
+   index index.html index.htm;
+ }
+}
+#删除secret
+[root@localhost home]# docker config rm conf2
+```
+
+## 使用
+
+```shell
+#docker config
+#使用nginx镜像创建容器
+#在conf配置中，将nginx的监听端口改成了88 --config source=conf，
+#然后再替换掉nginx中的默认80端口的配置文件target=/etc/nginx/conf.d/default.conf，
+#创建service时，将容器内部端口88端口映射成主机上90端口，-p 90:88
+#后台运行。-d
+[root@localhost ~]# docker service create --name nginx-01--config source=conf,target=/etc/nginx/conf.d/default.conf -p 90:88 nginx:latest
+yuu4hnqk2masmlr11v4tya83y
+overall progress: 1 out of 1 tasks
+1/1: running 
+verify: Service converged
+```
+
+测试得出：
+
+```html
+[root@localhost ~]# curl http://127.0.0.1:90
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is
+successfully installed and
+working. Further configuration is required.</p>
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
+
+# 16. CI/CD (流水线)
+
+![image-20221221104530630](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212211045902.png)
+
+CI/CD是实现敏捷和Devops理念的一种方法。
+具体而言，CI/CD 可让持续自动化和持续监控贯穿于应用的整个生命周期（从集成和测试阶段，到交付和部署）。这些关联的事务通常被统称为“CI/CD 管道”，由开发和运维团队以敏捷方式协同支持。
+
+## CI-持续集成
+
+> 概念：
+
+持续集成指的是，频繁地（一天多次）将代码集成到主干。
+
+
+
+​	CI是一种通过在应用开发阶段引入**自动化**来频繁向客户交付应用的方法。CI的核心概念是持续集成、持续交付和持续部署。作为一个面向开发和运营团队的解决方案，CI 主要针对在集成新代码时所引发的问题（亦称“集成地狱”）。
+​	持续集成强调开发人员提交了新代码之后，**立刻自动的进行构建**、（单元）测试。根据测试结果，我们可以确定新代码和原有代码能否正确地集成在一起。
+
+> 持续集成的目的：
+
+​	持续集成的目的就是让产品可以快速迭代，同时还能保持高质量。它的核心措施是，代码集成到主干之前，必须通过自动化测试。只要有一个测试用例失败，就不能集成。
+​	持续集成过程中很重视自动化测试验证结果，对可能出现的一些问题进行预警，以保障最终合并的代码没有问题。
+
+> 持续集成的作用：
+
+1. 代码库存越是积压，就越得不到生产检验，积压越多，代码间交叉感染的概率越大，下个发布（release）的复杂度和风险越高，持续集成可以保证团队开发人员提交代码的质量，减轻了软件发布时的压力；
+
+2. 持续集成中的任何一个环节都是自动完成的，无需太多的人工干预，有利于减少重复过程以节省时间、费用和工作量；
+
+3. 及早的发现代码中的问题，及早解决，代码越早推送（PUSH）出去，
+   用户能越早用到，快就是商业价值；
+
+> 特点
+>
+
+1. 它是一个自动化的周期性的集成测试过程，从检出代码、编译构建、运行测试、结果记录、测试统计等都是自动完成的，无需人工干预；
+2. 需要有专门的集成服务器来执行集成构建；
+3. 需要有代码托管工具支持；
+
+## CD-持续交付
+
+![image-20221221105159915](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212211052148.png)
+
+> CD与DevOps关系
+
+持续交付与DevOps的含义很相似，所以经常被混淆。但是它们是两个不同的概念：
+
+**DevOps**：
+
+​	范围更广，它以文化变迁为中心，特别是软件交付过程所设计的多个团队之间的合作。一种思想。
+
+**CD**：
+
+​	持续交付，是一种自动化交付的手短，关注点在于将不同的过程集中起来，并且更快，更频繁的执行这些过程。
