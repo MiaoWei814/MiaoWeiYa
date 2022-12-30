@@ -1911,6 +1911,19 @@ docker pull registry.cn-chengdu.aliyuncs.com/miaowei_save/miaowei-repository:[�
 
 发现：容器在启动的时候会分配一个网卡，而这个网卡是跟容器外某个网卡是意义一一对应的，并且在你发现docker的地址是**172.17.0.1**跟容器内的ip地址**172.17.0.2**是递增并且在Linux端去ping是可以ping通的容器内部的！
 
+> 问题：bash: ping: command not found
+
+执行命令：
+
+```shell
+#执行以下命令
+apt-get update
+apt install iputils-ping
+apt install net-tools
+```
+
+![在这里插入图片描述](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212211732259.png)
+
 > 原理
 
 1. 我们每启动一个docker容器, docker就会给docker容器分配一个ip ,我们只要安装了docker ,就会有一个网卡docker0。
