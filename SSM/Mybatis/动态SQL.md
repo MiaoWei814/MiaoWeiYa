@@ -306,3 +306,7 @@ xml:
 - **column**: 数据库的列名或者列标签别名,是关联查询往下一个语句传送值。注意：在处理组合键时，您可以使用column=“{prop1=col1,prop2=col2}”这样的语法，设置多个列名传入到嵌套查询语句。这就会把prop1和prop2设置到目标嵌套选择语句的参数对象中。
 
 注意：select查询的时候经测试还是使用别名进行对应，不能写入到collection内部进行字段映射
+
+# 9. 一对多返回List<\String>
+
+链接：https://blog.csdn.net/Mr_ZhouR/article/details/125633895
