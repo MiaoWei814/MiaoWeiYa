@@ -90,6 +90,10 @@ JVM 是运行在操作系统之上的，它与硬件没有直接的交互
 2. 中间数据区里要记住的是：多线程共享方法区和堆。而其他java栈、本地方法栈、程序计数器的线程独有一份的。
 3. 执行引擎里就有：解释器、JIT即时编译器、垃圾回收器。作用就在于将class这些高级语言转换为操作系统能识别到的机器指令。
 
+![Java 类的静态变量存放在哪块内存中？_java](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202305111530841.webp)
+
+
+
 ## 1.5 Java 代码执行流程
 
 ![image-20221222095141397](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202212220951515.png)
