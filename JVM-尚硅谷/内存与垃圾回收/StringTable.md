@@ -656,25 +656,43 @@ public class StringIntern {
         System.out.println(s3 == s4);//jdk6：false  jdk7/8：true
     }
 }
+
+// jdk6：如果常量池没有则会创建一个对象，此时会是新的地址。
+// jdk7/8：如果常量池没有则将创建一个空间记录了s3在堆中的地址，所以说此时s4会去常量池找到后发现其记录着堆中的地址，所以此时s4其实是指向了堆中的地址。
 ```
 
-**所以说：intern无论如何都会指向常量池中的地址，并且将该变量的持有者的地址进行变更。**
+
+
+
 
 ![image-20210511152240683](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202305311557643.png)
 
 ![image-20200711145925091](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202305311557556.png)
 
-总结 String 的 intern()的使用：
+#### 总结 String 的 intern()的使用：
 
-JDK1.6 中，将这个字符串对象尝试放入串池。
+JDK1.6 中，将这个字符串对象尝试放入常量池。
 
-- 如果串池中有，则并不会放入。返回已有的串池中的对象的地址
-- 如果没有，会把此<mark>对象复制一份</mark>，放入串池，并返回串池中的对象地址
+- 如果常量池中有，则并不会放入。返回已有的常量池中的对象的地址
+- 如果没有，会把此<mark>对象复制一份</mark>，放入常量池，并返回常量池中的`创建的对象地址`---独立的对象，新的对象。
 
 JDK1.7 起，将这个字符串对象尝试放入串池。
 
 - 如果串池中有，则并不会放入。返回已有的串池中的对象的地址
-- 如果没有，则会把<mark>对象的引用地址</mark>复制一份，放入串池，并返回串池中的引用地址
+- 如果没有，则会把<mark>对象的引用地址</mark>复制一份，放入常量池，`并返回常量池中记录的引用地址`
+
+```
+核心：
+1. 如果常量池都有，那么操作都一样
+2. 如果没有
+	1. jdk6会在常量池中创建一个对象，并返回这个对象的地址
+	2. jdk7会将你在堆中的对象的地址进行复制到常量池中进行保存，然后将这个对象地址进行返回。
+	
+	
+目的：节省空间！
+```
+
+
 
 **练习 1**
 
@@ -686,29 +704,137 @@ JDK1.7 起，将这个字符串对象尝试放入串池。
 
 ![image-20200711151433277](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202305311557105.png)
 
+
+
+1. 无论jdk6还是jdk8
+
+```java
+public class StringIntern1 {
+    public static void main(String[] args) {
+        //StringIntern.java中练习的拓展：
+        String s3 = new String("1") + new String("1");//new String("11")
+        //执行完上一行代码以后，字符串常量池中，是否存在"11"呢？答案：不存在！！
+        String s4 = "11";//在字符串常量池中生成对象"11"
+        String s5 = s3.intern(); // 因为“11”已经在常量池中存在，所以此时直接返回的是常量池中的地址。
+        System.out.println(s3 == s4);//false  一个是new在堆中的地址，一个是字面量常量池中的地址。
+        System.out.println(s5 == s4);//true   因为：“11”已经存在所以此时依然返回的是常量池的地址，而s4本身就是常量池的地址，所以相等！
+    }
+}
+```
+
+2. 练习
+
+```java
+public class StringExer1 {
+    public static void main(String[] args) {
+        String x = "ab";
+        String s = new String("a") + new String("b");//new String("ab")
+        //在上一行代码执行完以后，字符串常量池中并没有"ab"
+
+        String s2 = s.intern();//jdk6中：在串池中创建一个字符串"ab"
+                               //jdk8中：串池中没有创建字符串"ab",而是创建一个引用，指向new String("ab")，将此引用返回
+
+        System.out.println(s2 == "ab");//jdk6:true  jdk8:true
+        System.out.println(s == "ab");//jdk6:false  jdk8:true
+    }
+}
+```
+
+3. 练习
+
+```java
+public class StringExer2 {
+    public static void main(String[] args) {
+        String s1 = new String("ab");//执行完以后，会在字符串常量池中会生成"ab"
+//        String s1 = new String("a") + new String("b");//执行完以后，不会在字符串常量池中会生成"ab"
+        s1.intern();
+        String s2 = "ab";
+        System.out.println(s1 == s2); // false  因为这里返回没有变量接收，s1还是指向的是堆中地址
+    }
+}
+```
+
+
+
+
+
+
+
 ### 10.5.2. intern 的效率测试：空间角度
 
 我们通过测试一下，使用了 intern 和不使用的时候，其实相差还挺多的
 
 ```java
-public class StringIntern2 {    static final int MAX_COUNT = 1000 * 10000;    static final String[] arr = new String[MAX_COUNT];    public static void main(String[] args) {        Integer [] data = new Integer[]{1,2,3,4,5,6,7,8,9,10};        long start = System.currentTimeMillis();        for (int i = 0; i < MAX_COUNT; i++) {            // arr[i] = new String(String.valueOf(data[i%data.length]));            arr[i] = new String(String.valueOf(data[i%data.length])).intern();        }        long end = System.currentTimeMillis();        System.out.println("花费的时间为：" + (end - start));        try {            Thread.sleep(1000000);        } catch (Exception e) {            e.getStackTrace();        }    }}// 运行结果不使用intern：7256ms使用intern：1395ms
+/**
+ * 使用intern()测试执行效率：空间使用上
+ *
+ * 结论：对于程序中大量存在存在的字符串，尤其其中存在很多重复字符串时，使用intern()可以节省内存空间。
+ *
+ *
+ * @author shkstart  shkstart@126.com
+ * @create 2020  21:17
+ */
+public class StringIntern2 {
+    static final int MAX_COUNT = 1000 * 10000;
+    static final String[] arr = new String[MAX_COUNT];
+
+    public static void main(String[] args) {
+        Integer[] data = new Integer[]{1,2,3,4,5,6,7,8,9,10};
+
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < MAX_COUNT; i++) {
+//            arr[i] = new String(String.valueOf(data[i % data.length]));
+            arr[i] = new String(String.valueOf(data[i % data.length])).intern();
+
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("花费的时间为：" + (end - start));
+
+        try {
+            Thread.sleep(1000000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.gc();
+    }
+}
 ```
 
 **结论**：对于程序中大量使用存在的字符串时，尤其存在很多已经重复的字符串时，使用 intern()方法能够节省内存空间。
 
 大的网站平台，需要内存中存储大量的字符串。比如社交网站，很多人都存储：北京市、海淀区等信息。这时候如果字符串都调用 intern()方法，就会很明显降低内存的大小。
 
+> 用intern()的好处就是在堆中创建的对象已经有了值那么就不用再常量池中重复创建直接记录对象引用的地址。节省了内存空间
+
+使用intern：耗时1311ms
+
+不使用：耗时3611ms
+
+
+
 ## 10.6. StringTable 的垃圾回收
 
 ```java
-public class StringGCTest {    /**     * -Xms15m -Xmx15m -XX:+PrintGCDetails     */    public static void main(String[] args) {                for (int i = 0; i < 100000; i++) {            String.valueOf(i).intern();        }    }}
+/**
+ * String的垃圾回收:
+ * -Xms15m -Xmx15m -XX:+PrintStringTableStatistics -XX:+PrintGCDetails
+ *
+ * @author shkstart  shkstart@126.com
+ * @create 2020  21:27
+ */
+public class StringGCTest {
+    public static void main(String[] args) {
+        for (int j = 0; j < 100000; j++) {
+            String.valueOf(j).intern();
+        }
+    }
+}
+// -XX:+PrintStringTableStatistics : 打印字符串常量池中统计的信息
 ```
 
 运行结果
 
-```java
-[GC (Allocation Failure) [PSYoungGen: 4096K->504K(4608K)] 4096K->1689K(15872K), 0.0581583 secs] [Times: user=0.00 sys=0.00, real=0.06 secs] [GC (Allocation Failure) [PSYoungGen: 4600K->504K(4608K)] 5785K->2310K(15872K), 0.0015621 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] [GC (Allocation Failure) [PSYoungGen: 4600K->504K(4608K)] 6406K->2350K(15872K), 0.0034849 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] Heap PSYoungGen      total 4608K, used 1919K [0x00000000ffb00000, 0x0000000100000000, 0x0000000100000000)  eden space 4096K, 34% used [0x00000000ffb00000,0x00000000ffc61d30,0x00000000fff00000)  from space 512K, 98% used [0x00000000fff00000,0x00000000fff7e010,0x00000000fff80000)  to   space 512K, 0% used [0x00000000fff80000,0x00000000fff80000,0x0000000100000000) ParOldGen       total 11264K, used 1846K [0x00000000ff000000, 0x00000000ffb00000, 0x00000000ffb00000)  object space 11264K, 16% used [0x00000000ff000000,0x00000000ff1cd9b0,0x00000000ffb00000) Metaspace       used 3378K, capacity 4496K, committed 4864K, reserved 1056768K  class space    used 361K, capacity 388K, committed 512K, reserved 1048576K
-```
+![image-20230607112618589](https://springcloud-hrm-miao.oss-cn-beijing.aliyuncs.com/markdown/202306071126826.png)
 
 ## 10.7. G1 中的 String 去重操作
 
@@ -722,7 +848,7 @@ public class StringGCTest {    /**     * -Xms15m -Xmx15m -XX:+PrintGCDetails    
 
 ---
 
-注意这里说的重复，指的是在堆中的数据，而不是常量池中的，因为常量池中的本身就不会重复
+**注意这里说的重复，指的是在堆中的数据，而不是常量池中的，因为常量池中的本身就不会重复**
 
 背景：对许多 Java 应用（有大的也有小的）做的测试得出以下结果：
 
@@ -732,6 +858,10 @@ public class StringGCTest {    /**     * -Xms15m -Xmx15m -XX:+PrintGCDetails    
 
 许多大规模的 Java 应用的瓶颈在于内存，测试表明，在这些类型的应用里面，<mark>Java 堆中存活的数据集合差不多 25%是 String 对象</mark>。更进一步，这里面差不多一半 string 对象是重复的，重复的意思是说： `stringl.equals(string2)= true`。<mark>堆上存在重复的 String 对象必然是一种内存的浪费</mark>。这个项目将在 G1 垃圾收集器中实现自动持续对重复的 string 对象进行去重，这样就能避免浪费内存。
 
+**去重操作：**指的是底层new的char数组的重复操作
+
+
+
 **实现**
 
 1. 当垃圾收集器工作的时候，会访问堆上存活的对象。<mark>对每一个访问的对象都会检查是否是候选的要去重的 String 对象</mark>
@@ -740,13 +870,19 @@ public class StringGCTest {    /**     * -Xms15m -Xmx15m -XX:+PrintGCDetails    
 4. 如果存在，String 对象会被调整引用那个数组，释放对原来的数组的引用，最终会被垃圾收集器回收掉。
 5. 如果查找失败，char 数组会被插入到 hashtable，这样以后的时候就可以共享这个数组了。
 
+`就是使用HashTable来达到去重的目的`
+
 **命令行选项**
 
 ```shell
-# 开启String去重，默认是不开启的，需要手动开启。 UseStringDeduplication(bool)  # 打印详细的去重统计信息 PrintStringDeduplicationStatistics(bool)  # 达到这个年龄的String对象被认为是去重的候选对象StringpeDuplicationAgeThreshold(uintx)
+UseStringDeduplication(bool) #开启String去重，默认是不开启的，需要手动开启。  
+PrintStringDeduplicationStatistics(bool) # 打印详细的去重统计信息  
+StringpeDuplicationAgeThreshold(uintx) # 达到这个年龄的String对象被认为是去重的候选对象
 ```
 
 
 
-### 常见面试题
+# 总结
+
+
 
